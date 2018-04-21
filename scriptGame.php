@@ -15,22 +15,40 @@
 		<?php
 //        include 'gameStone.php';
 		$varUser = $_POST['variant'];
-			if($varUser == 1) $stringUser = 'Ножницы';
-			elseif($varUser == 2) $stringUser = 'Бумага';
-			elseif($varUser == 3) $stringUser = 'Колодец';
-		echo '<p>Вы выбрали вариант: <b>'.$stringUser.'</b></p>';
-		$varBot = rand(1,3);
-			if($varBot == 1 ) $stringBot = 'Ножницы';
-			elseif($varBot == 2) $stringBot = 'Бумага';
-			elseif($varBot == 3) $stringBot = 'Колодец';
-		echo '<p>Компьютер(Bot) выбрал вариант: <b>'.$stringBot.'</b></p>';
-		if($varUser == $varBot)
-			echo '<p>Draw</p>';
-		elseif(($varUser == 1 && $varBot == 2) || ($varUser == 2 && $varBot == 3) ||
-            ($varUser == 3 && $varBot == 1))
-			echo '<p>You win</p>';
-        else
-            echo '<p>Bot win</p>';
+        $varBot = rand(1,3);
+
+		function writeVariant($var)
+        {
+            $variant = $var;
+            global $stringVar;
+            if($variant == 1) $stringVar = 'Ножницы';
+            elseif($variant == 2) $stringVar = 'Бумага';
+            else $stringVar = 'Колодец';
+            return $stringVar;
+        }
+
+        function writeChange()
+        {
+            global $varUser, $varBot;
+            echo '<p>Вы выбрали вариант: <b>'.writeVariant($varUser).'</b></p>';
+            echo '<p>Компьютер(Bot) выбрал вариант: <b>'.writeVariant($varBot).'</b></p>';
+        }
+
+		function compareVariant($user, $bot)
+        {
+            $varUser = $user;
+            $varBot = $bot;
+            if($varUser == $varBot)
+                echo '<p>Draw</p>';
+            elseif(($varUser == 1 && $varBot == 2) || ($varUser == 2 && $varBot == 3) ||
+                ($varUser == 3 && $varBot == 1))
+                echo '<p>You win</p>';
+            else
+                echo '<p>Bot win</p>';
+        }
+
+        writeChange();
+        compareVariant($varUser, $varBot);
 		?>
 	<a href="GameForm .htm">Next round</a>
 </body>
