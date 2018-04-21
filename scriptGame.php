@@ -13,6 +13,7 @@
 	<div class="bordered">
 		<h3>Результат</h3>
 		<?php
+//        include 'gameStone.php';
 		$varUser = $_POST['variant'];
 			if($varUser == 1) $stringUser = 'Ножницы';
 			elseif($varUser == 2) $stringUser = 'Бумага';
@@ -25,12 +26,11 @@
 		echo '<p>Компьютер(Bot) выбрал вариант: <b>'.$stringBot.'</b></p>';
 		if($varUser == $varBot)
 			echo '<p>Draw</p>';
-		elseif($varUser == 1 && $varBot == 2)
+		elseif(($varUser == 1 && $varBot == 2) || ($varUser == 2 && $varBot == 3) ||
+            ($varUser == 3 && $varBot == 1))
 			echo '<p>You win</p>';
-		elseif($varUser == 1 && $varBot == 3)
-			echo '<p>Bot win</p>';
-		elseif($varUser == 2 && $varBot == 3)
-			echo '<p>You win</p>';
+        else
+            echo '<p>Bot win</p>';
 		?>
 	<a href="GameForm .htm">Next round</a>
 </body>
