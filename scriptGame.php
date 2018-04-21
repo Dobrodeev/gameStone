@@ -17,6 +17,7 @@
 		define('WIN_LIMIT', 10);
         $varUser = $_POST['variant'];
         $varBot = rand(1,3);
+        $counterUser = $counterBot = 0;
 
 		function writeVariant($var)
         {
@@ -40,7 +41,7 @@
             $varUser = $user;
             $varBot = $bot;
             global $counterUser, $counterBot;
-            $counterUser = $counterBot = 0;
+//            $counterUser = $counterBot = 0;
             if($varUser == $varBot)
             {
                 echo '<p>Draw</p>';
