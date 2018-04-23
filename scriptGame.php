@@ -16,7 +16,7 @@
 //        include 'gameStone.php';
 		define('WIN_LIMIT', 10);
         $varUser = $_POST['variant'];
-        $varBot = rand(1,3);
+        $varBot = mt_rand(1,3);
         $counterUser = $counterBot = 0;
 
 		function writeVariant($var)
