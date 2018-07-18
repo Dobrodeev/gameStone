@@ -10,14 +10,32 @@
 <body>
 	<script src="assets/jquery-3.2.1.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
+    <div>
+        <form name="form1" method="post" action="#">
+            <h3>Game JuZeFa for webdesign</h3>
+            <hr size="1">
+            <p>Выбираем вариант:</p>
+            <p>
+                <br>
+                <select name=variant size=1>
+                    <option value=1>Ножницы</option>
+                    <option value=2>Бумага</option>
+                    <option value=3 selected>Колодец</option>
+                </select>
+            </p>
+            <br>
+            <p>
+                <input type="submit" value="Отослать форму">
+                &nbsp;&nbsp;&nbsp<input type="reset" value="Очистить форму">
+            </p>
+        </form>
+    </div>
 	<div class="bordered">
 		<h3>Результат</h3>
 		<?php
-//        include 'gameStone.php';
-		define('WIN_LIMIT', 10);
+        const ROUND_LIMIT = 6;
         $varUser = $_POST['variant'];
         $varBot = mt_rand(1,3);
-        $counterUser = $counterBot = 0;
 
 		function writeVariant($var)
         {
@@ -40,11 +58,12 @@
         {
             $varUser = $user;
             $varBot = $bot;
-            global $counterUser, $counterBot;
-//            $counterUser = $counterBot = 0;
+            static $counterUser = 0;
+            static $counterBot = 0;
+            static $counterRound = 0;
             if($varUser == $varBot)
             {
-                echo '<p>Draw</p>';
+                echo '<h5>Draw</h5>';
                 $counterUser += 0.5;
                 $counterBot += 0.5;
             }
@@ -52,22 +71,23 @@
             elseif(($varUser == 1 && $varBot == 2) || ($varUser == 2 && $varBot == 3) ||
                 ($varUser == 3 && $varBot == 1))
             {
-                echo '<p>You win</p>';
+                echo '<h5>You win</h5>';
                 $counterUser++;
             }
 
             else
             {
-                echo '<p>Bot win</p>';
+                echo '<h5>Bot win</h5>';
                 $counterBot++;
             }
+            $counterRound++;
+            echo '<h5>Round '.$counterRound.'</h5>';
+            echo 'You wins: '.$counterUser.'; Bot wins: '.$counterBot.'<br>';
         }
 
         writeChange();
-		compareVariant($varUser, $varBot);
-		echo 'You wins: '.$counterUser.' Bot wins: '.$counterBot.'<br>';
-		?>
-	<a href="GameForm .htm">Next round</a>
+        compareVariant($varUser, $varBot);
+?>
 </body>
 </html>
 
