@@ -25,7 +25,7 @@
             </p>
             <br>
             <p>
-                <input type="submit" value="Отослать форму">
+                <input type="submit" value="Отослать форму" name="go">
                 &nbsp;&nbsp;&nbsp<input type="reset" value="Очистить форму">
             </p>
         </form>
@@ -83,10 +83,17 @@
             $counterRound++;
             echo '<h5>Round '.$counterRound.'</h5>';
             echo 'You wins: '.$counterUser.'; Bot wins: '.$counterBot.'<br>';
+            // дописать запись счета очьков в БД: id = 1 man_result = 0; bot_result = 1; и так до 6-ти раундов
+        }
+
+        function nextRound()
+        {
+            echo 'next round. <br>';
         }
 
         writeChange();
         compareVariant($varUser, $varBot);
+//        nextRound();
 ?>
 </body>
 </html>
