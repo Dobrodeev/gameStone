@@ -67,6 +67,7 @@ if (!curl_errno($c))
         $arrayInfo[4]['status'] = 'Error';
     }
     // сделать проверку: если Host повторяется >1 раза но после User Agent то это не ошибка
+    $needle = 'User-agent';
     $res = substr_count($content, 'Host');
     if ($res == 1)
     {
