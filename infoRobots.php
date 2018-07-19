@@ -66,6 +66,7 @@ if (!curl_errno($c))
     {
         $arrayInfo[4]['status'] = 'Error';
     }
+    // сделать проверку: если Host повторяется >1 раза но после User Agent то это не ошибка
     $res = substr_count($content, 'Host');
     if ($res == 1)
     {
@@ -88,9 +89,9 @@ if (!curl_errno($c))
 	echo '<br>';
 //	$result = explode('', $content);
 //	print_r($result);
-    echo '<pre>';
-    var_dump($arrayInfo);
-    echo '</pre>';
+//    echo '<pre>';
+//    var_dump($arrayInfo);
+//    echo '</pre>';
     echo '<hr>';
     echo '<pre>';
     var_dump($content);
@@ -101,6 +102,19 @@ if ($info ['http_code'] != 200)
 	echo "Error: " . $info ['http_code'];
 }
 curl_close($c);
+echo '<h5>Результат теста</h5>';
+echo '<table class="table table-striped table-bordered">';
+echo '<th><td>id</td><td>check</td><td>status</td><td>Название проверки</td><td>1</td><td>1</td><td>Состояние</td></th>';
+foreach ($arrayInfo as $array)
+{
+    echo '<tr>';
+    foreach ($array as $key=>$value)
+    {
+        echo '<td>'.$key.'</td><td>'.$value.'<td>';
+    }
+    echo '</tr>';
+}
+echo '</table>';
 ?>
 </body>
 </html>
