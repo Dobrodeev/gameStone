@@ -25,6 +25,7 @@
             </p>
             <br>
             <p>
+                <input type="hidden"><?php $id = 0; ?>
                 <input type="submit" value="Отослать форму" name="go">
                 &nbsp;&nbsp;&nbsp<input type="reset" value="Очистить форму">
             </p>
