@@ -105,6 +105,20 @@ if (!curl_errno($c))
     echo 'Array after explode(): <br>';
     echo $explodeArray[0].'<br>';
     echo $explodeArray[1].'<br>';
+    /*
+    $res_arr = explode("user-agent", strtolower($str));
+    $max = 0;
+    foreach ($res_arr as $value)
+    {
+        if ($value != "")
+        {
+            $n = substr_count($value, "host");
+            if ($n > $max) {$max = $n;}
+        }
+    }
+
+    echo 'Max host is: '. $max;
+    */
 }
 if ($info ['http_code'] != 200)
 {
