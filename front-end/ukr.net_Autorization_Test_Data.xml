@@ -1,0 +1,9 @@
+<testdata>
+  <vars id="1" Login="testkursor" Password="NtcnRehcjh" Result="true"/>
+  <vars id="2" Login="testkursor" Password="NtcnRehcjh111" Result="false"/>
+  <vars id="3" Login="testkursor111" Password="NtcnRehcjh" Result="false"/>
+  <vars id="4" Login="testkursor111" Password="NtcnRehcjh111" Result="false"/>
+</testdata>
+
+<!-- D:\test\xml\Selenium_ukr.net_login_test.xml -->
+<!-- file://D:/test/xml/Selenium_ukr.net_login_test.xml -->

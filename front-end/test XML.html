@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="https://addons.mozilla.org/" />
+<title>test XML</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">test XML</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>https://www.ukr.net/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>loadXmlVars</td>
+	<td>ukr.net_Autorization_Test_Data.xml</td>
+	<td>id=='2'</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${id} ${Login} ${Password} ${Result}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>forXml</td>
+	<td>ukr.net_Autorization_Test_Data.xml</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${id} ${Login} ${Password} ${Result}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>endForXml</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=Login</td>
+	<td>${Login}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=Password</td>
+	<td>${Password}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>css=div.user-name &gt; a</td>
+	<td>LogoutPresent</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${LogoutPresent}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertExpression</td>
+	<td>${Result}</td>
+	<td>${LogoutPresent}</td>
+</tr>
+<tr>
+	<td>if</td>
+	<td>LogoutPresent==true</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=div.user-name &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>endForXml</td>
+	<td></td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
