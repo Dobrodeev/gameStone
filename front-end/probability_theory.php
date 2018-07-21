@@ -11,6 +11,7 @@
 <body>
 <script src="assets/jquery-3.2.1.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
+<h5>Результаты нескольких опытов бросания монеты</h5>
 <table class="table table-striped table-bordered">
     <tr><th>Число бросаний</th><th>Число появлений герба</th><th>Относительная частота</th></tr>
     <tr><td>4040</td><td>2048</td><td>0,5069</td></tr>
