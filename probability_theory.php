@@ -20,6 +20,15 @@
     <tr><td>24000</td><td>12012</td><td>0,5005</td></tr>
 
 </table>
+<table class="table table-bordered">
+    <tr><th>id</th><th>name</th><th>difficulty</th></tr>
+    <tr><td>1</td><td>Матфизика</td><td>высокая</td></tr>
+    <tr><td>2</td><td>Исследование операций</td><td>средняя</td></tr>
+    <tr><td>3</td><td>Функциональный анализ</td><td>высокая</td></tr>
+    <tr><td>4</td><td>Операционное исчисление</td><td>средняя</td></tr>
+    <tr><td>5</td><td>Случайные процессы</td><td>средняя</td></tr>
+
+</table>
 <?php
 ?>
 </body>
