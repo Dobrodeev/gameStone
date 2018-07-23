@@ -1,8 +1,7 @@
 <?php
-        //echo "Наш новый тестовый файл!<br>";
         // Подключаем библиотечный класс
         include("Classes/PHPExcel.php");
-       
+       /*
         $data = array(
 	array(
 		'id' => 1,
@@ -58,19 +57,18 @@
             $active_sheet->setCellValueByColumnAndRow(3, $num_row , $value['price']);
             $num_row++;
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         header("Content-Type: application/vnd.ms-excel");
         header("Content-Disposition: attachment; filename='our_table.xlsx'");
         
         $objWriter = PHPExcel_IOFactory::createWriter($objExcel, 'Excel2007');
         $objWriter->save('php://output');
-        
-        
+*/
+if (isset($_POST['go']))
+{
+    echo "Наш новый тестовый файл!<br>";
+    $arrayRobots = $_POST;
+    echo '<pre>';
+    print_r($arrayRobots);
+    echo '</pre>';
+}
