@@ -27,6 +27,28 @@ $file_name = $host . '/robots.txt';
 $c = curl_init($file_name);
 curl_setopt($c, CURLOPT_RETURNTRANSFER, TRUE);
 
+function getMax($content)
+{
+    $needle = 'User-agent';
+    $needleLow = "user-agent";
+    $res_arr = explode($needleLow, strtolower($content));
+    $max = 0;
+//    echo '$res_arr: <br>';
+//    echo '<pre>';
+//    print_r($res_arr);
+//    echo '</pre>';
+    foreach ($res_arr as $value)
+    {
+        if ($value != "")
+        {
+            $n = substr_count($value, "host");
+            if ($n > $max) {$max = $n;}
+        }
+    }
+    echo 'Max host is: '. $max.'<br>';
+    return $max;
+}
+
 $content = curl_exec($c);
 $info = curl_getinfo($c);
 $arrayInfo = array(
@@ -69,7 +91,8 @@ if (!curl_errno($c))
     }
     // сделать проверку: если Host повторяется >1 раза но после User Agent то это не ошибка
 
-    $res = substr_count($content, 'Host');
+    $res = getMax($content);
+//    $res = substr_count($content, 'Host');
 
     if ($res == 1)
     {
@@ -90,35 +113,12 @@ if (!curl_errno($c))
 	echo '<br>HTTP HEADER:', $info['http_code'], "\n";
 	echo '<br>Data transfer size:', $info['size_download'], "\n";
 	echo '<br>';
-//	$result = explode('', $content);
-//	print_r($result);
-//    echo '<pre>';
-//    var_dump($arrayInfo);
-//    echo '</pre>';
+
     echo '<hr>';
     echo '<pre>';
     var_dump($content);
     echo '</pre>';
-    echo 'Еще раз $content: '.$content.'<br>';
-    $needle = 'User-agent';
-    $explodeArray = explode($needle, $content);
-    echo 'Array after explode(): <br>';
-    echo $explodeArray[0].'<br>';
-    echo $explodeArray[1].'<br>';
-    /*
-    $res_arr = explode("user-agent", strtolower($str));
-    $max = 0;
-    foreach ($res_arr as $value)
-    {
-        if ($value != "")
-        {
-            $n = substr_count($value, "host");
-            if ($n > $max) {$max = $n;}
-        }
-    }
 
-    echo 'Max host is: '. $max;
-    */
 }
 if ($info ['http_code'] != 200)
 {
@@ -127,7 +127,7 @@ if ($info ['http_code'] != 200)
 curl_close($c);
 echo '<h5>Результат теста</h5>';
 echo '<table class="table table-striped table-bordered">';
-echo '<tr><td>id</td><td>Название проверки</td><td>Состояние</td></tr>';
+echo '<tr><th>id</th><th>Название проверки</th><th>Состояние</th></tr>';
 foreach ($arrayInfo as $array)
 {
     echo '<tr>';
@@ -138,6 +138,14 @@ foreach ($arrayInfo as $array)
     echo '</tr>';
 }
 echo '</table>';
+//print_r($arrayInfo).'<br>';
 ?>
+<form action="infoRobotsExcel.php" method="post">
+<!--    <input name="result" hidden value="--><!--">-->
+    <input type="hidden" name="result[]" value="<? $arrayInfo ?>">
+<!--    <input type="hidden" name="resultTest" value="something else">-->
+    <label for="">Сохранить в Excel</label><br>
+    <button type="submit" class="btn btn-default" name="go">Submit</button>
+</form>
 </body>
 </html>
