@@ -12,7 +12,7 @@ class Calculator
     private $second;
     private $action;
 
-    public function getData($first, $second, $action)
+    public function __construct($first, $second, $action)
     {
         $this->first = $first;
         $this->second = $second;

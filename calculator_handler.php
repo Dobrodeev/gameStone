@@ -49,7 +49,7 @@
 </form>
 <?php
 include 'Calculator.php';
-$calculatorObject = new Calculator();
+
 
 if (isset($_POST['go']))
 {
@@ -58,7 +58,8 @@ if (isset($_POST['go']))
         $first = $_POST['first'];
         $second = $_POST['second'];
         $action = $_POST['optionsRadios'];
-        $calculatorObject->getData($first, $second, $action);
+        $calculatorObject = new Calculator($first, $second, $action);
+//        $calculatorObject->getData($first, $second, $action);
         $calculatorObject->resultAction();
     }
 }
