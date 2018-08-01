@@ -1,7 +1,9 @@
 <?php
-        // Подключаем библиотечный класс
-        include("Classes/PHPExcel.php");
-       /*
+// Подключаем библиотечный класс
+include("Classes/PHPExcel.php");
+//        include 'infoRobots.php';
+//require_once 'infoRobots.php';
+/*
         $data = array(
 	array(
 		'id' => 1,
@@ -67,8 +69,22 @@
 if (isset($_POST['go']))
 {
     echo "Наш новый тестовый файл!<br>";
-    $arrayRobots = $_POST;
+
     echo '<pre>';
-    print_r($arrayRobots);
+    print_r($_POST);
     echo '</pre>';
+
+    $arrayResult = array(
+        array('id'=>1, 'check'=>'Проверка наличия файла robots.txt', 'status'=>$_POST['proverca0']),
+        array('id'=>2, 'check'=>'Проверка указания директивы Host', 'status'=>$_POST['proverca1']),
+        array('id'=>3, 'check'=>'Проверка количества директив Host, прописанных в файле', 'status'=>$_POST['proverca2']),
+        array('id'=>4, 'check'=>'Проверка размера файла robots.txt', 'status'=>$_POST['proverca3']),
+        array('id'=>5, 'check'=>'Проверка указания директивы Sitemap', 'status'=>$_POST['proverca4']),
+        array('id'=>6, 'check'=>'Проверка кода ответа сервера для файла robots.txt', 'status'=>$_POST['proverca5'])
+    );
+
+    echo '<pre>';
+    print_r($arrayResult);
+    echo '</pre>';
+
 }

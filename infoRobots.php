@@ -19,6 +19,7 @@
     <button type="submit" class="btn btn-default">Submit</button>
 </form>
 <?php
+require_once 'infoRobotsExcel.php';
 const ROBOTS_SIZE = 32000;
 
 $host = $_GET['host'];
@@ -118,6 +119,18 @@ if (!curl_errno($c))
     echo '<pre>';
     var_dump($content);
     echo '</pre>';
+    // пузырь
+    $puzurArray = array(78,12,44,656,7,23,445,767,6);
+    for ($i = 0; $i < count($puzurArray)-1; $i++)
+    {
+        if ($puzurArray[$i] > $puzurArray[$i+1])
+        {
+            $temp = $puzurArray[$i+1];
+            $puzurArray[$i+1] = $puzurArray[$i];
+            $puzurArray[$i] = $temp;
+        }
+    }
+    // 12, 78, 44, 7, 23, 445, 656, 6, 767
 
 }
 if ($info ['http_code'] != 200)
@@ -141,9 +154,13 @@ echo '</table>';
 //print_r($arrayInfo).'<br>';
 ?>
 <form action="infoRobotsExcel.php" method="post">
-<!--    <input name="result" hidden value="--><!--">-->
-    <input type="hidden" name="result[]" value="<? $arrayInfo ?>">
-<!--    <input type="hidden" name="resultTest" value="something else">-->
+    <input type="hidden" name="proverca0" value="<?= $arrayInfo[0]['status']?>">
+    <input type="hidden" name="proverca1" value="<?= $arrayInfo[1]['status']?>">
+    <input type="hidden" name="proverca2" value="<?= $arrayInfo[2]['status']?>">
+    <input type="hidden" name="proverca3" value="<?= $arrayInfo[3]['status']?>">
+    <input type="hidden" name="proverca4" value="<?= $arrayInfo[4]['status']?>">
+    <input type="hidden" name="proverca5" value="<?= $arrayInfo[5]['status']?>">
+
     <label for="">Сохранить в Excel</label><br>
     <button type="submit" class="btn btn-default" name="go">Submit</button>
 </form>
