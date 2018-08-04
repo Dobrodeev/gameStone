@@ -22,6 +22,7 @@ class Calculator
     public function resultAction()
     {
         $variant = $this->action;
+        echo '<h5>Result:<h5>';
         switch ($variant)
         {
             case '+':
@@ -40,6 +41,15 @@ class Calculator
                     break;
                 }
                 echo $this->first/$this->second;
+                break;
+            case '%':
+                echo $this->first % $this->second;
+                break;
+            case 'x^2+y^2':
+                echo $this->first * $this->first + $this->second * $this->second;
+                break;
+            case 'x^3+y^3':
+                echo $this->first * $this->first * $this->first + $this->second * $this->second *$this->second;
                 break;
         }
     }
