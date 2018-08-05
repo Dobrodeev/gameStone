@@ -73,7 +73,7 @@ session_start();
 
         $active_sheet->mergeCells('A1:C1');
 
-        $active_sheet->getColumnDimension('A')->setAutoSize();
+        $active_sheet->getColumnDimension('B')->setWidth(80);
         $active_sheet->getRowDimension('1')->setRowHeight(30);
 
         $active_sheet->getStyle('C')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
