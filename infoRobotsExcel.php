@@ -1,9 +1,10 @@
 <?php
+session_start();
 // Подключаем библиотечный класс
 include("Classes/PHPExcel.php");
 //        include 'infoRobots.php';
 //require_once 'infoRobots.php';
-/*
+
         $data = array(
 	array(
 		'id' => 1,
@@ -64,8 +65,9 @@ include("Classes/PHPExcel.php");
         header("Content-Disposition: attachment; filename='our_table.xlsx'");
         
         $objWriter = PHPExcel_IOFactory::createWriter($objExcel, 'Excel2007');
+        $objWriter->setReadDataOnly(true);
         $objWriter->save('php://output');
-*/
+
 if (isset($_POST['go']))
 {
     echo "Наш новый тестовый файл!<br>";
@@ -73,7 +75,7 @@ if (isset($_POST['go']))
     echo '<pre>';
     print_r($_POST);
     echo '</pre>';
-
+/**
     $arrayResult = array(
         array('id'=>1, 'check'=>'Проверка наличия файла robots.txt', 'status'=>$_POST['proverca0']),
         array('id'=>2, 'check'=>'Проверка указания директивы Host', 'status'=>$_POST['proverca1']),
@@ -82,9 +84,12 @@ if (isset($_POST['go']))
         array('id'=>5, 'check'=>'Проверка указания директивы Sitemap', 'status'=>$_POST['proverca4']),
         array('id'=>6, 'check'=>'Проверка кода ответа сервера для файла robots.txt', 'status'=>$_POST['proverca5'])
     );
-
+*/
+//    echo '<pre>';
+//    print_r($_SESSION['arr']);
+//    echo '</pre>';
+    $forExcel = $_SESSION['arr'];
     echo '<pre>';
-    print_r($arrayResult);
+    print_r($forExcel);
     echo '</pre>';
-
 }

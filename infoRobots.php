@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +64,6 @@ $arrayInfo = array(
     array('id'=>5, 'check'=>'Проверка указания директивы Sitemap', 'status'=>'unchecked'),
     array('id'=>6, 'check'=>'Проверка кода ответа сервера для файла robots.txt', 'status'=>'unchecked')
 );
-
 if (!curl_errno($c))
 {
 	if ($info['http_code'] != 200)
@@ -150,17 +153,19 @@ foreach ($arrayInfo as $array)
     }
     echo '</tr>';
 }
-echo '</table>';
+$_SESSION['arr'] = $arrayInfo;
+//echo '</table>';
 //print_r($arrayInfo).'<br>';
 ?>
+
 <form action="infoRobotsExcel.php" method="post">
-    <input type="hidden" name="proverca0" value="<?= $arrayInfo[0]['status']?>">
+<!--    <input type="hidden" name="proverca0" value="<?= $arrayInfo[0]['status']?>">
     <input type="hidden" name="proverca1" value="<?= $arrayInfo[1]['status']?>">
     <input type="hidden" name="proverca2" value="<?= $arrayInfo[2]['status']?>">
     <input type="hidden" name="proverca3" value="<?= $arrayInfo[3]['status']?>">
     <input type="hidden" name="proverca4" value="<?= $arrayInfo[4]['status']?>">
     <input type="hidden" name="proverca5" value="<?= $arrayInfo[5]['status']?>">
-
+-->
     <label for="">Сохранить в Excel</label><br>
     <button type="submit" class="btn btn-default" name="go">Submit</button>
 </form>
