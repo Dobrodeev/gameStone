@@ -152,6 +152,7 @@ foreach ($arrayInfo as $array)
     }
     echo '</tr>';
 }
+echo '</table>';
 $_SESSION['arr'] = $arrayInfo;
 ?>
 
