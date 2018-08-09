@@ -96,6 +96,16 @@ session_start();
             $active_sheet->setCellValueByColumnAndRow(0, $num_row , $value['id']);
             $active_sheet->setCellValueByColumnAndRow(1, $num_row , $value['check']);
             $active_sheet->setCellValueByColumnAndRow(2, $num_row , $value['status']);
+            /**
+            if ($value['status'] = 'OK')
+            {
+                $objExcel->getActiveSheet()->getStyle('C3:C8')->applyFromArray($style_ok);
+            }
+            else
+            {
+                $objExcel->getActiveSheet()->getStyle('C3:C8')->applyFromArray($style_error);
+            }
+             */
 //            $active_sheet->setCellValueByColumnAndRow(3, $num_row , $value['price']);
             //$active_sheet->getStyle('D'.$num_row)->applyFromArray($style_ok);
             $num_row++;
