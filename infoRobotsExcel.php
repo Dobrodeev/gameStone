@@ -49,8 +49,8 @@ session_start();
                  'vertical'=>PHPExcel_Style_Alignment::VERTICAL_CENTER
              ),
              'font'=>array(
-                 'name'=>'Times New Roman',
-                 'size'=>14,
+                 'name'=>'Calibri',
+                 'size'=>11,
                  'italic'=>true
              )
          );
@@ -58,6 +58,12 @@ session_start();
             'fill'=>array(
                 'type'=> PHPExcel_Style_Fill::FILL_SOLID,
                 'color'=>array('rgb'=>'33FF33')
+            )
+        );
+        $style_error = array(
+            'fill'=>array(
+                'type'=> PHPExcel_Style_Fill::FILL_SOLID,
+                'color'=>array('rgb'=>'f48642')
             )
         );
 
@@ -84,7 +90,6 @@ session_start();
         $active_sheet->setCellValue('B2', 'check');
         $active_sheet->setCellValue('C2', 'status');
 //        $active_sheet->setCellValue('D2', 'price');
-
         $num_row = 3;
         foreach ($data as $value)
         {
@@ -99,9 +104,10 @@ session_start();
 
 
         $active_sheet->getStyle('A1:C'.($num_row-1))->applyFromArray($style_arr);
+        $objExcel->getActiveSheet()->getStyle('C3:C8')->applyFromArray($style_ok);
+        $objExcel->getActiveSheet()->getStyle('C7:C8')->applyFromArray($style_error);
 
-
-        header("Content-Type: application/vnd.ms-excel");
+header("Content-Type: application/vnd.ms-excel");
         header("Content-Disposition: attachment; filename='our_table.xlsx'");
 
         $objWriter = PHPExcel_IOFactory::createWriter($objExcel, 'Excel2007');
