@@ -33,7 +33,7 @@ session_start();
 */
         $data = $_SESSION['arr'];
         // Определяем массивы стилей:
-
+        $data[1]['status'] = 'Error';
          $style_arr = array(
              'borders'=>array(
                  'outline'=>array(
@@ -54,6 +54,11 @@ session_start();
                  'italic'=>true
              )
          );
+         /**
+         'font'=>array(
+    'bold'=>true,
+    'italic'=>true,
+          */
         $style_ok = array(
             'fill'=>array(
                 'type'=> PHPExcel_Style_Fill::FILL_SOLID,
@@ -96,28 +101,25 @@ session_start();
             $active_sheet->setCellValueByColumnAndRow(0, $num_row , $value['id']);
             $active_sheet->setCellValueByColumnAndRow(1, $num_row , $value['check']);
             $active_sheet->setCellValueByColumnAndRow(2, $num_row , $value['status']);
-            /**
-            if ($value['status'] = 'OK')
+
+            if ($value['status'] == 'OK')
             {
-                $objExcel->getActiveSheet()->getStyle('C3:C8')->applyFromArray($style_ok);
+                $objExcel->getActiveSheet()->getStyle('C'.$num_row)->applyFromArray($style_ok);
             }
             else
             {
-                $objExcel->getActiveSheet()->getStyle('C3:C8')->applyFromArray($style_error);
+                $objExcel->getActiveSheet()->getStyle('C'.$num_row)->applyFromArray($style_error);
             }
-             */
 //            $active_sheet->setCellValueByColumnAndRow(3, $num_row , $value['price']);
             //$active_sheet->getStyle('D'.$num_row)->applyFromArray($style_ok);
             $num_row++;
         }
-
-
-
+//        $active_sheet->getStyle();
         $active_sheet->getStyle('A1:C'.($num_row-1))->applyFromArray($style_arr);
-        $objExcel->getActiveSheet()->getStyle('C3:C8')->applyFromArray($style_ok);
-        $objExcel->getActiveSheet()->getStyle('C7:C8')->applyFromArray($style_error);
+        //$objExcel->getActiveSheet()->getStyle('C3:C8')->applyFromArray($style_ok);
+        //$objExcel->getActiveSheet()->getStyle('C7:C8')->applyFromArray($style_error);
 
-header("Content-Type: application/vnd.ms-excel");
+        header("Content-Type: application/vnd.ms-excel");
         header("Content-Disposition: attachment; filename='our_table.xlsx'");
 
         $objWriter = PHPExcel_IOFactory::createWriter($objExcel, 'Excel2007');
