@@ -301,4 +301,61 @@ class SortClass
         array('m','45','71'),
         array('y','78','87')
     );
+
+    public function print_arr()
+    {
+        foreach ($this->data as $value) {
+            foreach ($value as $key)
+            {
+                echo $key.' ';
+            }
+            echo '<br>';
+        }
+    }
+
+    public function our_sort()
+    {
+        function cmp($a, $b)
+        {
+            if (($a[1]+$a[2]) == ($b[1]+$b[2]))
+            {
+                return 0;
+            }
+            return (($a[1]+$a[2]) < ($b[1]+$b[2])) ? -1 : 1;
+
+        }
+
+        //usort($this->data,'cmp');
+        sort($this->data);
+
+        $start_index =0;
+
+        $shift = 1;
+
+        while($start_index < sizeof($this->data))
+        {
+            while($this->data[$start_index][0] == $this->data[$start_index+$shift][0])
+            {
+                ++$shift;
+            }
+            if ($shift>1){
+
+                for ($i=0; $i<$shift; ++$i)
+                {
+                    $temp[$i] = $this->data[$start_index+$i];
+                }
+                usort($temp,'cmp');
+                for ($i=0; $i<$shift; ++$i)
+                {
+                    $this->data[$start_index+$i] =  $temp[$i];
+                }
+            }
+
+            $start_index += $shift;
+            $shift = 1;
+            unset($temp);
+        }
+        //echo $shift.'<br>';
+
+    }
 }
