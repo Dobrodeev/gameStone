@@ -19,12 +19,6 @@ if (isset($_POST['go']))
             echo '<pre>';
             print_r($_POST);
             echo '</pre>';
-            /**
-            $circle1 = implode(',',$_POST['circle1']);
-            $circle2 = implode(',', $_POST['circle2']);
-            echo '(x1, y1, r1): ('.$circle1.')<br>';
-            echo '(x2, y2, r2): ('.$circle2.')<br>';
-             */
             $x1 = $_POST['circle1']['x1'];
             $y1 = $_POST['circle1']['y1'];
             $r1 = $_POST['circle1']['r1'];
@@ -35,17 +29,17 @@ if (isset($_POST['go']))
             $circleObject->getCircle1($x1, $y1, $r1);
             $circleObject->getCircle2($x2, $y2, $r2);
             $circleObject->countIntersections();
-            echo 'Всего точек пересечения: '.$circleObject->countPoints.'<br>';
+            echo '<span style="color: blue">Всего точек пересечения: '.$circleObject->countPoints.'</span><br>';
         }
         else
         {
             $result = 'Введите корректныые радиусы. <br>';
-            echo $result;
+            echo "<span style='color:red;'>$result</span>";
         }
     }
     else
     {
         $result = 'Введите все данные.<br>';
-        echo $result;
+        echo '<span style="color: red">'.$result.'<span>';
     }
 }
