@@ -324,12 +324,9 @@ class SortClass
             return (($a[1]+$a[2]) < ($b[1]+$b[2])) ? -1 : 1;
 
         }
-
-        //usort($this->data,'cmp');
         sort($this->data);
 
         $start_index =0;
-
         $shift = 1;
 
         while($start_index < sizeof($this->data))
@@ -355,7 +352,5 @@ class SortClass
             $shift = 1;
             unset($temp);
         }
-        //echo $shift.'<br>';
-
     }
 }
