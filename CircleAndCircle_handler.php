@@ -5,7 +5,6 @@
  * Date: 14.08.2018
  * Time: 12:13
  */
-//include 'CircleAndCircle.php';
 require_once 'CircleAndCircle.php';
 spl_autoload_register(function ($className)
 {
@@ -26,7 +25,6 @@ if (isset($_POST['go']))
             echo '(x1, y1, r1): ('.$circle1.')<br>';
             echo '(x2, y2, r2): ('.$circle2.')<br>';
              */
-//            echo $_POST['circle1']['x1'];
             $x1 = $_POST['circle1']['x1'];
             $y1 = $_POST['circle1']['y1'];
             $r1 = $_POST['circle1']['r1'];
