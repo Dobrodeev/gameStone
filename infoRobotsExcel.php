@@ -54,6 +54,7 @@ session_start();
                  'italic'=>true
              )
          );
+         // Создать новый массив стилей, чтобы он был таким же как в примере тестового задания
          /**
          'font'=>array(
     'bold'=>true,
@@ -71,7 +72,12 @@ session_start();
                 'color'=>array('rgb'=>'f48642')
             )
         );
-
+        $style_between = array(
+            'fill'=>array(
+                'type'=> PHPExcel_Style_Fill::FILL_PATTERN_DARKDOWN,
+                'color'=>array('rgb'=>'8b008b')
+            )
+        );
 
         $objExcel = new PHPExcel();
         $objExcel->setActiveSheetIndex(0);
@@ -101,7 +107,7 @@ session_start();
             $active_sheet->setCellValueByColumnAndRow(0, $num_row , $value['id']);
             $active_sheet->setCellValueByColumnAndRow(1, $num_row , $value['check']);
             $active_sheet->setCellValueByColumnAndRow(2, $num_row , $value['status']);
-
+//            $objExcel->getActiveSheet()->getStyle('A-C', ++$num_row)->applyFromArray($style_between);
             if ($value['status'] == 'OK')
             {
                 $objExcel->getActiveSheet()->getStyle('C'.$num_row)->applyFromArray($style_ok);
@@ -110,6 +116,7 @@ session_start();
             {
                 $objExcel->getActiveSheet()->getStyle('C'.$num_row)->applyFromArray($style_error);
             }
+            // после каждой строки результата сделать пустую строку серого цвета
 //            $active_sheet->setCellValueByColumnAndRow(3, $num_row , $value['price']);
             //$active_sheet->getStyle('D'.$num_row)->applyFromArray($style_ok);
             $num_row++;
