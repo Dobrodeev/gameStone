@@ -317,16 +317,17 @@ class SortClass
     {
         function cmp($a, $b)
         {
+//            if ($a[0] > $b[0])
             if (($a[1]+$a[2]) == ($b[1]+$b[2]))
             {
                 return 0;
             }
             return (($a[1]+$a[2]) < ($b[1]+$b[2])) ? -1 : 1;
-
+            // if a[0]== b[0]
         }
         sort($this->data);
 
-        $start_index =0;
+        $start_index = 0;
         $shift = 1;
 
         while($start_index < sizeof($this->data))
