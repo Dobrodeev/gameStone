@@ -16,9 +16,9 @@ if (isset($_POST['go']))
     {
         if ($_POST['circle1']['r1'] > 0 && $_POST['circle2']['r2'] > 0)
         {
-            echo '<pre>';
-            print_r($_POST);
-            echo '</pre>';
+//            echo '<pre>';
+//            print_r($_POST);
+//            echo '</pre>';
             $x1 = $_POST['circle1']['x1'];
             $y1 = $_POST['circle1']['y1'];
             $r1 = $_POST['circle1']['r1'];

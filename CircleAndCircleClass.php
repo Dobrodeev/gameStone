@@ -15,10 +15,6 @@ class CircleAndCircleClass
     private $x2;
     private $y2;
     private $r2;
-
-//    private $circle1;
-//    private $circle2;
-//    private $distance;
     public $countPoints;
 
     public function getCircle1($x, $y, $r)
@@ -40,15 +36,15 @@ class CircleAndCircleClass
     {
 
         $distance = sqrt(pow($this->x1 - $this->x2, 2) + pow($this->y1 - $this->y2, 2));
-        if ($distance > $this->r1 + $this->r2)
+        if ($distance > $this->r1 + $this->r2 || $this->r2 > $distance + $this->r1 || $this->r1 > $distance + $this->r2)
         {
             $this->countPoints = 0;
         }
-        elseif ($distance == $this->r1 + $this->r2)
+        elseif ($distance == $this->r1 + $this->r2 || $this->r2 == $distance + $this->r1 || $this->r1 == $distance + $this->r2)
         {
             $this->countPoints = 1;
         }
-        elseif ($distance < $this->r1 + $this->r2)
+        elseif ($distance < $this->r1 + $this->r2 || $this->r2 < $distance + $this->r1 || $this->r1 < $distance + $this->r2)
         {
             $this->countPoints = 2;
         }
@@ -56,6 +52,6 @@ class CircleAndCircleClass
         {
             $this->countPoints = 'infinity';
         }
-        return $this->countPoints;
+//        return $this->countPoints;
     }
 }
