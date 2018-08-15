@@ -16,14 +16,14 @@ class CircleAndCircleClass
     private $y2;
     private $r2;
     public $countPoints;
-
+    // 1 класс для круга и 2 обьекта - круги
     public function getCircle1($x, $y, $r)
     {
 
         $this->x1 = $x;
         $this->y1 = $y;
         $this->r1 = $r;
-}
+    }
 
     public function getCircle2($x, $y, $r)
     {
@@ -34,7 +34,7 @@ class CircleAndCircleClass
 
     public function countIntersections()
     {
-
+        // abs(), min(), max() if $distance > abs(r1-r2)
         $distance = sqrt(pow($this->x1 - $this->x2, 2) + pow($this->y1 - $this->y2, 2));
         if ($distance > $this->r1 + $this->r2 || $this->r2 > $distance + $this->r1 || $this->r1 > $distance + $this->r2)
         {
@@ -52,6 +52,5 @@ class CircleAndCircleClass
         {
             $this->countPoints = 'infinity';
         }
-//        return $this->countPoints;
     }
 }
