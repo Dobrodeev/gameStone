@@ -305,6 +305,7 @@ class SortClass
     public function print_arr()
     {
         foreach ($this->data as $value) {
+            echo '--';
             foreach ($value as $key)
             {
                 echo $key.' ';
@@ -315,18 +316,29 @@ class SortClass
 
     public function our_sort()
     {
+//        array('t','19','61'),
+//        array('v','67','11'),
         function cmp($a, $b)
         {
-//            if ($a[0] > $b[0])
-            if (($a[1]+$a[2]) == ($b[1]+$b[2]))
+            /**
+            if ($a[0] > $b[0])
+                return 1;
+            if ($a[0] < $b[0])
+                return -1;
+             */
+            if ($a[0] == $b[0])
             {
-                return 0;
+                if (($a[1]+$a[2]) == ($b[1]+$b[2]))
+                {
+                    return 0;
+                }
+                return (($a[1]+$a[2]) < ($b[1]+$b[2])) ? -1 : 1;
             }
-            return (($a[1]+$a[2]) < ($b[1]+$b[2])) ? -1 : 1;
-            // if a[0]== b[0]
+            return ($a[0] > $b[0]) ? 1 : -1;
         }
-        sort($this->data);
-
+        usort($this->data, 'cmp');
+//        sort($this->data);
+        /** @var
         $start_index = 0;
         $shift = 1;
 
@@ -353,5 +365,6 @@ class SortClass
             $shift = 1;
             unset($temp);
         }
+         */
     }
 }
