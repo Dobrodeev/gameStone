@@ -10,6 +10,7 @@ class ExampleClass
 {
     public function exampleArrays()
     {
+        /**
         $number = 5;
         $str = 'Мир';
 //    echo "Привет $str !";
@@ -50,6 +51,74 @@ class ExampleClass
         $getting = 'get something';
         $db_conn = 'DELETE FROM shedule WHERE id="' . $getting . '"';
         echo $db_conn.'<br>';
+         */
+//        $deputyArray = [];
+        $deputyArray['Наша Украина'] = 'Укроп Украинский';
+        $deputyArray['Чужа Украина'] = 'Козак Деснянский';
+        $deputyArray['Малороссия'] = 'Отаман Белокопытов';
+        $deputyArray['ДНР'] = 'Иван Мазепа';
+        $deputyArray['ЛНР'] = 'Лев Ландау';
+        $deputyArray['Крым'] = 'Евгений Лифшиц';
+        $deputyArray['Буковель'] = 'Академик Тихонов';
+        $deputyArray['Народный фронт'] = 'Професоср Самарский';
+        $deputyArray['Народный фронт'] = 'Олег Ляшко';
+        $deputyArray['БПП'] = 'Надежда Савченко';
+        $deputyArray['БЮТ'] = 'Олесь Бузина';
+        echo '<br>Массив депутатов<br>';
+        foreach ($deputyArray as $party=>$deputy)
+        {
+            echo $party.'=>'.$deputy.'<br>';
+        }
+        asort($deputyArray);
+        echo 'Посортировали массив <br>';
+        foreach ($deputyArray as $party=>$deputy)
+        {
+            echo $party.' => '.$deputy.'<br>';
+        }
+        shuffle($deputyArray);
+        echo 'Перемешали массив <br>';
+        foreach ($deputyArray as $party=>$deputy)
+        {
+            echo $party.' => '.$deputy.'<br>';
+        }
+        echo 'Выберем трех победителей <br>';
+        $rand_keys = array_rand($deputyArray, 3);
+        echo 'первое место - '.$deputyArray[$rand_keys[0]].'<br>';
+        echo 'второе место - '.$deputyArray[$rand_keys[1]].'<br>';
+        echo 'третье место - '.$deputyArray[$rand_keys[2]].'<br>';
+        $key1 = $rand_keys[0];
+        $key2 = $rand_keys[1];
+        $key3 = $rand_keys[2];
+        for ($i = 0; $i < count($deputyArray); $i++)
+        {
+            for ($j = 0; $j < count($rand_keys); $j++)
+            {
+                if ($i == $rand_keys[$j]) unset($deputyArray[$i]);
+            }
+        }
+        echo 'Депутаты, которые не заняли призовые места <br>';
+        foreach ($deputyArray as $key=>$value)
+        {
+            echo $key.'=>'.$value.'<br>';
+        }
+        echo 'Многомерный массив <br>';
+        $weightArray = array(
+            'Саша Тернополь'=>array('рост'=>'181', 'вес'=>97, 'профессия'=>'охранник'),
+            'Игорь Бодибилдер'=>array('рост'=>'182', 'вес'=>106, 'профессия'=>'тренер'),
+            'Валентина Маринец'=>array('рост'=>'165', 'вес'=>46, 'размер груди'=>0, 'профессия'=>'секретарь суда'),
+            'Диана Маринец'=>array('рост'=>'168', 'вес'=>48, 'размер груди'=>1, 'профессия'=>'врач терапевт'),
+            'Виктория Бойко'=>array('рост'=>'166', 'вес'=>53, 'размер груди'=>3, 'профессия'=>'фотограф, тренер по классике'),
+            'Марина Флейм'=>array('рост'=>'169', 'вес'=>51, 'размер груди'=>1, 'профессия'=>'тренер по пилону')
+        );
+        foreach ($weightArray as $key=>$someone)
+        {
+            echo '<ul>'.$key;
+            foreach ($someone as $value=>$item)
+            {
+                echo '<li>'.$value.'=>'.$item.'</li>';
+            }
+            echo '</ul>';
+        }
     }
 
     public function clearMessage($message)
