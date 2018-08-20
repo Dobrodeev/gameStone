@@ -128,4 +128,73 @@ class ExampleClass
         $m = strip_tags($message);
         return $m;
     }
+
+    public function cardsGame()
+    {
+        $cards = array(
+            1=>array('A', 'heart'),
+            2=>array('A', 'diamond'),
+            3=>array('A', 'club'),
+            4=>array('A', 'spade'),
+            5=>array('K', 'heart'),
+            6=>array('K', 'diamond'),
+            7=>array('K', 'club'),
+            8=>array('K', 'spade'),
+            9=>array('Q', 'heart'),
+            10=>array('Q', 'diamond'),
+            11=>array('Q', 'club'),
+            12=>array('Q', 'spade'),
+            13=>array('J', 'heart'),
+            14=>array('J', 'diamond'),
+            15=>array('J', 'club'),
+            16=>array('J', 'spade'),
+            17=>array('10', 'heart'),
+            18=>array('10', 'diamond'),
+            19=>array('10', 'club'),
+            20=>array('10', 'spade'),
+            21=>array('9', 'heart'),
+            22=>array('9', 'diamond'),
+            23=>array('9', 'club'),
+            24=>array('9', 'spade'),
+            25=>array('8', 'heart'),
+            26=>array('8', 'diamond'),
+            27=>array('8', 'club'),
+            28=>array('8', 'spade'),
+            29=>array('7', 'heart'),
+            30=>array('7', 'diamond'),
+            31=>array('7', 'club'),
+            32=>array('7', 'spade'),
+            33=>array('6', 'heart'),
+            34=>array('6', 'diamond'),
+            35=>array('6', 'club'),
+            36=>array('6', 'spade'),
+            37=>array('5', 'heart'),
+            38=>array('5', 'diamond'),
+            39=>array('5', 'club'),
+            40=>array('5', 'spade'),
+            41=>array('4', 'heart'),
+            42=>array('4', 'diamond'),
+            43=>array('4', 'club'),
+            44=>array('4', 'spade'),
+            45=>array('3', 'heart'),
+            46=>array('3', 'diamond'),
+            47=>array('3', 'club'),
+            48=>array('3', 'spade'),
+            49=>array('2', 'heart'),
+            50=>array('2', 'diamond'),
+            51=>array('2', 'club'),
+            52=>array('2', 'spade'),
+            // еще можно два джокера добавить
+        );
+//        echo '<img src="img/'.$cards[1].'.jpg">';
+        foreach ($cards as $card=>$mast)
+        {
+            foreach ($mast as $key=>$value)
+            {
+//                echo $key.'=>'.$value.'<br>';
+                echo $value.' ';
+            }
+            echo '<br>';
+        }
+    }
 }

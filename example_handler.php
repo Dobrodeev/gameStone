@@ -25,6 +25,7 @@ spl_autoload_register(function ($className)
 $arrayObject = new ExampleClass();
 echo $arrayObject->clearMessage('Это текст с    implode(x)  <p>и еще чем-то <? echo $arrayX;?></p>лишними пробелами.').'<br>';
 $arrayObject->exampleArrays();
+$arrayObject->cardsGame();
 ?>
 </body>
 </html>
