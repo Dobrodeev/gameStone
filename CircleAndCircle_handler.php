@@ -28,18 +28,24 @@ if (isset($_POST['go']))
             $x2 = $_POST['circle2']['x2'];
             $y2 = $_POST['circle2']['y2'];
             $r2 = $_POST['circle2']['r2'];
-            $circleObject = new CircleAndCircleClass();
+            $circleObject1 = new CircleAndCircleClass();
             /**
             $circleObject->getCircle1($x1, $y1, $r1);
             $circleObject->getCircle2($x2, $y2, $r2);
             */
-            $circleObject->getCircle($x1, $y1, $r1);
+            $circleObject1->getCircle($x1, $y1, $r1);
             echo '<h5>Circle1</h5>';
-            $circleObject->countIntersections();
+            $circleObject1->countIntersections();
             $circleObject2 = new CircleAndCircleClass();
             $circleObject2->getCircle($x2, $y2, $r2);
             echo '<h5>Circle2</h5>';
             $circleObject2->countIntersections();
+            echo '<pre>';
+            print_r($circleObject1);
+            echo '</pre>';
+            echo '<pre>';
+            print_r($circleObject2);
+            echo '</pre>';
             //echo '<span style="color: blue">Всего точек пересечения: '.$circleObject->countPoints.'</span><br>';
         }
         else
