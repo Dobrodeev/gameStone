@@ -28,7 +28,11 @@ class CircleAndCircleClass
         $r1 = $this->r;
         echo 'Circle: ('.$x1.', '.$y1.'); r='.$r1.'<br>';
     }
-
+    
+    public function countIntersectionsCompare()
+    {
+        
+    }
     // 1 класс для круга и 2 обьекта - круги
     /**
     public function getCircle1($x, $y, $r)
