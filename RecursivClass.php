@@ -14,11 +14,13 @@ class RecursivClass
         else return ($number * $this->factorialRecursic($number - 1));
     }
     
-    public function factorialSimple($n)
-    {
-        for ($n = 0; $n <= 16; $n++) 
+    public function factorialFor($number)
+    {    
+        $factorial = 1;
+        for ($i = 1; $i <= $number; $i++) 
         {
-            echo($n . "! = " . factorial($n) . "\n");
+            $factorial *= $i;            
         }
+        echo $number.'! = '.$factorial.'<br>';
     }
 }
