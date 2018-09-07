@@ -5,6 +5,23 @@
  * Date: 06.08.2018
  * Time: 16:43
  */
-include 'RecursivClass.php';
+//include 'RecursivClass.php';
+require_once 'factorialForm.php';
+if(isset($_POST['go']))
+{
+    echo '<pre>';
+    print_r($_POST);
+    echo '</pre>';
+}
+;
+/**
+echo '<pre>';
+print_r($_POST['number']);
+echo '</pre>';
+
 $factorial = new RecursivClass();
-echo 'n! = '.$factorial->factorialRecursic(3);
+$x = 8;
+echo $x.'! = '.$factorial->factorialRecursic($x).'<br>';
+$factorial->factorialFor(7);
+*/
+?>

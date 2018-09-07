@@ -9,14 +9,32 @@
 class CircleAndCircleClass
 {
 
-    private $x1;
-    private $y1;
-    private $r1;
-    private $x2;
-    private $y2;
-    private $r2;
+    private $x;
+    private $y;
+    private $r;
     public $countPoints;
+    
+    public function getCircle($x, $y, $r)
+    {
+        $this->x = $x;
+        $this->y = $y;
+        $this->r = $r;
+    }
+    
+    public function countIntersections()
+    {
+        $x1 = $this->x;
+        $y1 = $this->y;
+        $r1 = $this->r;
+        echo 'Circle: ('.$x1.', '.$y1.'); r='.$r1.'<br>';
+    }
+    
+    public function countIntersectionsCompare()
+    {
+        
+    }
     // 1 класс для круга и 2 обьекта - круги
+    /**
     public function getCircle1($x, $y, $r)
     {
 
@@ -53,4 +71,5 @@ class CircleAndCircleClass
             $this->countPoints = 'infinity';
         }
     }
+    */    
 }
