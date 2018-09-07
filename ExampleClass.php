@@ -196,5 +196,39 @@ class ExampleClass
             }
             echo '<br>';
         }
+        $cardsSomeone = mt_rand(1, 52);
+        echo '<h5>First hand<h5>';
+        echo '<img src="img/'.$cardsSomeone.'.jpg" alt="first card" width = 30% height = 30%>';
+        $cardsSomeone2 = abs(mt_rand(1, 52) - 13);
+        echo '<img src="img/'.$cardsSomeone2.'.jpg" alt="second card" width = 30% height = 30%>';
+        echo '<hr>';
+        foreach ($cards as $card)
+        {
+            unset($cards[$cardsSomeone]);
+            unset($cards[$cardsSomeone2]);
+        }
+        $cardsSomeone = mt_rand(1, 52);
+        echo '<h5>Second hand<h5>';
+        echo '<img src="img/'.$cardsSomeone.'.jpg" alt="first card" width = 30% height = 30%>';
+        $cardsSomeone2 = abs(mt_rand(1, 52) - 13);
+        echo '<img src="img/'.$cardsSomeone2.'.jpg" alt="second card" width = 30% height = 30%>';
+        foreach ($cards as $card)
+        {
+            unset($cards[$cardsSomeone]);
+            unset($cards[$cardsSomeone2]);
+        }
+        $flopCards = array_rand($cards, 3);
+        echo '<h5>Флоп<h5>';
+        foreach ($flopCards as $card)
+        {
+            echo '<img src="img/'.$card.'.jpg" alt="second card" width = 30% height = 30%>';
+        }
+        /**
+        echo '<pre>';
+        print_r($cards);
+        echo '</pre>';
+         */
+        echo '<br>';
+        echo 'Осталось карт в колоде: '.count($cards).'<br>';
     }
 }

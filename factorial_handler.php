@@ -13,6 +13,12 @@ if(isset($_POST['go']))
     print_r($_POST);
     echo '</pre>';
 }
+spl_autoload_register(function ($className)
+{
+    include $className.'.php';
+});
+$objCardGame = new ExampleClass();
+$objCardGame->cardsGame();
 ;
 /**
 echo '<pre>';
