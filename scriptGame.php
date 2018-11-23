@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Game result</title>
-	<!-- <link rel="stylesheet" href="assets/style.css"> -->
+	 <link rel="stylesheet" href="assets/style.css">
 	<link rel="stylesheet" href="assets/reset.css">
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
