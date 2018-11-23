@@ -3,6 +3,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="assetst/reset.css">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="assets/style.css">
     <title>Игра ЮЗФ</title>
 </head>
 <body>
