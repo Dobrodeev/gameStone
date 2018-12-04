@@ -20,6 +20,7 @@
 <!--        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
     </div>
 <?php
+/**
 $start = 12;
 $end = 19;
 for ($i = $start; $i <= $end; $i++)
@@ -31,8 +32,26 @@ for ($i = $start; $i <= $end; $i++)
     }
     echo '<br>';
 }
+ */
+$string = 'abcdefghhafkfkafkauyevpi';
+$index = 5;
+function perevorotString($text, $index)
+{
+    echo $text.'<br>';
+//    $first = substr($text, 0, $index - 1);
+//    $temp = substr($text, $index - 1);
+//    $perevorot = strrev($temp);
+//    $result = $first.$perevorot;
+//    echo $result;
+    return substr($text, 0, $index-1) . strrev(substr($text, $index-1));
+}
+
+echo perevorotString($string, $index).'<br>';
+$save = perevorotString('Moscow Kiev Lutsck', 7);
+echo $save.'<br>';
+echo '<br>';
 ?>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Перевернуть строку</button>
 </form>
 </body>
 </html>
