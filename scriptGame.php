@@ -10,27 +10,27 @@
 <body>
 	<script src="assets/jquery-3.2.1.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
-    <div>
-        <form name="form1" method="post" action="#">
-            <h3>Game JuZeFa for webdesign</h3>
-            <hr size="1">
-            <p>Выбираем вариант:</p>
-            <p>
-                <br>
-                <select name=variant size=1>
-                    <option value=1>Ножницы</option>
-                    <option value=2>Бумага</option>
-                    <option value=3 selected>Колодец</option>
-                </select>
-            </p>
-            <br>
-            <p>
-                <input type="hidden"><?php $id = 0; ?>
-                <input type="submit" value="Отослать форму" name="go">
-                &nbsp;&nbsp;&nbsp<input type="reset" value="Очистить форму">
-            </p>
-        </form>
-    </div>
+<!--    <div>-->
+<!--        <form name="form1" method="post" action="#">-->
+<!--            <h3>Game JuZeFa for webdesign</h3>-->
+<!--            <hr size="1">-->
+<!--            <p>Выбираем вариант:</p>-->
+<!--            <p>-->
+<!--                <br>-->
+<!--                <select name=variant size=1>-->
+<!--                    <option value=1>Ножницы</option>-->
+<!--                    <option value=2>Бумага</option>-->
+<!--                    <option value=3 selected>Колодец</option>-->
+<!--                </select>-->
+<!--            </p>-->
+<!--            <br>-->
+<!--            <p>-->
+<!--                <input type="hidden">--><?php //$id = 0; ?>
+<!--                <input type="submit" value="Отослать форму" name="go">-->
+<!--                &nbsp;&nbsp;&nbsp<input type="reset" value="Очистить форму">-->
+<!--            </p>-->
+<!--        </form>-->
+<!--    </div>-->
 	<div class="bordered">
 		<h3>Результат</h3>
 		<?php
@@ -89,12 +89,12 @@
 
         function nextRound()
         {
-            echo 'next round. <br>';
+            echo '<a href="gameStone.php">Next Round</a>';
         }
 
         writeChange();
         compareVariant($varUser, $varBot);
-//        nextRound();
+        nextRound();
 ?>
 </body>
 </html>
