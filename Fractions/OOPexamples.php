@@ -75,8 +75,8 @@ class BeautyFractionOutput extends Fraction
 
 	}*/
 }
-$fr4 = new Animal();
-$fr3 = new FractionOutput(5,5);
+//$fr4 = new Animal();
+//$fr3 = new FractionOutput(5,5);
 
 $fr1 = new Fraction(1,2);
 $fr2 = new Fraction(3,5);
