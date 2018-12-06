@@ -430,7 +430,13 @@ class ExampleClass
         echo ' <br>Случайный елемент массива $arr: '.$arr[$index].'<br>';
     }
 
-    /** Pyramida */
+    /** Pyramida
+    2345
+    2345
+     345
+      45
+       5
+     */
     public function pyramidaOfNumbers()
     {
         for ($i = 0; $i < 9; $i++)
