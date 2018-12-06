@@ -393,6 +393,8 @@ class ExampleClass
         $simpleArray[] = 56;
         $simpleArray[] = - 39;
         $simpleArray[] = - 43;
+        $simpleArray[] = 119;
+        $simpleArray[] = 21;
         echo '<pre>';
         print_r($simpleArray);
         echo '</pre>';
@@ -401,6 +403,18 @@ class ExampleClass
         {
             echo $value.' С - '. (9 / 5 * $value + 32).' F<br>';
         }
+//        reset($simpleArray);
+        arsort($simpleArray);
+        $key_of_max = key($simpleArray);
+        echo 'Key of max element: '.$key_of_max.'<br>';
+        echo 'Применение функции compact() - из переменных делаем массив <br>';
+        $x1 = 'first X1';
+        $x2 = 'second X2';
+
+        $xArray = compact('x1','x2');
+        echo '<pre>';
+        print_r($xArray);
+        echo '</pre>';
     }
     /** Случайный елемент массива */
     function generatorRandomArrays() //подходит только для индексных массивов, индексы которых начинаются с 0
@@ -415,4 +429,19 @@ class ExampleClass
         $index = mt_rand(0, count($arr)-1);
         echo ' <br>Случайный елемент массива $arr: '.$arr[$index].'<br>';
     }
+
+    /** Pyramida */
+    public function pyramidaOfNumbers()
+    {
+        for ($i = 0; $i < 9; $i++)
+        {
+            for ($j = 0; $j < 9; $j++)
+            {
+                echo $j.' ';
+            }
+        }
+    }
+    /** S = 1 + x^2/2! + x^4/4! + ...+ x^n/n!
+     * n<N, x<R
+     n & x задаются через адресную строку методом GET*/
 }
