@@ -23,4 +23,16 @@ class RecursivClass
         }
         echo $number.'! = '.$factorial.'<br>';
     }
+    /**
+     * Degrees Celsius Degrees Fahrenheit
+     * F = 9 / 5 x C + 32
+     */
+    public function degreesExchange()
+    {
+        for ($i = 0; $i <= 100; $i + 10)
+        {
+            $Fahrenheit = 9 / 5 * $i + 32;
+            echo $i.' Celsius -> '.$Fahrenheit.' F<br>';
+        }
+    }
 }
