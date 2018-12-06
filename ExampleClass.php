@@ -379,6 +379,28 @@ class ExampleClass
         /** @var Fibonacci array $exampleArray */
         $exampleArray = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597];
         $warDates = [1646, 1877, 1914, 1939, 1979, 2014];
+        $simpleArray = [49, -13, 26, -3, 19, 29, 3, 27, -20, 18];
+        echo '<pre>';
+        print_r($simpleArray);
+        echo '</pre>';
+        echo 'Индексы элементы массива которые > 6: <br>';
+        while ($someone = current($simpleArray)) {
+            if ($someone > 6) {
+                echo key($simpleArray).'<br />';
+            }
+            next($simpleArray);
+        }
+        $simpleArray[] = 56;
+        $simpleArray[] = - 39;
+        $simpleArray[] = - 43;
+        echo '<pre>';
+        print_r($simpleArray);
+        echo '</pre>';
+        $degreesArray = range(0,100, 10);
+        foreach ($degreesArray as $value)
+        {
+            echo $value.' С - '. (9 / 5 * $value + 32).' F<br>';
+        }
     }
     /** Случайный елемент массива */
     function generatorRandomArrays() //подходит только для индексных массивов, индексы которых начинаются с 0
