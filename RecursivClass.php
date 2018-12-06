@@ -29,10 +29,14 @@ class RecursivClass
      */
     public function degreesExchange()
     {
-        for ($i = 0; $i <= 100; $i + 10)
+        $Fahrenheit = 0;
+        $j = 0;
+        echo '<b>Exchange Deegrees Celsius to Fahrengeit</b><br>';
+        for ($i = 0; $i <= 30; $i ++)
         {
-            $Fahrenheit = 9 / 5 * $i + 32;
-            echo $i.' Celsius -> '.$Fahrenheit.' F<br>';
+            $Fahrenheit = 9 / 5 * $j + 32;
+            echo $j.' Celsius -> '.$Fahrenheit.' F<br>';
+            $j += 10;
         }
     }
 }
