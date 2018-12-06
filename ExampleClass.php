@@ -242,5 +242,15 @@ class ExampleClass
         echo '<pre>';
         print_r($simpleArray);
         echo '</pre>';
+        echo 'min элемент массива: '.min($simpleArray).'<br>';
+        $Summa = 0;
+        for ($i = 0; $i < count($simpleArray); $i ++)
+        {
+            if ($simpleArray[$i] > 0)
+            {
+                $Summa += $simpleArray[$i];
+            }
+        }
+        echo 'Сумма положительных элементов массива: '.$Summa.'<br>';
     }
 }
