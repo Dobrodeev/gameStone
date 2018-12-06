@@ -373,4 +373,24 @@ class ExampleClass
             }
         }
     }
+    /** Примеры функций для работы с массивами */
+    public function someFunctionsArrays()
+    {
+        /** @var Fibonacci array $exampleArray */
+        $exampleArray = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597];
+        $warDates = [1646, 1877, 1914, 1939, 1979, 2014];
+    }
+    /** Случайный елемент массива */
+    function generatorRandomArrays() //подходит только для индексных массивов, индексы которых начинаются с 0
+    {
+        $j = 0;
+        for ($i = 0; $i < 10; $i++)
+        {
+            $arr[$i] = $j++;
+            echo $arr[$i].' ';
+        }
+        //получаем случайный индекс массива
+        $index = mt_rand(0, count($arr)-1);
+        echo ' <br>Случайный елемент массива $arr: '.$arr[$index].'<br>';
+    }
 }
