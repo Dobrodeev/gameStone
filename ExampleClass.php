@@ -53,6 +53,7 @@ class ExampleClass
         echo $db_conn.'<br>';
          */
 //        $deputyArray = [];
+        /**
         $deputyArray['Наша Украина'] = 'Укроп Украинский';
         $deputyArray['Чужа Украина'] = 'Козак Деснянский';
         $deputyArray['Малороссия'] = 'Отаман Белокопытов';
@@ -118,7 +119,7 @@ class ExampleClass
                 echo '<li>'.$value.'=>'.$item.'</li>';
             }
             echo '</ul>';
-        }
+        }*/
     }
 
     public function clearMessage($message)
@@ -186,7 +187,7 @@ class ExampleClass
             52=>array('2', 'spade'),
             // еще можно два джокера добавить
         );
-//        echo '<img src="img/'.$cards[1].'.jpg">';
+        /**
         foreach ($cards as $card=>$mast)
         {
             foreach ($mast as $key=>$value)
@@ -196,6 +197,7 @@ class ExampleClass
             }
             echo '<br>';
         }
+        */
         $cardsSomeone = mt_rand(1, 52);
         echo '<h5>First hand<h5>';
         echo '<img src="img/'.$cardsSomeone.'.jpg" alt="first card" width = 30% height = 30%>';
@@ -230,5 +232,15 @@ class ExampleClass
          */
         echo '<br>';
         echo 'Осталось карт в колоде: '.count($cards).'<br>';
+    }
+    /**
+     * 16 задач на массивы из НАУ
+     */
+    public function exercisesArrays()
+    {
+        $simpleArray = [49, -13, 26, -3, 19, 29, 32, 27, -20, 18];
+        echo '<pre>';
+        print_r($simpleArray);
+        echo '</pre>';
     }
 }
