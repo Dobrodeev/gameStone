@@ -29,6 +29,14 @@ $n = $_GET['n'];
 $x = $_GET['x'];
 echo $n.'<br>';
 echo $x.'<br>';
-$cosinus = pow(-1, $n) * pow($x, 2*$n) / (recFactorial(2*$n));
-echo 'cos('.$x.')='.$cosinus.'<br>';
+$i = 1;
+$exponenta = 1;
+while ($i <= $n)
+{
+    $exponenta += pow($x, 2*$i) / (recFactorial(2*$i));
+    $i++;
+}
+
+echo 'exp('.$x.')='.$exponenta.'<br>';
 echo ' при n='.$n.'<br>';
+echo recFactorial(5).'<br>';
