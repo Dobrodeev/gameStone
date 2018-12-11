@@ -11,6 +11,7 @@
 <body>
 <script src="assets/jquery-3.2.1.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
+<img src="img/viber.jpg" style="width:90px;height:60px;">
 <form action="#" method="post" name="calculator">
     <input type="text" placeholder="первое число" required name=first><br>
     <input type="text" placeholder="второе число" required name=second><br>

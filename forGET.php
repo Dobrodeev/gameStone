@@ -1,3 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<a href="viber://add?number=38067111111"><img src="img/viber.jpg" style="width:45px;height:30px;"></a>
+<img src="images/viber.jpg" style="width:90px;height:60px;">
 <?php
 /**
  * Created by PhpStorm.
@@ -40,3 +52,6 @@ while ($i <= $n)
 echo 'exp('.$x.')='.$exponenta.'<br>';
 echo ' при n='.$n.'<br>';
 echo recFactorial(5).'<br>';
+?>
+</body>
+</html>
