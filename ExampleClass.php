@@ -238,10 +238,19 @@ class ExampleClass
      */
     public function exercisesArrays()
     {
+        /** max element */
         $simpleArray = [49, -13, 26, -3, 19, 29, 3, 27, -20, 18];
         echo '<pre>';
         print_r($simpleArray);
         echo '</pre>';
+//        echo 'max элемент массива: '.min($simpleArray).'<br>';
+        $maximumElement = $simpleArray[0];
+        for ($i = 1; $i < count($simpleArray); $i++)
+        {
+            if ($simpleArray[$i] > $maximumElement)
+                $maximumElement = $simpleArray[$i];
+        }
+        echo 'max элемент массива: '.$maximumElement.'<br>';
         echo 'min элемент массива: '.min($simpleArray).'<br>';
         $Summa = 0;
         for ($i = 0; $i < count($simpleArray); $i ++)
