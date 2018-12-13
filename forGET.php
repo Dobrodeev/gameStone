@@ -8,8 +8,8 @@
     <title>Document</title>
 </head>
 <body>
-<a href="viber://add?number=38067111111"><img src="img/viber.jpg" style="width:45px;height:30px;"></a>
-<img src="images/viber.jpg" style="width:90px;height:60px;">
+<!--<a href="viber://add?number=38067111111"><img src="img/viber.jpg" style="width:45px;height:30px;"></a>-->
+<!--<img src="images/viber.jpg" style="width:90px;height:60px;">-->
 <?php
 /**
  * Created by PhpStorm.
@@ -17,6 +17,34 @@
  * Date: 10.12.2018
  * Time: 10:07
  */
+function pyramidaDown()
+{
+    $a = 3;
+    $b = 6;
+
+    for ($j=0; $j < $a ; $j++)
+    {
+        for ($i=$a; $i <= $b ; $i++)
+        {
+            echo $i;
+        }
+        echo '<br/>';
+    }
+
+    for ($j=$a+1; $j <= $b ; $j++)
+    {
+        for ($i=$a; $i <= $b ; $i++)
+        {
+            if ($i<$j)
+                echo '0';
+            else
+                echo $i;
+        }
+
+        echo '<br/>';
+    }
+}
+//pyramidaDown();
 function recFactorial($n)
 {
     if ($n < 0) return 0;
@@ -51,7 +79,25 @@ while ($i <= $n)
 
 echo 'exp('.$x.')='.$exponenta.'<br>';
 echo ' при n='.$n.'<br>';
-echo recFactorial(5).'<br>';
+//echo recFactorial(5).'<br>';
+/** Более оптимальный просчет суммы ряда */
+
+$n = 20;
+$x = 5.3;
+
+$sum = 1;
+$fact = 1;
+for ($i=2; $i <= 2*$n ; $i+=2)
+{
+    for ($j=($i-1); $j <= $i; $j++)
+    {
+        $fact *= $j;
+    }
+    $sum += pow($x, $i) / ($fact);
+
+}
+
+echo $sum;
 ?>
 </body>
 </html>
