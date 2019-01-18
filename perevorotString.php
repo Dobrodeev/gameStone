@@ -26,7 +26,7 @@ spl_autoload_register(function ($class)
 $object = new PerevorotArray();
 $object->perevorotTexta('В ролях: Chad White, Ember Stone, Erik Everhard, James Deen, Kasey Warner, Tegan Riley, Willow Hayes, Xander Corvus');
 echo 'Example <br>';
-$exampleArray = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597];
+//$exampleArray = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597];
 $string = 'Описание: These girls can\'t wait to show off their hairy bushes! Tegan Riley, Kasey Warner, Willow Hayes, and Ember Stone are here, and they\'re about to get into some sexually hairy situations. Let these beautiful ladies show you why it\'s so sexy to have hair down there!';
 $index = 13;
 $save = $object->perevorotString($string, $index);

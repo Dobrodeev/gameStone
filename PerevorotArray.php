@@ -32,6 +32,11 @@ class PerevorotArray
 //        echo '<pre>';
 //        print_r($this->routes);
 //        echo '</pre>';
+        $this->routes = array(
+            'cart'=>'cart/view',// обращаемся к классу cartController & к методу view
+            'news/([0-9]+)' => 'news/view/$1',// обращаемся к классу newsController и к методу actionView к конкретному номеру новости
+            '' => 'news/index',// обращаемся к классу newsController и к методу actionIndex для вывода всех новостей
+        );
         foreach ($this->routes  as $uriPattern=>$path)
         {
             if(preg_match("~$uriPattern~",$uri))
