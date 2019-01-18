@@ -77,6 +77,19 @@ class PerevorotArray
         echo '<pre>';
         print_r($explodeText);
         echo '</pre>';
+        $count = 150;
+        $Summa = 0;
+        for ($i = 1; $i < $count; $i++)
+        {
+            $Summa += 1/$i;
+        }
+        echo 'Сумма '.$count.' первых членов гармонического ряда = '.$Summa.'<br>';
+        $exampleArray = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597];
+        foreach ($exampleArray as $item)
+        {
+            echo $item.' ';
+            echo '<br>';
+        }
     }
 
     public function perevorotString($text, $index)
