@@ -9,13 +9,14 @@
 class PerevorotArray
 {
     private $routes;// здесь уже массив
-/**
+/***/
     public function __construct()
     {
-        $routesPath = ROOT.'/config/routes.php';//здесь уже массив
-        $this->routes = include($routesPath);
+//        $routesPath = ROOT.'/config/routes.php';//здесь уже массив
+//        $this->routes = include($routesPath);
+        echo 'Вызов конструктора <br>';;
     }
-*/
+
     private function getURI()
     {
         if(!empty($_SERVER['REQUEST_URI']))// если наш адрес не пуст после слеша
@@ -88,8 +89,8 @@ class PerevorotArray
         foreach ($exampleArray as $item)
         {
             echo $item.' ';
-            echo '<br>';
         }
+        echo '<br>';
     }
 
     public function perevorotString($text, $index)
@@ -161,5 +162,11 @@ class PerevorotArray
         }
 
         return $f;
+    }
+
+    public function __destruct()
+    {
+        // TODO: Implement __destruct() method.
+        echo 'Вызов деструктора. <br>';
     }
 }
