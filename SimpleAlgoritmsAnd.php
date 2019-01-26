@@ -60,6 +60,7 @@ sort($testArray);
 echo 'Снова отсортировали массив: <br>';
 writelineArray($testArray);
 echo '<br>';
+$object->simpleMatrica(10);
 ?>
 </body>
 </html>

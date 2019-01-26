@@ -216,4 +216,16 @@ class SimpleAlgoritms
         }
         echo '<br>';
     }
+
+    public function simpleMatrica($n)
+    {
+        for ($i = 0; $i < $n; $i++)
+        {
+            for ($j = 0; $j < $n; $j++)
+            {
+                echo $j.' ';
+            }
+            echo '<br>';
+        }
+    }
 }
