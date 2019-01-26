@@ -176,6 +176,19 @@ class SimpleAlgoritms
         return $temp;
     }
 
+    public function minElement($arr)
+    {
+        $min = $arr[0];
+        for ($i =1; $i < count($arr)-1; $i++)
+        {
+            if ($arr[$i] < $min)
+            {
+                $min = $arr[$i];
+            }
+        }
+        return $min;
+    }
+
     public function puzurSort($arr)
     {
         echo 'До сортировки: <br>';
@@ -201,5 +214,6 @@ class SimpleAlgoritms
         {
             echo $value.' ';
         }
+        echo '<br>';
     }
 }
