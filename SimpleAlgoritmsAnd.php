@@ -41,8 +41,25 @@ $testArray = [3, 7, 15, 1, 292, 1, 1, 1, 2, 1, 3, 1, 14, 2, 1, 1, 2, 2, 2, 2, 1,
 echo '<br>Max element of $testArray: <br>';
 echo $object->maxElementOfArray($testArray);
 echo '<br>';
-$object->gameIn15();
+echo 'Минимальный элемент массива $arr: <br>';
+echo $object->minElement($testArray).'<br>';
+//$object->gameIn15();
 $object->puzurSort($testArray);
+shuffle($testArray);
+echo 'Перемешали массив $testArray: <br>';
+function writelineArray($testArray)
+{
+    foreach ($testArray as $value)
+    {
+        echo $value.' ';
+    }
+    echo '<br>';
+}
+writelineArray($testArray);
+sort($testArray);
+echo 'Снова отсортировали массив: <br>';
+writelineArray($testArray);
+echo '<br>';
 ?>
 </body>
 </html>
