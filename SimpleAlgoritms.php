@@ -10,18 +10,46 @@ class SimpleAlgoritms
 {
     public function cvadrarickNumbers()
     {
+        $array = [];
         echo '<table>';
         for ($i = 0; $i < 9; $i++)
         {
             echo '<tr>';
             for ($j = 0; $j < 9; $j++)
             {
-                echo '<td>'.(9*$i + $j + 1) .'</td>';
+                echo '<td>'.$array[$i][$j]=(9*$i + $j + 1) .'</td>';
+            }
+            echo '</tr>';
+        }
+        echo '</table>';
+        for ($i = 0; $i < 9; $i++)
+        {
+            for ($j = 0; $j < 9; $j++)
+            {
+                if ($j > $i)
+                {
+                    $temp = $array[$i][$j];
+                    $array[$i][$j]=$array[$j][$i];
+                    $array[$j][$i] = $temp;
+                }
+//                echo '<td>'.$array[$i][$j].'</td>';
+            }
+        }
+        echo '<hr>';
+        echo '<table>';
+        for ($i = 0; $i < 9; $i++)
+        {
+            echo '<tr>';
+            for ($j = 0; $j < 9; $j++)
+            {
+                echo '<td>'.$array[$i][$j].'</td>';
             }
             echo '</tr>';
         }
         echo '</table>';
     }
+// $a[$i][$j]=$a[$j][$i]
+
 
     /** Pyramida
     2345
@@ -223,7 +251,7 @@ class SimpleAlgoritms
         {
             for ($j = 0; $j < $n; $j++)
             {
-                echo $j.' ';
+                echo $i.' ';
             }
             echo '<br>';
         }
