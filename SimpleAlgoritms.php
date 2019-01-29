@@ -258,15 +258,30 @@ class SimpleAlgoritms
             echo '</tr>';
         }
         echo '</table>';
-
-//        for ($j = 0; $i < 9; $j++)
-//        {
-//            for ($i = 0; $i < 9; $i++)
-//            {
-//                echo $array[$i][$j].' ';
-//            }
-//            echo '<br>';
-//        }
+        $n = 9;
+//        $b = array();
+        echo '<table class="table table-dark">';
+        for ($i = 0; $i < $n; $i++)
+        {
+            echo '<tr>';
+            for ($j = $n; $j >= 0; $j--)
+            {
+                echo '<td>'.$array[$i][$j].'</td>';
+            }
+            echo '</tr>';
+        }
+        echo '</table>';
+        echo '<table class="table table-dark">';
+        for ($j = 0; $j < $n; $j++)
+        {
+            echo '<tr>';
+            for ($i = $n; $i >= 0; $i--)
+            {
+                echo '<td>'.$array[$i][$j].'</td>';
+            }
+            echo '</tr>';
+        }
+        echo '</table>';
     }
 
     public function evenNumbers($num1, $num2, $num3)
