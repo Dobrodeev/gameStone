@@ -251,7 +251,7 @@ class SimpleAlgoritms
         {
             for ($j = 0; $j < $n; $j++)
             {
-                echo $i.' ';
+                echo $j.' ';
             }
             echo '<br>';
         }
@@ -299,8 +299,14 @@ class SimpleAlgoritms
             echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
     }
 
-    public function evenNumbers5($num1, $num2, $num3)
+    function evenNumbers5($num1, $num2, $num3)
     {
-        
+
+        if ($num1 % 2 + $num2 % 2 + $num3 % 2 <= 1)
+        {
+            echo $num1.', '.$num2.', '.$num3.' - 2 числа четные <br>';
+        }
+        else
+            echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
     }
 }
