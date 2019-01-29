@@ -32,7 +32,6 @@ class SimpleAlgoritms
                     $array[$i][$j]=$array[$j][$i];
                     $array[$j][$i] = $temp;
                 }
-//                echo '<td>'.$array[$i][$j].'</td>';
             }
         }
         echo '<hr>';
@@ -247,14 +246,27 @@ class SimpleAlgoritms
 
     public function simpleMatrica($n)
     {
+        $array = array();
+        echo '<table class="table">';
         for ($i = 0; $i < $n; $i++)
         {
+            echo '<tr>';
             for ($j = 0; $j < $n; $j++)
             {
-                echo $j.' ';
+                echo '<td>'.$array[$i][$j] = (9*$i+$j+1).'</td>';
             }
-            echo '<br>';
+            echo '</tr>';
         }
+        echo '</table>';
+
+//        for ($j = 0; $i < 9; $j++)
+//        {
+//            for ($i = 0; $i < 9; $i++)
+//            {
+//                echo $array[$i][$j].' ';
+//            }
+//            echo '<br>';
+//        }
     }
 
     public function evenNumbers($num1, $num2, $num3)
