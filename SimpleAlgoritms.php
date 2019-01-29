@@ -256,4 +256,51 @@ class SimpleAlgoritms
             echo '<br>';
         }
     }
+
+    public function evenNumbers($num1, $num2, $num3)
+    {
+        if (($num1 % 2 == 0 && $num2 % 2 == 0) or ($num2 % 2 == 0 && $num3 % 2 == 0) or ($num1 % 2 == 0 && $num3 % 2 ==0))
+        {
+            echo $num1.', '.$num2.', '.$num3.' - 2 числа четные <br>';
+        }
+        else
+            echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
+    }
+
+    public function evenNumbers2($num1, $num2, $num3)
+    {
+        if (($num1 % $num2 == 0) or ($num2 % $num3 == 0) or ($num3 % $num1 == 0) ($num2 % $num1 == 0) or ($num2 % $num3 == 0) or ($num3 % 2 == 0))
+        {
+            echo $num1.', '.$num2.', '.$num3.' - 2 числа четные <br>';
+        }
+        else
+            echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
+    }
+
+    public  function evenNumbers3($num1, $num2, $num3)
+    {
+        if ((($num1 * $num2) %2 == 0) and (($num1 * $num3) % 2 == 0) and (($num2 * $num3) % 2 ==0))
+        {
+            echo $num1.', '.$num2.', '.$num3.' - 2 числа четные <br>';
+        }
+        else
+            echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
+    }
+    /**  */
+    public function evenNumbers4($num1, $num2, $num3)
+    {
+        $counter = 0;
+        if ($num1 % 2 == 0) $counter++;
+        if ($num2 % 2 == 0) $counter++;
+        if ($num3 % 2 == 0) $counter++;
+        if ($counter >= 2)
+            echo $num1.', '.$num2.', '.$num3.' - 2 числа четные <br>';
+        else
+            echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
+    }
+
+    public function evenNumbers5($num1, $num2, $num3)
+    {
+        
+    }
 }
