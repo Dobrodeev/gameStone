@@ -23,7 +23,7 @@ session_destroy();
 <script src="assets/js/bootstrap.min.js"></script>
 <form action="#" method="post">
     <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg" name="number"><br>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" name="go">Submit</button>
 </form>
 <?php
 /**
@@ -32,30 +32,63 @@ session_destroy();
  * Date: 01.02.2019
  * Time: 20:24
  */
-//echo '$_SESSION[]='.$_SESSION['count'].'<br>';
+include 'DB.php';
 echo $_POST['number'].'<br>';
 $number = $_POST['number'];
-function numberAnalysis($number)
+if ($number > 0)
 {
-    $counter = 0;
-    $Summa = 0;
-    $min = $number;
-    $max = $number;
-    if ($number > 0)
+    $query = "INSERT INTO numbers_statistics (number) VALUE ('$number')";
+    $stmt = $pdo->query($query);
+}
+elseif ($number < 0)
+{
+    echo ' Error. $number must be > 0 <br>';
+}
+else
+{
+    echo 'Выводим статистику: <br>';
+    $queryStatistics = "SELECT * FROM numbers_statistics";
+    $queryMIN = "SELECT MIN(number) FROM numbers_statistics";
+    $queryMAX = "SELECT MAX(number) FROM numbers_statistics";
+    $querySUM = "SELECT SUM(number) FROM numbers_statistics";
+    $querySUMaverage = "SELECT SUM(number)/COUNT(number) FROM numbers_statistics";
+    $stmt = $pdo->query($queryStatistics);
+    while ($row = $stmt->fetch())
     {
-        $counter ++;
-        $Summa += $number;
-    }
-    elseif ($number < 0)
-    {
-        echo 'Error. $number must be > 0. <br>';
-    }
-    else
-    {
-        echo 'Get statistics: <br>';
+        echo $row['id'].' -> '.$row['number'].'<br>';
     }
 }
-numberAnalysis($number);
+/**
+if (isset($_POST['go']))
+{
+
+    echo $_POST['number'].'<br>';
+    $number = $_POST['number'];
+    function numberAnalysis($number)
+    {
+        $counter = 0;
+        $Summa = 0;
+        $min = $number;
+        $max = $number;
+        if ($number > 0)
+        {
+            $counter ++;
+            $Summa += $number;
+
+        }
+        elseif ($number < 0)
+        {
+            echo 'Error. $number must be > 0. <br>';
+        }
+        else
+        {
+            echo 'Get statistics: <br>';
+        }
+    }
+//    numberAnalysis($number);
+}
+ * */
+
 ?>
 <!--<a href="#">Обновить страницу</a>-->
 </body>
