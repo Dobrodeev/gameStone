@@ -246,6 +246,7 @@ class SimpleAlgoritms
 
     public function simpleMatrica($n)
     {
+        $n = 9;
         $array = array();
         echo '<table class="table">';
         for ($i = 0; $i < $n; $i++)
@@ -258,30 +259,25 @@ class SimpleAlgoritms
             echo '</tr>';
         }
         echo '</table>';
-        $n = 9;
-        $b = array();
+        
+        echo '<table class="table table-dark">';
         for ($i = 0; $i < $n; $i++)
         {
-            for ($j = $n; $j >= 0; $j--)
+            echo '<tr>';
+            for ($j = 0; $j < $n; $j++)
             {
-                $b[] = $array[$i][$j];
+                if ($j % 2 == 0)
+                {
+                    echo '<td>'.$array[$i][$j].'</td>';
+                }
+                else
+                {
+                    echo '<td>'.$array[$n - 1 - $i][$j].'</td>';
+                }
             }
+            echo '</tr>';
         }
-//        echo '<table class="table table-dark">';
-////        for ($i = 0; $i < $n; $i++)
-////        {
-////            echo '<tr>';
-////            for ($j = 0; $j < $n; $j++)
-////            {
-////                echo '<td>'.$b[$j].'</td>';
-////            }
-////            echo '</tr>';
-////        }
-////        echo '</table>';
-        for ($i = 0; $i < count($b)-1; $i++)
-        {
-            echo $b[$i].' ';
-        }
+        echo '</table>';
     }
 
     public function evenNumbers($num1, $num2, $num3)
