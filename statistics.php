@@ -57,6 +57,14 @@ else
     {
         echo $row['id'].' -> '.$row['number'].'<br>';
     }
+    $min = $pdo->query($queryMIN)->fetchColumn();
+    echo 'min = '.$min.'<br>';
+    $max = $pdo->query($queryMAX)->fetchColumn();
+    echo 'max = '.$max.'<br>';
+    $Sum = $pdo->query($querySUM)->fetchColumn();
+    echo 'Сумма всех чисел = '.$Sum.'<br>';
+    $SumAverage = $pdo->query($querySUMaverage)->fetchColumn();
+    echo 'Среднее арифметическое чисел = '.$SumAverage.'<br>';
 }
 /**
 if (isset($_POST['go']))
