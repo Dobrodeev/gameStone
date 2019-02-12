@@ -39,13 +39,11 @@ if (!isset($_SESSION['count']))
 </form>
 
 <?
-
-
 if (isset($_POST['go']))
 {
-    echo $_POST['number'].'<br>';
+
     $number = $_POST['number'];
-    
+    echo $number.'<br>';
     if ($number > 0)
     {
         $_SESSION['count']++;
@@ -66,7 +64,7 @@ if (isset($_POST['go']))
         if ($_SESSION['max'] < $number) $_SESSION['max'] = $number;
               
     }
-    elseif ($number == 0 && $_SESSION['count']!=0)
+    elseif ($_SESSION['count']!=0 && $number == 0)
     {
         echo 'Кол-во всех чисел = '.$_SESSION['count'].'<br>';
         echo 'Сумма всех чисел = '.$_SESSION['sum'].'<br>';
@@ -77,15 +75,10 @@ if (isset($_POST['go']))
     }
     elseif ($number < 0)
     {
-       
         echo ' Error. $number must be > 0 <br>';
     }
-        
-
 }
 
-
 ?>
-<!--<a href="#">Обновить страницу</a>-->
 </body>
 </html>
