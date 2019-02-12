@@ -1,12 +1,12 @@
 <?php
-/**
+/***/
 session_name('test');
 session_start();
-$_SESSION['count'] = @$_SESSION['count'] + 1;
-unset($_SESSION['count']);
-$_SESSION = array();
-session_destroy();
-*/
+//$_SESSION['count'] = @$_SESSION['count'] + 1;
+//unset($_SESSION['count']);
+//$_SESSION = array();
+//session_destroy();
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -66,10 +66,11 @@ else
     $SumAverage = $pdo->query($querySUMaverage)->fetchColumn();
     echo 'Среднее арифметическое чисел = '.$SumAverage.'<br>';
 }
+//$_SESSION['number']
 /**
 if (isset($_POST['go']))
 {
-
+    $
     echo $_POST['number'].'<br>';
     $number = $_POST['number'];
     function numberAnalysis($number)
