@@ -64,7 +64,7 @@ if (isset($_POST['go']))
         if ($_SESSION['max'] < $number) $_SESSION['max'] = $number;
               
     }
-    elseif ($_SESSION['count']!=0 && $number == 0)
+    elseif (  $number == 0 && $_SESSION['count']!=0 )
     {
         echo 'Кол-во всех чисел = '.$_SESSION['count'].'<br>';
         echo 'Сумма всех чисел = '.$_SESSION['sum'].'<br>';
