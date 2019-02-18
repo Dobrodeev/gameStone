@@ -46,4 +46,9 @@ class Our_List
     {
 
     }
+
+    public function push_end()
+    {
+
+    }
 }
