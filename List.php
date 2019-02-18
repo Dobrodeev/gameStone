@@ -36,4 +36,14 @@ class Our_List
 			while ($temp != null);
 		}
 	}
+
+	public function pop_front($data, $start)
+    {
+
+    }
+
+    public function get_element()
+    {
+
+    }
 }
