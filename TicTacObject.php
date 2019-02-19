@@ -14,7 +14,8 @@
 <form method="post" action="#">
     <div class="form-group">
         <label for="exampleInputEmail1">Походить</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ход" name="step">
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ход" name="x">
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ход" name="y">
 <!--        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
@@ -35,5 +36,8 @@ spl_autoload_register(function ($class)
 });
 $TicTac = new TicTac();
 $TicTac->simpleTicTack(3);
-print_r($_POST['step']);
+//print_r($_POST);
+$TicTac->getStep(2,3);
+$TicTac->simpleTicTack(3);
+$TicTac->afterStep(1,2);
 ?>
