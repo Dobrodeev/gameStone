@@ -332,4 +332,19 @@ class SimpleAlgoritms
         else
             echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
     }
+
+    public function simpleTicTack($n)
+    {
+        $n = 3;
+        $array = array();
+        echo '<table class="table table-bordered table-dark">';
+        for ($i = 0; $i < $n; $i++) {
+            echo '<tr>';
+            for ($j = 0; $j < $n; $j++) {
+                echo '<td>' . $array[$i][$j] = '&nbsp' . '</td>';
+            }
+            echo '</tr>';
+        }
+        echo '</table>';
+    }
 }

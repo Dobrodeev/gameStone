@@ -63,6 +63,8 @@ echo '<br>';
 $object->simpleMatrica(10);
 $object->evenNumbers(13, 267, 38);
 $object->evenNumbers4(19,12,90);
+echo 'Tic Tack <br>';
+$object->simpleTicTack(2);
 ?>
 </body>
 </html>
