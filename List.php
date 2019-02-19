@@ -36,17 +36,21 @@ class Our_List
 			while ($temp != null);
 		}
 	}
-
-	public function pop_front($data, $start)
+/* метод для удаления первого элемента списка */
+    public function pop_front()
     {
-
+        if (!$this->count) return;
+        $temp = $this->start->data;
+        $this->start = $this->start->next;
+        $this->count--;
+        return $temp;
     }
-
-    public function get_element()
+/* Метод получения элемента по индексу: $a->get(index) */
+    public function get_element($index)
     {
-
+//        return $this->start;
     }
-
+/* метод для добавления элемента в конец списка */
     public function push_end()
     {
 

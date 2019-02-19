@@ -29,16 +29,16 @@ $a = new Our_List();
 $a->push_front(35);
 $a->push_front(11);
 $a->push_front(21);
-$a->list_print();
 
+printf("Осталось в списке %d объектов. <br>", $a->count);
+$a->push_front(55);
+$a->push_front(-100);
+printf("Осталось в списке %d объектов. <br>", $a->count);
 
-/*
-Написать метод для удаления первого элемента списка. (pop_front)
+$a->pop_front();
+while($a->count)
+    printf("Мы взяли из списка: %d <br>", $a->pop_front());
 
-*Написать метод для добавления элемента в конец списка.
-
-*Метод получения элемента по индексу: $a->get(index)
-
-
-*/
+printf("Осталось в списке %d объектов. <br>", $a->count);
+$a->pop_front();
 ?>
