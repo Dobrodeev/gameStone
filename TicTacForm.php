@@ -104,47 +104,69 @@ function sessionZero()
 
 if ($_POST['doGo'])
 {
-    if ($_SESSION['count'] < 9 && $_SESSION['count']%2 == 0)
+    if (isset($_POST['x']) && isset($_POST['y']))
     {
-        $x = $_POST['x'];
-        $y = $_POST['y'];
-        echo 'Ход ('.$x.', '.$y.') <br>';
-        $_SESSION['count'] = @$_SESSION['count'] + 1;
-        echo 'Ход №'.$_SESSION['count'].' сделан: ('.$x.', '.$y.') <br>';
-        $array[$x][$y] = 'X';
-        $_SESSION['array'][$x][$y] = 'X';
-        writeArray($_SESSION['array']);
-        $flag = afterStep();
-        if ($flag)
+        if ($_SESSION['count'] < 9 && $_SESSION['count']%2 == 0)
         {
-            echo 'Крестики победили.<br>';
+            $x = $_POST['x'];
+            $y = $_POST['y'];
+
+            if (isset($_SESSION['array'][$x][$y]))
+            {
+                echo 'Это поле уже занято. Сделайте другой ход.<br>';
+                writeArray($_SESSION['array']);
+            }
+            else
+            {
+                $_SESSION['count'] = @$_SESSION['count'] + 1;
+                echo 'Ход №'.$_SESSION['count'].' сделан: ('.$x.', '.$y.') <br>';
+                $array[$x][$y] = 'X';
+                $_SESSION['array'][$x][$y] = 'X';
+                writeArray($_SESSION['array']);
+                $flag = afterStep();
+                if ($flag)
+                {
+                    echo 'Крестики победили.<br>';
+                    sessionZero();
+                }
+            }
+
+        }
+        elseif ($_SESSION['count'] < 9 && $_SESSION['count']%2 != 0)
+        {
+            $x = $_POST['x'];
+            $y = $_POST['y'];
+            echo 'Ход ('.$x.', '.$y.') <br>';
+            if (isset($_SESSION['array'][$x][$y]))
+            {
+                echo 'Это поле уже занято. Сделайте другой ход.<br>';
+                writeArray($_SESSION['array']);
+            }
+            else
+            {
+                $_SESSION['count'] = @$_SESSION['count'] + 1;
+                echo 'Ход №'.$_SESSION['count'].' сделан: ('.$x.', '.$y.') <br>';
+                $array[$x][$y] = 'X';
+                $_SESSION['array'][$x][$y] = 'O';
+                writeArray($_SESSION['array']);
+                $flag = afterStep();
+                if ($flag)
+                {
+                    echo 'Нолики победили.<br>';
+                    sessionZero();
+                }
+            }
+        }
+        else
+        {
+            echo 'Все ходы сделаны.  <br>';
+            writeArray($_SESSION['array']);
             sessionZero();
         }
     }
-    elseif ($_SESSION['count'] < 9 && $_SESSION['count']%2 != 0)
-    {
-        $x = $_POST['x'];
-        $y = $_POST['y'];
-        echo 'Ход ('.$x.', '.$y.') <br>';
-        $_SESSION['count'] = @$_SESSION['count'] + 1;
-        echo 'Ход №'.$_SESSION['count'].' сделан: ('.$x.', '.$y.') <br>';
-        $array[$x][$y] = 'X';
-        $_SESSION['array'][$x][$y] = 'O';
-        writeArray($_SESSION['array']);
-        $flag = afterStep();
-        if ($flag)
-        {
-            echo 'Нолики победили.<br>';
-            sessionZero();
-        }
-    }
-    else
-    {
-        echo 'Все ходы сделаны.  <br>';
-        sessionZero();
-    }
+    else echo 'Заполните оба поля. <br>';
 }
-/*echo '<pre>';
+echo '<pre>';
 print_r($_SESSION['array']);
-echo '</pre>';*/
+echo '</pre>';
 ?>
