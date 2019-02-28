@@ -1,9 +1,6 @@
 <?php
 session_name('TicTac');
 session_start();
-
-/*$_SESSION['stepX'] = array();
-$_SESSION['stepY'] = array();*/
 ?>
 <!doctype html>
 <html lang="en">
@@ -26,6 +23,7 @@ $_SESSION['stepY'] = array();*/
         <!--        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
     </div>
     <button type="submit" class="btn btn-primary" name="doGo" value="go">Submit</button>
+<!--    <button type="reset" class="btn btn-primary" name="reset" value="reset">Reset</button>-->
 </form>
 </body>
 </html>
@@ -51,13 +49,6 @@ function createArray()
     }
 }
 
-function makeStep($x, $y)
-{
-    $array[$x][$y] = 'X';
-    /*$array[1][1] = 'O';
-    $array[1][2] = 'O';
-    echo '$array[][]='.$x.' '.$y.'<br>';*/
-}
 function writeArray($array)
 {
     $n = 3;
@@ -81,16 +72,36 @@ function writeArray($array)
     echo '</tbody>';
     echo '</table>';
 }
-$arrayTest = array(array(0, 1, 2),
-    array(0, 1, 2),
-    array(0, 1, 2)
-);
-
+/*Условие окончания игры - когда три значения подряд одинаковы, например XXX или OOO*/
+function afterStep()
+{
+    /*
+     * 00 01 02
+     * 10 11 12
+     * 20 21 22
+     *
+     * 8 вариантов трех значений подряд XXX || OOO
+     * условие победы - окончание игры*/
+    $endGame = false;
+    if (
+        ($_SESSION['array'][0][0] == $_SESSION['array'][0][1] && $_SESSION['array'][0][1] == $_SESSION['array'][0][2] && ($_SESSION['array'][0][2] == 'X'|| $_SESSION['array'][0][2] == 'O')) ||
+        ($_SESSION['array'][1][0] == $_SESSION['array'][1][1] && $_SESSION['array'][1][1] == $_SESSION['array'][1][2] && ($_SESSION['array'][1][2] == 'X'|| $_SESSION['array'][1][2] == 'O')) ||
+        ($_SESSION['array'][2][0] == $_SESSION['array'][2][1] && $_SESSION['array'][2][1] == $_SESSION['array'][2][2] && ($_SESSION['array'][2][2] == 'X'|| $_SESSION['array'][2][2] == 'O')) ||
+        ($_SESSION['array'][0][0] == $_SESSION['array'][1][0] && $_SESSION['array'][1][0] == $_SESSION['array'][2][0] && ($_SESSION['array'][2][0] == 'X'|| $_SESSION['array'][2][0] == 'O')) ||
+        ($_SESSION['array'][0][1] == $_SESSION['array'][1][1] && $_SESSION['array'][1][1] == $_SESSION['array'][2][1] && ($_SESSION['array'][2][1] == 'X'|| $_SESSION['array'][2][1] == 'O')) ||
+        ($_SESSION['array'][0][2] == $_SESSION['array'][1][2] && $_SESSION['array'][1][2] == $_SESSION['array'][2][2] && ($_SESSION['array'][2][2] == 'X'|| $_SESSION['array'][2][2] == 'O')) ||
+        ($_SESSION['array'][0][0] == $_SESSION['array'][1][1] && $_SESSION['array'][1][1] == $_SESSION['array'][2][2] && ($_SESSION['array'][2][2] == 'X'|| $_SESSION['array'][2][2] == 'O')) ||
+        ($_SESSION['array'][0][2] == $_SESSION['array'][1][1] && $_SESSION['array'][1][1] == $_SESSION['array'][2][0] && ($_SESSION['array'][2][0] == 'X'|| $_SESSION['array'][2][0] == 'O'))
+    ) {
+        $endGame = true;
+    }
+    return $endGame;
+}
 function sessionZero()
 {
     $_SESSION = array();
 }
-//createArray();
+
 if ($_POST['doGo'])
 {
     if ($_SESSION['count'] < 9 && $_SESSION['count']%2 == 0)
@@ -103,6 +114,12 @@ if ($_POST['doGo'])
         $array[$x][$y] = 'X';
         $_SESSION['array'][$x][$y] = 'X';
         writeArray($_SESSION['array']);
+        $flag = afterStep();
+        if ($flag)
+        {
+            echo 'Крестики победили.<br>';
+            sessionZero();
+        }
     }
     elseif ($_SESSION['count'] < 9 && $_SESSION['count']%2 != 0)
     {
@@ -114,16 +131,20 @@ if ($_POST['doGo'])
         $array[$x][$y] = 'X';
         $_SESSION['array'][$x][$y] = 'O';
         writeArray($_SESSION['array']);
+        $flag = afterStep();
+        if ($flag)
+        {
+            echo 'Нолики победили.<br>';
+            sessionZero();
+        }
     }
     else
     {
         echo 'Все ходы сделаны.  <br>';
-        writeArray($_SESSION['array']);
         sessionZero();
     }
 }
-echo '<pre>';
+/*echo '<pre>';
 print_r($_SESSION['array']);
-echo '</pre>';
-
+echo '</pre>';*/
 ?>
