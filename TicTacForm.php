@@ -1,8 +1,8 @@
 <?php
-/*session_name('TicTac');
+session_name('TicTac');
 session_start();
-$_SESSION['count'] = @$_SESSION['count'] + 1;
-$_SESSION['stepX'] = array();
+
+/*$_SESSION['stepX'] = array();
 $_SESSION['stepY'] = array();*/
 ?>
 <!doctype html>
@@ -37,27 +37,96 @@ $_SESSION['stepY'] = array();*/
  * Date: 28.02.2019
  * Time: 14:01
  */
-/*$x = $_POST['x'];
+$x = $_POST['x'];
 $y = $_POST['y'];
-echo 'Ход сделан: ('.$x.', '.$y.') <br>';*/
-$array = array();
-function saveStep($x)
+echo 'Ход сделан: ('.$x.', '.$y.') <br>';
+
+function createArray()
 {
-    global $array;
+    $n = 3;
     $array = array();
-    $array[] = $x;
+    for ($i = 0; $i < $n; $i ++)
+    {
+        for ($j = 0; $j < $n; $j++)
+        {
+            $array[$i][$j] = '&nbsp';
+        }
+    }
 }
+
+function makeStep($x, $y)
+{
+    $array[$x][$y] = 'X';
+    /*$array[1][1] = 'O';
+    $array[1][2] = 'O';
+    echo '$array[][]='.$x.' '.$y.'<br>';*/
+}
+function writeArray($array)
+{
+    $n = 3;
+    echo '<table class="table table-bordered table-dark">';
+    echo '<thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">0</th>
+      <th scope="col">1</th>
+      <th scope="col">2</th>
+    </tr>
+  </thead>';
+    echo '<tbody>';
+    for ($i = 0; $i < $n; $i++) {
+        echo '<tr><th scope="row">'.$i.'</th>';
+        for ($j = 0; $j < $n; $j++) {
+            echo '<td>' . $array[$i][$j]. '</td>';
+        }
+        echo '</tr>';
+    }
+    echo '</tbody>';
+    echo '</table>';
+}
+$arrayTest = array(array(0, 1, 2),
+    array(0, 1, 2),
+    array(0, 1, 2)
+);
+/*$array = createArray();
+makeStep(0,0);
+makeStep(1,1);
+makeStep(2,2);*/
+$array[0][0] = 'X';
+$array[0][1] = 'X';
+$array[0][2] = 'X';
+$array[$x][$y] = 'O';
+writeArray($array);
+
+/*function sessionZero()
+{
+    $_SESSION = array();
+}
+
 if ($_POST['doGo'])
 {
-    $x = $_POST['x'];
-    $y = $_POST['y'];
-    saveStep($x);
-    echo 'Ход ('.$x.', '.$y.') <br>';
-    /*$_SESSION['stepX'][] = $x;
-    $_SESSION['stepY'][] = $y;
-    echo 'Ход №'.$_SESSION['count'].' сделан: ('.$x.', '.$y.') <br>';*/
+    if ($_SESSION['count'] < 9)
+    {
+        $x = $_POST['x'];
+        $y = $_POST['y'];
+        $array[] = $x;
+        echo 'Ход ('.$x.', '.$y.') <br>';
+        $_SESSION['stepX'][] = $y;
+        $_SESSION['stepY'][] = $y;
+        $_SESSION['count'] = @$_SESSION['count'] + 1;
+        echo 'Ход №'.$_SESSION['count'].' сделан: ('.$x.', '.$y.') <br>';
+    }
+    else
+    {
+        echo 'Все ходы сделаны.  <br>';
+        sessionZero();
+    }
+
+
 }
 echo '<pre>';
-print_r($array);
+print_r($_SESSION);
 echo '</pre>';
+//unset($_SESSION['TicTac']);*/
+
 ?>
