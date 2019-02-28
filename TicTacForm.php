@@ -17,9 +17,9 @@ session_start();
 <script src="assets/js/bootstrap.js"></script>
 <form method="post" action="<? echo $_SERVER['SCRIPT_NAME'];?>">
     <div class="form-group">
-        <label for="exampleInputEmail1">Походить</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ход" name="x">
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ход" name="y">
+        <label for="exampleInputEmail1">Походить - вводим координаты (x, y)</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="x" name="x">
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="y" name="y">
         <!--        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
     </div>
     <button type="submit" class="btn btn-primary" name="doGo" value="go">Submit</button>
@@ -104,7 +104,8 @@ function sessionZero()
 
 if ($_POST['doGo'])
 {
-    if (isset($_POST['x']) && isset($_POST['y']))
+    $needle = array(0, 1, 2);
+    if (in_array($_POST['x'], $needle) && in_array($_POST['y'], $needle))
     {
         if ($_SESSION['count'] < 9 && $_SESSION['count']%2 == 0)
         {
@@ -136,7 +137,6 @@ if ($_POST['doGo'])
         {
             $x = $_POST['x'];
             $y = $_POST['y'];
-            echo 'Ход ('.$x.', '.$y.') <br>';
             if (isset($_SESSION['array'][$x][$y]))
             {
                 echo 'Это поле уже занято. Сделайте другой ход.<br>';
