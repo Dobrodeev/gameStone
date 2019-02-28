@@ -13,7 +13,7 @@ class TicTac
     public function simpleTicTack($n)
     {
 
-        echo '<table class="table table-bordered table-dark">';
+        /*echo '<table class="table table-bordered table-dark">';
         echo '<thead>
     <tr>
       <th scope="col">#</th>
@@ -31,7 +31,14 @@ class TicTac
             echo '</tr>';
         }
         echo '</tbody>';
-        echo '</table>';
+        echo '</table>';*/
+        for ($i = 0; $i < $n; $i ++)
+        {
+            for ($j = 0; $j < $n; $j++)
+            {
+                $array[$i][$j] = '&nbsp';
+            }
+        }
     }
 
     public function getStep($x, $y)
@@ -82,14 +89,14 @@ class TicTac
         echo '<thead>
     <tr>
       <th scope="col">#</th>
+      <th scope="col">0</th>
       <th scope="col">1</th>
       <th scope="col">2</th>
-      <th scope="col">3</th>
     </tr>
   </thead>';
         echo '<tbody>';
         for ($i = 0; $i < $n; $i++) {
-            echo '<tr><th scope="row">'.($i+1).'</th>';
+            echo '<tr><th scope="row">'.$i.'</th>';
             for ($j = 0; $j < $n; $j++) {
                 echo '<td>' . $this->array[$i][$j]. '</td>';
             }
