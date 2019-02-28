@@ -18,7 +18,7 @@
         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ход" name="y">
 <!--        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" name="go">Submit</button>
 </form>
 </body>
 </html>
@@ -36,8 +36,12 @@ spl_autoload_register(function ($class)
 });
 $TicTac = new TicTac();
 $TicTac->simpleTicTack(3);
-//print_r($_POST);
-$TicTac->getStep(2,3);
-$TicTac->simpleTicTack(3);
-$TicTac->afterStep(1,2);
+$TicTac->getStep();
+//$TicTac->getStepZeroPlayer();
+/*do
+{
+    $TicTac->getStep();
+}
+while($TicTac->counter <= 9);*/
+
 ?>

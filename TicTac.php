@@ -9,29 +9,12 @@
 class TicTac
 {
     public $array = array();
+    public $x;
+    public $y;
+    public $counter = 0;
 
     public function simpleTicTack($n)
     {
-
-        /*echo '<table class="table table-bordered table-dark">';
-        echo '<thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">1</th>
-      <th scope="col">2</th>
-      <th scope="col">3</th>
-    </tr>
-  </thead>';
-        echo '<tbody>';
-        for ($i = 0; $i < $n; $i++) {
-            echo '<tr><th scope="row">'.($i+1).'</th>';
-            for ($j = 0; $j < $n; $j++) {
-                echo '<td>' . $array[$i][$j] = '&nbsp' . '</td>';
-            }
-            echo '</tr>';
-        }
-        echo '</tbody>';
-        echo '</table>';*/
         for ($i = 0; $i < $n; $i ++)
         {
             for ($j = 0; $j < $n; $j++)
@@ -41,12 +24,65 @@ class TicTac
         }
     }
 
-    public function getStep($x, $y)
+    public function getStep()
     {
-        $x = $_POST['x'];
-        $y = $_POST['y'];
-        echo 'Ход сделан: ('.$x.', '.$y.') ';
-        $this->array[$x][$y] = 'X';
+            $this->x = $_POST['x'];
+            $this->y = $_POST['y'];
+
+            $this->array[$this->x][$this->y] = 'X';
+            $this->counter ++;
+            echo 'Ход №'.$this->counter.' сделан: ('.$this->x.', '.$this->y.') <br>';
+            $n = 3;
+            echo '<table class="table table-bordered table-dark">';
+            echo '<thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">0</th>
+      <th scope="col">1</th>
+      <th scope="col">2</th>
+    </tr>
+  </thead>';
+            echo '<tbody>';
+            for ($i = 0; $i < $n; $i++) {
+                echo '<tr><th scope="row">'.$i.'</th>';
+                for ($j = 0; $j < $n; $j++) {
+                    echo '<td>' . $this->array[$i][$j]. '</td>';
+                }
+                echo '</tr>';
+            }
+            echo '</tbody>';
+            echo '</table>';
+
+//        return $this->array;
+    }
+    public function getStepZeroPlayer()
+    {
+        $this->x = 3;
+        $this->y = 2;
+
+        $this->array[$this->x][$this->y] = 'O';
+        $this->counter ++;
+        echo 'Ход №'.$this->counter.' сделан: ('.$this->x.', '.$this->y.') <br>';
+        $n = 3;
+        echo '<table class="table table-bordered table-dark">';
+        echo '<thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">0</th>
+      <th scope="col">1</th>
+      <th scope="col">2</th>
+    </tr>
+  </thead>';
+        echo '<tbody>';
+        for ($i = 0; $i < $n; $i++) {
+            echo '<tr><th scope="row">'.$i.'</th>';
+            for ($j = 0; $j < $n; $j++) {
+                echo '<td>' . $this->array[$i][$j]. '</td>';
+            }
+            echo '</tr>';
+        }
+        echo '</tbody>';
+        echo '</table>';
     }
     /*
      * Порядок игры:
@@ -57,13 +93,8 @@ class TicTac
      * Передача хода другому игроку
      * 2 варианта игры Чел-Чел, Чел-Бот, Бот-Бот
      */
-    public function afterStep($x, $y)
+    public function afterStep()
     {
-        $n = 3;
-        $this->array[$x][$y] = 'X';
-        $this->array[2][1] = 'O';
-        $this->array[2][2] = 'O';
-        $this->array[0][1] = 'O';
         /*
          * 00 01 02
          * 10 11 12
@@ -85,24 +116,6 @@ class TicTac
             $endGame = true;
         }
         */
-        echo '<table class="table table-bordered table-dark">';
-        echo '<thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">0</th>
-      <th scope="col">1</th>
-      <th scope="col">2</th>
-    </tr>
-  </thead>';
-        echo '<tbody>';
-        for ($i = 0; $i < $n; $i++) {
-            echo '<tr><th scope="row">'.$i.'</th>';
-            for ($j = 0; $j < $n; $j++) {
-                echo '<td>' . $this->array[$i][$j]. '</td>';
-            }
-            echo '</tr>';
-        }
-        echo '</tbody>';
-        echo '</table>';
     }
+
 }
