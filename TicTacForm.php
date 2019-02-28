@@ -37,9 +37,6 @@ $_SESSION['stepY'] = array();*/
  * Date: 28.02.2019
  * Time: 14:01
  */
-$x = $_POST['x'];
-$y = $_POST['y'];
-echo 'Ход сделан: ('.$x.', '.$y.') <br>';
 
 function createArray()
 {
@@ -88,45 +85,45 @@ $arrayTest = array(array(0, 1, 2),
     array(0, 1, 2),
     array(0, 1, 2)
 );
-/*$array = createArray();
-makeStep(0,0);
-makeStep(1,1);
-makeStep(2,2);*/
-$array[0][0] = 'X';
-$array[0][1] = 'X';
-$array[0][2] = 'X';
-$array[$x][$y] = 'O';
-writeArray($array);
 
-/*function sessionZero()
+function sessionZero()
 {
     $_SESSION = array();
 }
-
+//createArray();
 if ($_POST['doGo'])
 {
-    if ($_SESSION['count'] < 9)
+    if ($_SESSION['count'] < 9 && $_SESSION['count']%2 == 0)
     {
         $x = $_POST['x'];
         $y = $_POST['y'];
-        $array[] = $x;
         echo 'Ход ('.$x.', '.$y.') <br>';
-        $_SESSION['stepX'][] = $y;
-        $_SESSION['stepY'][] = $y;
         $_SESSION['count'] = @$_SESSION['count'] + 1;
         echo 'Ход №'.$_SESSION['count'].' сделан: ('.$x.', '.$y.') <br>';
+        $array[$x][$y] = 'X';
+        $_SESSION['array'][$x][$y] = 'X';
+        writeArray($_SESSION['array']);
+    }
+    elseif ($_SESSION['count'] < 9 && $_SESSION['count']%2 != 0)
+    {
+        $x = $_POST['x'];
+        $y = $_POST['y'];
+        echo 'Ход ('.$x.', '.$y.') <br>';
+        $_SESSION['count'] = @$_SESSION['count'] + 1;
+        echo 'Ход №'.$_SESSION['count'].' сделан: ('.$x.', '.$y.') <br>';
+        $array[$x][$y] = 'X';
+        $_SESSION['array'][$x][$y] = 'O';
+        writeArray($_SESSION['array']);
     }
     else
     {
         echo 'Все ходы сделаны.  <br>';
+        writeArray($_SESSION['array']);
         sessionZero();
     }
-
-
 }
 echo '<pre>';
-print_r($_SESSION);
+print_r($_SESSION['array']);
 echo '</pre>';
-//unset($_SESSION['TicTac']);*/
 
 ?>
