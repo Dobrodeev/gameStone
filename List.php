@@ -16,7 +16,7 @@ class Our_List
 {
 	public $start = null;
 	public $count = 0;
-
+/*Добавление элемента в список*/
 	public function push_front($data)
 	{
 		$this->start = new Node($this->start, $data);
@@ -48,11 +48,22 @@ class Our_List
 /* Метод получения элемента по индексу: $a->get(index) */
     public function get_element($index)
     {
-//        return $this->start;
+        if ($this->start)
+        {
+            echo 'Получаем элемент по индексу <br>';
+            $temp = $this->start->data;
+//            echo $temp->data;
+//            $this->start = $index;
+        }
+        else
+        {
+            echo 'Нема элементов в списке';
+        }
     }
 /* метод для добавления элемента в конец списка */
-    public function push_end()
+    public function push_end($data)
     {
-
+        $this->start = new Node($this->start, $data);
+        $this->count++;
     }
 }

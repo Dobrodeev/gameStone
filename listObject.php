@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>List Object</title>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
@@ -25,8 +25,21 @@
 //    include $class.'.php';
 //});
 include 'List.php';
-$a = new Our_List();
-$a->push_front(35);
+$listObject = new Our_List();
+$listObject->push_front(1991);
+$listObject->push_front(1989);
+$listObject->push_front(1972);
+$listObject->push_front(1965);
+$listObject->push_front('man');
+$listObject->list_print();
+printf('$strart = %d',$listObject->start);
+printf('<br>Количество элементов в списке $count = %d', $listObject->count);
+echo '<br>';
+$listObject->get_element(2);
+echo '<pre>';
+print_r($listObject);
+echo '</pre>';
+/*$a->push_front(35);
 $a->push_front(11);
 $a->push_front(21);
 
@@ -40,5 +53,5 @@ while($a->count)
     printf("Мы взяли из списка: %d <br>", $a->pop_front());
 
 printf("Осталось в списке %d объектов. <br>", $a->count);
-$a->pop_front();
+$a->pop_front();*/
 ?>
