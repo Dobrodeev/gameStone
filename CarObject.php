@@ -23,6 +23,11 @@ spl_autoload_register(function ($class)
     include $class.'.php';
 });
 $carObject = new PassengerCar();
+$carObject->acelerate(140);
+echo '<pre>';
+print_r($carObject);
+echo '</pre>';
+echo $carObject;
 ?>
 </body>
 </html>

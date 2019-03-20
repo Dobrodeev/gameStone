@@ -8,6 +8,12 @@
 
 class Wheel
 {
-    public $diametr = 13;
-    public $pressure = 2.1;
+    public $diametr;
+    public $pressure;
+
+    public function __construct($diametr, $pressure)
+    {
+        $this->diametr = $diametr;
+        $this->pressure = $pressure;
+    }
 }
