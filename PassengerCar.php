@@ -8,30 +8,26 @@
 
 class PassengerCar
 {
-    public
-        $color = 'Grey',
-        $speed = 0,
-        $wheels,
-        $coleso;
-    public $mark;
-    public $model;
-    public $year;
-    public $v;
-    public $transmission;
+    public 	$year,
+        $color,
+        $speed,
+        $wheels = array();
 
-    public function __construct()
+    function __construct($color = 'Grey', $speed = 0)
     {
-        # code...
-        include 'Wheel.php';
-        $coleso = new Wheel(13, 2.1);
+        $this->color = $color;
+        $this->speed = $speed;
+        for ($i=0; $i < 4 ; ++$i) {
+            $this->wheels[$i] = new Wheel($this);
+        }
     }
 
-    public function acelerate($speed)
+    function aacelerate($speed)
     {
-        echo 'Едем на скорости '.$speed.' км/ч <br>';
+        $this->speed += $speed;
     }
 
-    public function __toString()
+    function __toString()
     {
         return "This is {$this->color} car with speed = {$this->speed}!";
     }

@@ -22,12 +22,48 @@ spl_autoload_register(function ($class)
 {
     include $class.'.php';
 });
-$carObject = new PassengerCar();
-$carObject->acelerate(140);
-echo '<pre>';
-print_r($carObject);
-echo '</pre>';
-echo $carObject;
+$a = new PassengerCar();
+$b = new PassengerCar('Green', 120);
+
+$b->wheels[2]->setPressure(7);
+echo $a."<br>";
+$a->color = 'Red';
+echo $a."<br>";
+echo $b."<br>";
+
+for ($i=0; $i < 4; ++$i) {
+    echo $b->wheels[$i]->getPressure() . "<br>";
+}
+# ++$i, $i++ examples
+function post(&$x)
+{
+    $temp = $x;
+    $x += 1;
+    return $temp;
+}
+
+function pref(&$x)
+{
+    return $x += 1;;
+}
+
+
+$x = 10;
+echo post($x)."<br>";
+echo $x."<br>";
+
+$x = 10;
+echo $x++."<br>";
+echo $x."<br>";
+
+
+$x = 10;
+echo pref($x)."<br>";
+echo $x."<br>";
+
+$x = 10;
+echo ++$x."<br>";
+echo $x."<br>";
 ?>
 </body>
 </html>

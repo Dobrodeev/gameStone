@@ -8,12 +8,34 @@
 
 class Wheel
 {
-    public $diametr;
-    public $pressure;
+    private $pressure,
+        $d,
+        $owner;
 
-    public function __construct($diametr, $pressure)
+    function __construct($owner = NULL, $pressure = 2.0, $d = 13)
     {
-        $this->diametr = $diametr;
+        $this->pressure = $pressure;
+        $this->d = $d;
+        $this->owner = $owner;
+    }
+
+    function getPressure() {return $this->pressure;}
+
+    function setPressure($pressure)
+    {
+        if ($pressure < 0) $pressure = 0;
+        if ($pressure > 5)
+        {
+            echo "BABAH!!!<br>";
+            $pressure = 0;
+        }
+        if ($this->owner != NULL)
+        {
+            if ($pressure == 0)
+                $this->owner->speed = 0;
+            else if($pressure < 0.5)
+                $this->owner->speed /= 2;
+        }
         $this->pressure = $pressure;
     }
 }
