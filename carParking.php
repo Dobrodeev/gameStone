@@ -30,7 +30,9 @@ if (isset($_POST['go']))
     $car = $_POST['car'];
     $hours =  1*$time;
     $minutes = substr($time, strpos($time,':') + 1);
+    echo 'hiurs: '.$hours.'<br>';
     echo 'min: '.$minutes.'<br>';
+    echo 'car: '.$car.'<br>';
     /*$queryCheck = "SELECT * FROM parking WHERE car_name='$car'";
     $check = $pdo->query($queryCheck)->fetch();
     print_r($check);
