@@ -40,10 +40,10 @@ if (isset($_POST['go']))
     $hours =  1*$time;
     $minutes = substr($time, strpos($time,':') + 1,2);
     $car = substr($time, strpos($time, '*') + 1);
-    echo 'hiurs: '.$hours.'<br>';
+    /*echo 'hiurs: '.$hours.'<br>';
     echo 'min: '.$minutes.'<br>';
     echo 'car: '.$car.'<br>';
-    echo 'car: '.$car.'<br>';
+    echo 'car: '.$car.'<br>';*/
     $queryCheck = "SELECT * FROM parking WHERE car_name='$car'";
     $check = $pdo->query($queryCheck)->fetch();
 //    print_r($check);
@@ -51,15 +51,15 @@ if (isset($_POST['go']))
     {
         $on_parking = 'y';
         $queryCome = "INSERT INTO parking (car_time, on_parking, car_name) VALUES ('$time','$on_parking','$car')";
-
         $result = $pdo->query($queryCome);
+        echo "<span style='color:blue;'>Машина приехала на стоянку</span>";
     }
     else
     {
         $on_parking = 'n';
         $queryOut = "UPDATE parking SET on_parking='$on_parking' WHERE car_name='$car'";
         $result = $pdo->query($queryOut);
-        echo 'Машина уехала со стоянки в:';
+        echo "<span style='color:blue;'>Машина уехала со стоянки</span>";
     }
 
 }
