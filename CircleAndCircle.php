@@ -34,7 +34,7 @@
     <h5>Окружность 2</h5>
     <div class="form-group">
         <label for="Circle1">Координата центра по X</label>
-        <input type="number" class="form-control" id="Circle2X" placeholder="X2" name="circle2[x2]">
+        <input type="text" class="form-control" id="Circle2X" placeholder="X2" name="circle2[x2]">
     </div>
     <div class="form-group">
         <label for="Circle1">Координата центра по Y</label>
@@ -42,7 +42,7 @@
     </div>
     <div class="form-group">
         <label for="Circle1">Радиус, мм</label>
-        <input type="number" class="form-control" id="Circle2R" placeholder="R2" name="circle2[r2]">
+        <input type="text" class="form-control" id="Circle2R" placeholder="R2" name="circle2[r2]">
     </div>
 
     <!--    <div class="form-group">-->

@@ -12,8 +12,8 @@ spl_autoload_register(function ($className)
 });
 if (isset($_POST['go']))
 {
-    if (is_numeric($_POST['circle1']['x1']) && is_numeric($_POST['circle1']['y1']) && $_POST['circle1']['r1'] &&
-        is_numeric($_POST['circle2']['x2']) && is_numeric($_POST['circle2']['y2']) && $_POST['circle2']['r2'])
+    if (($_POST['circle1']['x1']) && ($_POST['circle1']['y1']) && $_POST['circle1']['r1'] &&
+        ($_POST['circle2']['x2']) && ($_POST['circle2']['y2']) && $_POST['circle2']['r2'])
     {
         if ($_POST['circle1']['r1'] > 0 && $_POST['circle2']['r2'] > 0)
         {
