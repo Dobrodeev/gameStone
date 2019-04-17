@@ -32,6 +32,17 @@
 7:20 * CAR1
 -Отбытие, общая парковка: 0:20
 7:33 * CAR2
+hours=13
+minutes=31
+car=AA1991AI
+['AA1991AI'=>object]
+class car
+{
+public where = true, false;
+public allTime;
+public время заезда(с последнего раза);
+
+}
 -Отбытие, всего парковок: 0:23*/
 include 'DB.php';
 if (isset($_POST['go']))
