@@ -6,9 +6,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link href="assets/css/bootstrap.css" rel="stylesheet" media="screen">
 </head>
 <body>
-
+<script src="assets/jquery-3.2.1.js"></script>
+<script src="assets/js/bootstrap.js"></script>
 </body>
 </html>
 <?php
@@ -44,7 +46,7 @@ for ($i = 0; $i < count($array) - 1; $i ++)
 echo '<br>';
 /* Сортировка выбором*/
 shuffle($array);
-echo '<br>После shufle(): <br>';
+echo '<br>После shuffle(): <br>';
 for ($i = 0; $i < count($array) - 1; $i ++)
 {
     echo $array[$i].' ';
