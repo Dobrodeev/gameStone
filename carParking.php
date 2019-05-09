@@ -17,6 +17,7 @@
     <button type="submit" class="btn btn-primary" name="go">Submit</button>
 </form>
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Zver
@@ -45,6 +46,19 @@ public время заезда(с последнего раза);
 }
 -Отбытие, всего парковок: 0:23*/
 include 'DB.php';
+/**
+ * если машина стоит на, то выежает,
+ * если нет, то заежает и записать время заезда в минутах
+ * если нету машины, то зарегать в системе
+ * проверка времени 19:30 не может потом 13:13
+ * $_SESSION['car_name'] = $object(AA1111AA);
+ * $_SESION['car_onparking']
+ * $_SESION['car_arrive']
+ * $_SESION['car_depart']
+ * class CarOnParking()
+ * {}
+ * потом перевод дня
+ */
 if (isset($_POST['go']))
 {
     $time = $_POST['time'];
@@ -72,6 +86,5 @@ if (isset($_POST['go']))
         $result = $pdo->query($queryOut);
         echo "<span style='color:blue;'>Машина уехала со стоянки</span>";
     }
-
 }
 ?>
