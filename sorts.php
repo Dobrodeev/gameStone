@@ -106,7 +106,7 @@ function cmp_even($a, $b)
     }
     return ($a % 2 == 0 && $b % 2 != 0) ? -1 : 1;
 }
-usort($array, 'cmp_even');
+uasort($array, 'cmp_even');
 echo '<br>После usort() : <br>';
 printArray($array);
 shuffle($array);
