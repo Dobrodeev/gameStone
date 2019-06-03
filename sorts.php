@@ -22,9 +22,13 @@
  */
 $array = [1991, 1941, 1994, 1989, 1945, 1966, 1976, 1939, 1933, 1982];
 echo 'До сортировки: <br>';
-for ($i = 0; $i < count($array) - 1; $i ++) {
-    echo $array[$i] . ' ';
+function printArray($array)
+{
+    for ($i = 0; $i < count($array); $i ++) {
+        echo $array[$i] . ' ';
+    }
 }
+printArray($array);
     /* Пузырьковая сортировка*/
 for ($i = 0; $i < count($array) - 2; $i ++) // count()-2 а не -1
 {
@@ -38,19 +42,13 @@ for ($i = 0; $i < count($array) - 2; $i ++) // count()-2 а не -1
         }
     }
 }
-echo '<br>После: <br>';
-for ($i = 0; $i < count($array) - 1; $i ++)
-{
-    echo $array[$i].' ';
-}
+echo '<br>После сортировки пузырьком: <br>';
+printArray($array);
 echo '<br>';
 /* Сортировка выбором*/
 shuffle($array);
-echo '<br>После shuffle(): <br>';
-for ($i = 0; $i < count($array) - 1; $i ++)
-{
-    echo $array[$i].' ';
-}
+echo 'После shuffle(): <br>';
+printArray($array);
 for ($i = count($array) - 1; $i > 0 ; $i --)
 {
     $maxIndex = 0;
@@ -67,8 +65,66 @@ for ($i = count($array) - 1; $i > 0 ; $i --)
     $array[$i] = $temp;
 }
 echo '<br>После СВ: <br>';
-for ($i = 0; $i < count($array) - 1; $i ++)
+printArray($array);
+shuffle($array);
+echo '<br>Снова перемешали: <br>';
+printArray($array);
+/*Сортировка вставками*/
+// 2 4 66 34 3 1 19
+//
+shuffle($array);
+function vstavckaSort(&$var)
 {
-    echo $array[$i].' ';
+    for ($i = 1; $i < count($var); ++ $i)
+    {
+        $j = $i;
+        while ($j > 0 &&  $var[$j - 1] > $var[$j])
+        {
+            $temp = $var[$j];
+            $var[$j] = $var[$j - 1];
+            $var[$j - 1] = $temp;
+            -- $j;
+        }
+        /*print_r($var);
+        echo '<br>';*/
+    }
+    /*echo '<pre>';
+    print_r($var);
+    echo '</pre>';*/
 }
+echo '<br>Сортировка вставками: <br>';
+vstavckaSort($array);
+printArray($array);
+shuffle($array);
+echo '<br>Снова перемешали: <br>';
+printArray($array);
+function cmp_even($a, $b)
+{
+    if ($a % 2 == 0 && $b % 2 == 0)
+    {
+        return 0;
+    }
+    return ($a % 2 == 0 && $b % 2 != 0) ? -1 : 1;
+}
+usort($array, 'cmp_even');
+echo '<br>После usort() : <br>';
+printArray($array);
+shuffle($array);
+echo '<br>Снова перемешали: <br>';
+printArray($array);
+/*Данн массив чисел. Отсортировать его таким образом, чтоб сначала шли все четные, затем уже все нечетные.
+Порядок следования элементов среди четных/нечетных сохранялся чтоб как в исходном массиве*/
+function even_add_odd(&$var)
+{
+    for ($i = 0; $i < count($var); $i++) {
+        for ($j = count($var) - 1; $j > $i; $j--) {
+            if ($var[$j] % 2 != 0) {
+                $temp = $var[$j - 1];
+                $var[$j - 1] = $var[$j];
+                $var[$j] = $temp;
+            }
+        }
+    }
+}
+/*Оптимизировать алгоритм сортировки пузырьком*/
 ?>
