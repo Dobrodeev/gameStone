@@ -7,7 +7,7 @@
  */
 
 $host = '127.0.0.1';
-$db   = 'statistics';
+$db   = 'carparking';
 $user = 'root';
 $pass = '';
 $charset = 'utf8';
