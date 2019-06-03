@@ -113,7 +113,7 @@ function even_add_odd(&$var)
 {
     for ($i = 0; $i < count($var); $i++) {
         for ($j = count($var) - 1; $j > $i; $j--) {
-            if ($var[$j] % 2 != 0) {
+            if ($var[$j] % 2 == 0 && $var[$j - 1] % 2 != 0) {
                 $temp = $var[$j - 1];
                 $var[$j - 1] = $var[$j];
                 $var[$j] = $temp;
@@ -121,22 +121,60 @@ function even_add_odd(&$var)
         }
     }
 }
+/*с изменением порядка. Неустойчивая*/
 function even_sort(&$var)
 {
     $i = 0;
-    $k = count($var);
+    $k = count($var) - 1;
     while ($i < $k)
     {
-        if ($var[$i] % 2 != 0 && $var[$k] == 0)
-            continue;
-        if ($var[$i] == 0)
+        if ($var[$i] % 2 != 0 && $var[$k] % 2 == 0)
+        {
+            $temp = $var[$i];
+            $var[$i] = $var[$k];
+            $var[$k] = $temp;
+            ++$i;
+            --$k;
+        }
+        if ($var[$i] % 2 == 0)
             $i ++;
         if ($var[$k] % 2 != 0)
             $k --;
     }
 }
-/*even_sort($array);
-echo 'После even_sort() <br>';
-printArray($array);*/
+even_sort($array);
+echo '<br>После even_sort()<br>';
+printArray($array);
+shuffle($array);
+echo '<br>После shuffle()<br>';
+printArray($array);
+function even_then_odd(&$var)
+{
+    $tempArray = [];
+    for ($i = 0; $i < count($var); ++ $i)
+    {
+        if ($var[$i] % 2 == 0)
+        {
+            $tempArray[] = $var[$i];
+        }
+    }
+    for ($i = 0; $i < count($var); ++ $i)
+    {
+        if ($var[$i] % 2 != 0)
+        {
+            $tempArray[] = $var[$i];
+        }
+    }
+    return $tempArray;
+}
+$array = even_then_odd($array);
+echo '<br> even_then_odd<br>';
+printArray($array);
 /*Оптимизировать алгоритм сортировки пузырьком*/
+shuffle($array);
+echo '<br>После shuffle()<br>';
+printArray($array);
+even_add_odd($array);
+echo '<br>После even_add_odd()<br>';
+printArray($array);
 ?>
