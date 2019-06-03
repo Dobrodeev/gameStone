@@ -8,5 +8,7 @@
 
 class BookProduct
 {
-
+    public $name;
+    public $author;
+    public $pages;
 }
