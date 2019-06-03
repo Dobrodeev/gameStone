@@ -85,12 +85,7 @@ function vstavckaSort(&$var)
             $var[$j - 1] = $temp;
             -- $j;
         }
-        /*print_r($var);
-        echo '<br>';*/
     }
-    /*echo '<pre>';
-    print_r($var);
-    echo '</pre>';*/
 }
 echo '<br>Сортировка вставками: <br>';
 vstavckaSort($array);
@@ -126,5 +121,22 @@ function even_add_odd(&$var)
         }
     }
 }
+function even_sort(&$var)
+{
+    $i = 0;
+    $k = count($var);
+    while ($i < $k)
+    {
+        if ($var[$i] % 2 != 0 && $var[$k] == 0)
+            continue;
+        if ($var[$i] == 0)
+            $i ++;
+        if ($var[$k] % 2 != 0)
+            $k --;
+    }
+}
+/*even_sort($array);
+echo 'После even_sort() <br>';
+printArray($array);*/
 /*Оптимизировать алгоритм сортировки пузырьком*/
 ?>
