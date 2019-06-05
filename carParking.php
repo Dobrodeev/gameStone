@@ -58,6 +58,8 @@ include 'DB.php';
  * class CarOnParking()
  * {}
  * потом перевод дня
+ * AA1991AI 14:04
+ * $car f($a, $b = 0)
  */
 if (isset($_POST['go']))
 {
