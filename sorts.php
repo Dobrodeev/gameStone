@@ -21,6 +21,16 @@
  * Time: 14:01
  */
 $array = [1991, 1941, 1994, 1989, 1945, 1966, 1976, 1939, 1933, 1982];
+$timer0 = microtime();
+$randomArray = [];
+//$randomArray = new SplFixedArray(10000);
+$i = 0;
+while ($i < 5000)
+{
+    $randomArray[] = mt_rand(1, 99);
+    $i ++;
+}
+echo 't = '.(microtime() - $timer0).'<br>';
 echo 'До сортировки: <br>';
 function printArray($array)
 {
@@ -28,6 +38,7 @@ function printArray($array)
         echo $array[$i] . ' ';
     }
 }
+
 printArray($array);
     /* Пузырьковая сортировка*/
 for ($i = 0; $i < count($array) - 2; $i ++) // count()-2 а не -1
