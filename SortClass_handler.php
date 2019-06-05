@@ -23,9 +23,11 @@ spl_autoload_register(function ($className)
 {
     include $className.'.php';
 });
+//include 'sorts.php';
 $objectSort = new SortClass();
-$objectSort->our_sort();
+//$objectSort->our_sort();
 echo '<span style="color: #005cbf">После сортировки: </span><br>';
+$objectSort->vstavckaSort();
 $objectSort->print_arr();
 ?>
 </body>
