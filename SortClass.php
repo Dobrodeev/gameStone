@@ -313,7 +313,34 @@ class SortClass
             echo '<br>';
         }
     }
-
+    public function compareArray(&$var1, &$var2)
+    {
+        if ($var1[0] == $var2[0])
+        {
+            /*if (1 * $var1[1] + 1 * $var1[2] > 1 * $var2[1] + 1 * $var2[2])
+            return true;
+            else
+                return false;*/
+            return (1 * $var1[1] + 1 * $var1[2] > 1 * $var2[1] + 1 * $var2[2]);
+        }
+        return ($var1[0] > $var2[0]);
+    }
+    // передать callback а вне класса передать массив и callback f
+    public function vstavckaSort()
+    {
+        $var = &$this->data;
+        for ($i = 1; $i < count($var); ++ $i)
+        {
+            $j = $i;
+            while ($j > 0 &&  $this->compareArray($var[$j - 1] , $var[$j]))
+            {
+                $temp = $var[$j];
+                $var[$j] = $var[$j - 1];
+                $var[$j - 1] = $temp;
+                -- $j;
+            }
+        }
+    }
     public function our_sort()
     {
 //        array('t','19','61'),
