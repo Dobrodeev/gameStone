@@ -27,8 +27,16 @@ spl_autoload_register(function ($className)
 $objectSort = new SortClass();
 //$objectSort->our_sort();
 echo '<span style="color: #005cbf">После сортировки: </span><br>';
-$objectSort->vstavckaSort();
-$objectSort->print_arr();
+//Считываем текущее время
+$mtime = microtime();
+
+//$objectSort->vstavckaSort();
+//$objectSort->print_arr();
+
+//printf ("Время операции %f милисекунд !", microtime() - $mtime);
+//echo 'microtime(): '.microtime();
+$objectSort->randomArray(7);
+
 ?>
 </body>
 </html>

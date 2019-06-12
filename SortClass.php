@@ -313,6 +313,26 @@ class SortClass
             echo '<br>';
         }
     }
+
+    public function randomArray($size)
+    {
+        $array = [];
+        $strart = ord('a');
+        $end = ord('z');
+        for ($i = 0; $i < $size; ++ $i)
+        {
+            $array[] = [chr((mt_rand($strart, $end))), mt_rand(1, 100), mt_rand(1, 100)];
+        }
+        echo 'Нагенерировали массив: <br>';
+        foreach ($array as $value) {
+            echo '--';
+            foreach ($value as $key)
+            {
+                echo $key.' ';
+            }
+            echo '<br>';
+        }
+    }
     private function compareArray(&$var1, &$var2)
     {
         if ($var1[0] == $var2[0])
