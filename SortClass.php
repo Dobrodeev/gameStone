@@ -313,7 +313,7 @@ class SortClass
             echo '<br>';
         }
     }
-    public function compareArray(&$var1, &$var2)
+    private function compareArray(&$var1, &$var2)
     {
         if ($var1[0] == $var2[0])
         {
