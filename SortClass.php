@@ -317,11 +317,11 @@ class SortClass
     public function randomArray($size)
     {
         $array = [];
-        $strart = ord('a');
+        $start = ord('a');
         $end = ord('z');
         for ($i = 0; $i < $size; ++ $i)
         {
-            $array[] = [chr((mt_rand($strart, $end))), mt_rand(1, 100), mt_rand(1, 100)];
+            $array[] = [chr((mt_rand($start, $end))), mt_rand(1, 100), mt_rand(1, 100)];
         }
         echo 'Нагенерировали массив: <br>';
         foreach ($array as $value) {
