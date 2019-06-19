@@ -302,9 +302,9 @@ class SortClass
         array('y','78','87')
     );
 
-    public function print_arr()
+    public function print_arr($array)
     {
-        foreach ($this->data as $value) {
+        foreach ($array/*$this->data*/ as $value) {
             echo '--';
             foreach ($value as $key)
             {
@@ -323,7 +323,8 @@ class SortClass
         {
             $array[] = [chr((mt_rand($start, $end))), mt_rand(1, 100), mt_rand(1, 100)];
         }
-        echo 'Нагенерировали массив: <br>';
+        return $array;
+        /*echo 'Нагенерировали массив: <br>';
         foreach ($array as $value) {
             echo '--';
             foreach ($value as $key)
@@ -331,7 +332,7 @@ class SortClass
                 echo $key.' ';
             }
             echo '<br>';
-        }
+        }*/
     }
     private function compareArray(&$var1, &$var2)
     {
@@ -346,13 +347,14 @@ class SortClass
         return ($var1[0] > $var2[0]);
     }
     // передать callback а вне класса передать массив и callback f
-    public function vstavckaSort()
+    public function insertSort(&$var)
     {
-        $var = &$this->data;
+//        $var = &$this->data;
         for ($i = 1; $i < count($var); ++ $i)
         {
             $j = $i;
-            while ($j > 0 &&  $this->compareArray($var[$j - 1] , $var[$j]))
+//            while ($j > 0 &&  $this->compareArray($var[$j - 1] , $var[$j]))  3 4 11 19
+            while ($j > 0 && $var[$j - 1] > $var[$j])
             {
                 $temp = $var[$j];
                 $var[$j] = $var[$j - 1];
@@ -360,7 +362,77 @@ class SortClass
                 -- $j;
             }
         }
+        /*foreach ($var as $value) {
+            echo '--';
+            foreach ($value as $key) {
+                echo $key . ' ';
+            }
+            echo '<br>';
+        }*/
     }
+
+    public function bubbleSort(&$array)
+    {
+        for ($i = 0; $i < count($array) - 2; $i ++) // count()-2 а не -1
+        {
+            for ($j = count($array) - 1; $j > $i; $j --)
+            {
+                if ($array[$j] < $array[$j - 1])
+                {
+                    $temp = $array[$j - 1];
+                    $array[$j - 1] = $array[$j];
+                    $array[$j] = $temp;
+                }
+            }
+        }
+    }
+
+    public function caseSort(&$array)
+    {
+        for ($i = count($array) - 1; $i > 0 ; $i --)
+        {
+            $maxIndex = 0;
+            for ($j = 0; $j < $i; $j ++)
+            {
+                if ($array[$j] > $array[$maxIndex])
+                {
+                    $maxIndex = $j;
+                }
+            }
+            /*xchng()*/
+            $temp = $array[$maxIndex];
+            $array[$maxIndex] = $array[$i];
+            $array[$i] = $temp;
+        }
+    }
+
+    // Быстрая сортировка Хоара
+    public function qsort(&$arr, $first, $last)
+    {
+        $i = $first;
+        $j = $last;
+        $x = $arr[($i+$j)/2];
+        do
+        {
+            while ($arr[$i] < $x) ++$i;
+            while ($arr[$j] > $x) --$j;
+            if($i <= $j)
+            {
+                if($i < $j)
+                {
+                    $temp = $arr[$i];
+                    $arr[$i] = $arr[$j];
+                    $arr[$j] = $temp;
+                }
+                ++$i;
+                --$j;
+            }
+
+        }while($i <= $j);
+        if ($i < $last) $this->qsort($arr, $i, $last);
+        if ($j > $first) $this->qsort($arr, $first, $j);
+    }
+
     public function our_sort()
     {
 //        array('t','19','61'),
