@@ -486,4 +486,28 @@ class SortClass
         }
          */
     }
+
+    private static function cmp_ins($a, $b)
+    {
+        if ($a[0] == $b[0])
+        {
+            return ($a[1]+$a[2]) > ($b[1]+$b[2]);
+        }
+        return $a[0] > $b[0];
+    }
+
+    public function insert_sort()
+    {
+        for ($index = 1; $index < count($this->data); ++$index)
+        {
+            $j = $index;
+            while ($j > 0 && SortClass::cmp_ins($this->data[$j-1], $this->data[$j]))
+            {
+                $tmp = $this->data[$j];
+                $this->data[$j] = $this->data[$j-1];
+                $this->data[$j-1] = $tmp;
+                --$j;
+            }
+        }
+    }
 }
