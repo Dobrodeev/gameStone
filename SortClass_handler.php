@@ -19,15 +19,14 @@
  * Date: 10.08.2018
  * Time: 22:00
  */
-spl_autoload_register(function ($className)
-{
-    include $className.'.php';
+spl_autoload_register(function ($className) {
+    include $className . '.php';
 });
 //include 'sorts.php';
 $objectSort = new SortClass();
 //$objectSort->our_sort();
 $countElements = 100;
-echo '<span style="color: #005cbf">После сортировки '.$countElements.' элементов массива: </span><br>';
+echo '<span style="color: #005cbf">После сортировки ' . $countElements . ' элементов массива: </span><br>';
 //$objectSort->print_arr();
 $array = $objectSort->randomArray($countElements);
 /*echo '<pre>';
@@ -35,24 +34,24 @@ print_r($array);
 echo '</pre>';*/
 $mtime = microtime(true);
 $objectSort->bubbleSort($array);
-printf ("Время операции сортировки bubbletSort() <span style='color: #007bff'>%f милисекунд. </span>", microtime(true) - $mtime);
-echo 'microtime(): '.microtime(true).'<br>';
+printf("Время операции сортировки bubbletSort() <span style='color: #007bff'>%f милисекунд. </span>", microtime(true) - $mtime);
+echo 'microtime(): ' . microtime(true) . '<br>';
 //$objectSort->print_arr($array);
 shuffle($array);
 $mtime = microtime(true);
 $objectSort->caseSort($array);
-printf ("Время операции сортировки caseSort() <span style='color: #007bff'>%f милисекунд. </span>", microtime(true) - $mtime);
-echo 'microtime(): '.microtime(true).'<br>';
+printf("Время операции сортировки caseSort() <span style='color: #007bff'>%f милисекунд. </span>", microtime(true) - $mtime);
+echo 'microtime(): ' . microtime(true) . '<br>';
 shuffle($array);
 $mtime = microtime(true);
 $objectSort->insertSort($array);
-printf ("Время операции сортировки insertSort() <span style='color: #007bff'>%f милисекунд. </span>", microtime(true) - $mtime);
-echo 'microtime(): '.microtime(true).'<br>';
+printf("Время операции сортировки insertSort() <span style='color: #007bff'>%f милисекунд. </span>", microtime(true) - $mtime);
+echo 'microtime(): ' . microtime(true) . '<br>';
 shuffle($array);
 $mtime = microtime(true);
 $objectSort->qsort($array, 0, count($array) - 1);
-printf ("Время операции сортировки quickSort() <span style='color: #007bff'>%f милисекунд. </span>", microtime(true) - $mtime);
-echo 'microtime(): '.microtime(true).'<br>';
+printf("Время операции сортировки quickSort() <span style='color: #007bff'>%f милисекунд. </span>", microtime(true) - $mtime);
+echo 'microtime(): ' . microtime(true) . '<br>';
 //$objectSort->print_arr($array);
 //$objectSort->caseSort($array);
 //$objectSort->insertSort($array);
