@@ -25,7 +25,7 @@ spl_autoload_register(function ($className) {
 //include 'sorts.php';
 $objectSort = new SortClass();
 //$objectSort->our_sort();
-$countElements = 100;
+$countElements = 900;
 echo '<span style="color: #005cbf">После сортировки ' . $countElements . ' элементов массива: </span><br>';
 //$objectSort->print_arr();
 $array = $objectSort->randomArray($countElements);
