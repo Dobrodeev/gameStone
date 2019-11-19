@@ -258,7 +258,7 @@ class SimpleAlgoritms
 
     public function evenNumbers2($num1, $num2, $num3)
     {
-        if (($num1 % $num2 == 0) or ($num2 % $num3 == 0) or ($num3 % $num1 == 0) ($num2 % $num1 == 0) or ($num2 % $num3 == 0) or ($num3 % 2 == 0)) {
+        if (($num1 % $num2 == 0) or ($num2 % $num3 == 0) or ($num3 % $num1 == 0) or ($num2 % $num1 == 0) or ($num2 % $num3 == 0) or ($num3 % 2 == 0)) {
             echo $num1 . ', ' . $num2 . ', ' . $num3 . ' - 2 числа четные <br>';
         } else
             echo $num1 . ', ' . $num2 . ', ' . $num3 . ' - нету двох четных чисел <br>';
