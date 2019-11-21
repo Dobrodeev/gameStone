@@ -17,12 +17,12 @@ class RecursivClass
     public function factorialFor($number)
     {
         $factorial = 1;
-        for ($i = 1; $i <= $number; $i++)
-        {
+        for ($i = 1; $i <= $number; $i++) {
             $factorial *= $i;
         }
-        echo $number.'! = '.$factorial.'<br>';
+        echo $number . '! = ' . $factorial . '<br>';
     }
+
     /**
      * Degrees Celsius Degrees Fahrenheit
      * F = 9 / 5 x C + 32
@@ -32,13 +32,13 @@ class RecursivClass
         $Fahrenheit = 0;
         $j = 0;
         echo '<b>Exchange Deegrees Celsius to Fahrengeit</b><br>';
-        for ($i = 0; $i <= 30; $i ++)
-        {
+        for ($i = 0; $i <= 30; $i++) {
             $Fahrenheit = 9 / 5 * $j + 32;
-            echo $j.' Celsius -> '.$Fahrenheit.' F<br>';
+            echo $j . ' Celsius -> ' . $Fahrenheit . ' F<br>';
             $j += 10;
         }
     }
+
     /**
      * Degrees Celsius Degrees Fahrenheit with parametrs
      */
@@ -48,12 +48,11 @@ class RecursivClass
         echo "<b>Exchange Deegrees Celsius to Fahrengeit with step $step</b><br>";
         echo '<table border="1">';
         echo '<tr><th>Цельсий </th><th>Фаренгейт</th></tr>';
-        for ($C = $start; $C < $start + $step * $num_rows; $C += $step)
-        {
+        for ($C = $start; $C < $start + $step * $num_rows; $C += $step) {
 //            $Fahrenheit = 9 / 5 * $start + 32;
 //            echo '<tr><td>'.$start.' Celsius </td><td>'.$Fahrenheit.' F</td></tr>';
 //            $start += $step;
-            echo '<tr><td>'.$C.' Celsius </td><td>'.(9 / 5 * $C + 32).' F</td></tr>';
+            echo '<tr><td>' . $C . ' Celsius </td><td>' . (9 / 5 * $C + 32) . ' F</td></tr>';
         }
         echo '</table>';
     }
