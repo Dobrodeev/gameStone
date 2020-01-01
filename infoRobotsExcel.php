@@ -131,8 +131,8 @@ foreach ($data as $value) {
 $active_sheet->getStyle('A1:C' . ($num_row - 1))->applyFromArray($style_arr);
 
 
-header("Content-Type: application/vnd.ms-excel");
-header("Content-Disposition: attachment; filename='our_table.xlsx'");
+header('Content-Type: application/vnd.ms-excel');
+header('Content-Disposition: attachment; filename="our_table.xlsx"');
 
 $objWriter = PHPExcel_IOFactory::createWriter($objExcel, 'Excel2007');
 $objWriter->save('php://output');
