@@ -14,7 +14,7 @@ session_start();
 <body>
 <script src="assets/jquery-3.2.1.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
-    <h3>Анализ robots.txt</h3>
+<h3>Анализ robots.txt</h3>
 <form action="#" method="get">
     <div class="form-group">
         <label for="exampleInputUrl">url address</label>
@@ -41,55 +41,46 @@ function getMax($content)
 //    echo '<pre>';
 //    print_r($res_arr);
 //    echo '</pre>';
-    foreach ($res_arr as $value)
-    {
-        if ($value != "")
-        {
+    foreach ($res_arr as $value) {
+        if ($value != "") {
             $n = substr_count($value, "host");
-            if ($n > $max) {$max = $n;}
+            if ($n > $max) {
+                $max = $n;
+            }
         }
     }
-    echo 'Max host is: '. $max.'<br>';
+    echo 'Max host is: ' . $max . '<br>';
     return $max;
 }
 
 $content = curl_exec($c);
 $info = curl_getinfo($c);
 $arrayInfo = array(
-    array('id'=>1, 'check'=>'Проверка наличия файла robots.txt', 'status'=>'unchecked'),
-    array('id'=>2, 'check'=>'Проверка указания директивы Host', 'status'=>'unchecked'),
-    array('id'=>3, 'check'=>'Проверка количества директив Host, прописанных в файле', 'status'=>'unchecked'),
-    array('id'=>4, 'check'=>'Проверка размера файла robots.txt', 'status'=>'unchecked'),
-    array('id'=>5, 'check'=>'Проверка указания директивы Sitemap', 'status'=>'unchecked'),
-    array('id'=>6, 'check'=>'Проверка кода ответа сервера для файла robots.txt', 'status'=>'unchecked')
+    array('id' => 1, 'check' => 'Проверка наличия файла robots.txt', 'status' => 'unchecked'),
+    array('id' => 2, 'check' => 'Проверка указания директивы Host', 'status' => 'unchecked'),
+    array('id' => 3, 'check' => 'Проверка количества директив Host, прописанных в файле', 'status' => 'unchecked'),
+    array('id' => 4, 'check' => 'Проверка размера файла robots.txt', 'status' => 'unchecked'),
+    array('id' => 5, 'check' => 'Проверка указания директивы Sitemap', 'status' => 'unchecked'),
+    array('id' => 6, 'check' => 'Проверка кода ответа сервера для файла robots.txt', 'status' => 'unchecked')
 );
-if (!curl_errno($c))
-{
-	if ($info['http_code'] != 200)
-    {
+if (!curl_errno($c)) {
+    if ($info['http_code'] != 200) {
         foreach ($arrayInfo as $one)
             $one['status'] = 'Error';
-    }
-    else
-    {
+    } else {
         $arrayInfo[0]['status'] = 'OK';
         $arrayInfo[5]['status'] = 'OK';
-        if ($info['size_download'] > ROBOTS_SIZE)
-        {
+        if ($info['size_download'] > ROBOTS_SIZE) {
             $arrayInfo[3]['status'] = 'Error';
-        }
-        else
+        } else
             $arrayInfo[3]['status'] = 'OK';
 
     }
-    $res = stristr( $content,'Sitemap');
+    $res = stristr($content, 'Sitemap');
 
-    if ($res!='')
-    {
+    if ($res != '') {
         $arrayInfo[4]['status'] = 'OK';
-    }
-    elseif ($res=='')
-    {
+    } elseif ($res == '') {
         $arrayInfo[4]['status'] = 'Error';
     }
     // сделать проверку: если Host повторяется >1 раза но после User Agent то это не ошибка
@@ -97,32 +88,27 @@ if (!curl_errno($c))
     $res = getMax($content);
 //    $res = substr_count($content, 'Host');
 
-    if ($res == 1)
-    {
+    if ($res == 1) {
         $arrayInfo[1]['status'] = 'OK';
         $arrayInfo[2]['status'] = 'OK';
-    }
-    elseif ($res > 1)
-    {
+    } elseif ($res > 1) {
         $arrayInfo[1]['status'] = 'OK';
         $arrayInfo[2]['status'] = 'Error';
-    }
-    else
-    {
+    } else {
         $arrayInfo[1]['status'] = 'Error';
         $arrayInfo[2]['status'] = 'Error';
     }
     echo 'Took ', $info['total_time'], ' seconds for reqest to ', $info['url'], "\n";
-	echo '<br>HTTP HEADER:', $info['http_code'], "\n";
-	echo '<br>Data transfer size:', $info['size_download'], "\n";
-	echo '<br>';
+    echo '<br>HTTP HEADER:', $info['http_code'], "\n";
+    echo '<br>Data transfer size:', $info['size_download'], "\n";
+    echo '<br>';
 
     echo '<hr>';
     echo '<pre>';
     var_dump($content);
     echo '</pre>';
     // пузырь
-    $puzurArray = array(78,12,44,656,7,23,445,767,6);
+    /*$puzurArray = array(78,12,44,656,7,23,445,767,6);
     for ($i = 0; $i < count($puzurArray)-1; $i++)
     {
         if ($puzurArray[$i] > $puzurArray[$i+1])
@@ -131,24 +117,21 @@ if (!curl_errno($c))
             $puzurArray[$i+1] = $puzurArray[$i];
             $puzurArray[$i] = $temp;
         }
-    }
+    }*/
     // 12, 78, 44, 7, 23, 445, 656, 6, 767
 
 }
-if ($info ['http_code'] != 200)
-{
-	echo "Error: " . $info ['http_code'];
+if ($info ['http_code'] != 200) {
+    echo "Error: " . $info ['http_code'];
 }
 curl_close($c);
 echo '<h5>Результат теста</h5>';
 echo '<table class="table table-striped table-bordered">';
 echo '<tr><th>id</th><th>Название проверки</th><th>Состояние</th></tr>';
-foreach ($arrayInfo as $array)
-{
+foreach ($arrayInfo as $array) {
     echo '<tr>';
-    foreach ($array as $key=>$value)
-    {
-        echo '<td>'.$value.'</td>';
+    foreach ($array as $key => $value) {
+        echo '<td>' . $value . '</td>';
     }
     echo '</tr>';
 }
