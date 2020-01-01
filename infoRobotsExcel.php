@@ -1,36 +1,7 @@
 <?php
 session_start();
-//echo "Наш новый тестовый файл!<br>";
 // Подключаем библиотечный класс
 include("Classes/PHPExcel.php");
-/**
- * $data = array(
- * array(
- * 'id' => 1,
- * 'title' => 'bmw',
- * 'model' => '323',
- * 'price' => 5670
- * ),
- * array(
- * 'id' => 2,
- * 'title' => 'bmw',
- * 'model' => '525',
- * 'price' => 12670
- * ),
- * array(
- * 'id' => 3,
- * 'title' => 'audi',
- * 'model' => 'A6',
- * 'price' => 8570
- * ),
- * array(
- * 'id' => 4,
- * 'title' => 'vaz',
- * 'model' => '2106',
- * 'price' => 800
- * )
- * );
- */
 $data = $_SESSION['arr'];
 // Определяем массивы стилей:
 $data[1]['status'] = 'Error';
@@ -104,7 +75,6 @@ $active_sheet->setCellValue('A1', '№');
 $active_sheet->setCellValue('B1', 'Название проверки');
 $active_sheet->setCellValue('C1', 'Статус');
 
-
 $objExcel->getActiveSheet()->getStyle('A:C')->applyFromArray($style_center);
 $objExcel->getActiveSheet()->getStyle('B')->applyFromArray($style_left);
 $objExcel->getActiveSheet()->getStyle('A1:C1')->applyFromArray($style_header);
@@ -127,9 +97,8 @@ foreach ($data as $value) {
     // после каждой строки результата сделать пустую строку серого цвета
     $num_row++;
 }
-//        $active_sheet->getStyle();
-$active_sheet->getStyle('A1:C' . ($num_row - 1))->applyFromArray($style_arr);
 
+$active_sheet->getStyle('A1:C' . ($num_row - 1))->applyFromArray($style_arr);
 
 header('Content-Type: application/vnd.ms-excel');
 header('Content-Disposition: attachment; filename="our_table.xlsx"');
