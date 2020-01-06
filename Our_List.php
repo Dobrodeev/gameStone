@@ -20,11 +20,9 @@ class Our_List
 
     public function list_print()
     {
-        if ($this->count > 0)
-        {
+        if ($this->count > 0) {
             $temp = $this->start;
-            do
-            {
+            do {
                 echo $temp->data . '<br>';
                 $temp = $temp->next;
 
