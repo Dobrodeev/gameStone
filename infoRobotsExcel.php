@@ -4,7 +4,7 @@ session_start();
 include("Classes/PHPExcel.php");
 $data = $_SESSION['arr'];
 // Определяем массивы стилей:
-$data[1]['status'] = 'Error';
+//$data[1]['status'] = 'Error';
 $style_arr = array(
     'borders' => array(
         'outline' => array(
