@@ -20,7 +20,7 @@ session_start();
         <label for="exampleInputUrl">url address</label>
         <input type="url" class="form-control" id="exampleInputEmail1" placeholder="host" name="host">
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-default">Анализировать robots.txt</button>
 </form>
 <?php
 const ROBOTS_SIZE = 32000;
@@ -37,10 +37,7 @@ function getMax($content)
     $needleLow = "user-agent";
     $res_arr = explode($needleLow, strtolower($content));
     $max = 0;
-//    echo '$res_arr: <br>';
-//    echo '<pre>';
-//    print_r($res_arr);
-//    echo '</pre>';
+
     foreach ($res_arr as $value) {
         if ($value != "") {
             $n = substr_count($value, "host");
@@ -86,7 +83,6 @@ if (!curl_errno($c)) {
     // сделать проверку: если Host повторяется >1 раза но после User Agent то это не ошибка
 
     $res = getMax($content);
-//    $res = substr_count($content, 'Host');
 
     if ($res == 1) {
         $arrayInfo[1]['status'] = 'OK';
@@ -98,27 +94,15 @@ if (!curl_errno($c)) {
         $arrayInfo[1]['status'] = 'Error';
         $arrayInfo[2]['status'] = 'Error';
     }
-    echo 'Took ', $info['total_time'], ' seconds for reqest to ', $info['url'], "\n";
-    echo '<br>HTTP HEADER:', $info['http_code'], "\n";
-    echo '<br>Data transfer size:', $info['size_download'], "\n";
-    echo '<br>';
+    echo 'Took: ', $info['total_time'], ' seconds for request to ', $info['url'], "\n";
+    echo '<br>HTTP HEADER: ', $info['http_code'], "\n";
+    echo '<br>Data transfer size: ', $info['size_download'], "\n";
+
 
     echo '<hr>';
     echo '<pre>';
-    var_dump($content);
+    print_r($content);
     echo '</pre>';
-    // пузырь
-    /*$puzurArray = array(78,12,44,656,7,23,445,767,6);
-    for ($i = 0; $i < count($puzurArray)-1; $i++)
-    {
-        if ($puzurArray[$i] > $puzurArray[$i+1])
-        {
-            $temp = $puzurArray[$i+1];
-            $puzurArray[$i+1] = $puzurArray[$i];
-            $puzurArray[$i] = $temp;
-        }
-    }*/
-    // 12, 78, 44, 7, 23, 445, 656, 6, 767
 
 }
 if ($info ['http_code'] != 200) {
@@ -140,8 +124,8 @@ $_SESSION['arr'] = $arrayInfo;
 ?>
 
 <form action="infoRobotsExcel.php" method="post">
-    <label for="">Сохранить в Excel</label><br>
-    <button type="submit" class="btn btn-default" name="go">Submit</button>
+    <!--<label for="">Сохранить в Excel</label><br>-->
+    <button type="submit" class="btn btn-default" name="go">Сохранить в Excel</button>
 </form>
 </body>
 </html>
