@@ -18,24 +18,23 @@
  * Date: 11.03.2019
  * Time: 20:31
  */
-spl_autoload_register(function ($class)
-{
-    include $class.'.php';
+spl_autoload_register(function ($class) {
+    include $class . '.php';
 });
 $a = new PassengerCar();
 $b = new PassengerCar('Green', 120);
 
 $b->wheels[2]->setPressure(7);
-echo $a."<br>";
+echo $a . "<br>";
 $a->color = 'Red';
-echo $a."<br>";
-echo $b."<br>";
+echo $a . "<br>";
+echo $b . "<br>";
 
-for ($i=0; $i < 4; ++$i) {
+for ($i = 0; $i < 4; ++$i) {
     echo $b->wheels[$i]->getPressure() . "<br>";
 }
 # ++$i, $i++ examples
-function post(&$x)
+/*function post(&$x)
 {
     $temp = $x;
     $x += 1;
@@ -63,7 +62,7 @@ echo $x."<br>";
 
 $x = 10;
 echo ++$x."<br>";
-echo $x."<br>";
+echo $x."<br>";*/
 ?>
 </body>
 </html>

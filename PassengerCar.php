@@ -8,7 +8,7 @@
 
 class PassengerCar
 {
-    public 	$year,
+    public $year,
         $color,
         $speed,
         $wheels = array();
@@ -17,7 +17,7 @@ class PassengerCar
     {
         $this->color = $color;
         $this->speed = $speed;
-        for ($i=0; $i < 4 ; ++$i) {
+        for ($i = 0; $i < 4; ++$i) {
             $this->wheels[$i] = new Wheel($this);
         }
     }

@@ -25,6 +25,5 @@ class CarOnParking
         $this->car_on_parking = $car_on_parking;
     }
 
-    public function 
 
 }
