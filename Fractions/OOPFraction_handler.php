@@ -36,7 +36,7 @@ $fr1->addFraction($fr2);
 $fr1->addFraction($fr2);
 echo 'Сумма дробей: <br>';
 echo $fr1->toString();
-echo '<br>После упрощения: <br>';
+/*echo '<br>После упрощения: <br>';
 $fr1->simplify();
 echo $fr1->toString();
 echo '<hr>';
@@ -59,7 +59,7 @@ $fraction->printFraction(1145, 19);
 $fraction->simplification(743, 51);
 $fr5 = new Fraction(434, 34);
 print_r($fr5);
-$fraction->simpleOutput($fr5);
+$fraction->simpleOutput($fr5);*/
 ?>
 </body>
 </html>

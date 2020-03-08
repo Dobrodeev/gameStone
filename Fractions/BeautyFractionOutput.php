@@ -1,14 +1,34 @@
 <?php
-
+/**
+ * Упрщает неправильную дробь и выводит ее в красивом виде
+ * @package fractions
+ * @author A. Maleev
+ * @copyright 2018
+ * */
 class BeautyFractionOutput extends Fraction
 {
+    /**
+     * Используется для упрощения дроби
+     * @var int
+     */
     protected $intPart;
 
+    /**
+     * Обычный вывод дроби
+     * @param
+     * @return void
+     * */
     public function simpleOutput()
     {
         echo $this->numerator.' / '.$this->denominator.'<br>';
     }
 
+    /**
+     * Красивый вывод дроби
+     * @param $chus object
+     * @param $znam object
+     * @return void
+     * */
     public function printFraction($chus, $znam)
     {
         echo $chus.' / '.$znam.'<br>';
@@ -27,6 +47,12 @@ class BeautyFractionOutput extends Fraction
         echo $znam.'<br>';
     }
 
+    /**
+     * Упрощение дроби
+     * @param $chus object
+     * @param $znam object
+     * @return void
+     * */
     public function simplification($chus, $znam)
     {
         $this->intPart = 0;

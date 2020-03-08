@@ -1,19 +1,27 @@
 <?php
-
+/**
+ * Определяет создание дродей, суммирование, упрощение и преобразование дроби в строку (метод toString)
+ * @package fractions
+ * @author A. Maleev
+ * @copyright 2018
+ * */
 class Fraction
 {
+    /**
+     * @var int
+     */
     protected $numerator;
+    /**
+     * @var int
+     */
     protected $denominator;
-    /*public $numerator;
-    public $denominator;
-    public $someone;*/
 
-    public function addFraction(Fraction $fraction)
-    {
-        $this->numerator = $this->numerator * $fraction->denominator + $this->denominator * $fraction->numerator;
-        $this->denominator = $this->denominator * $fraction->denominator;
-    }
-
+    /**
+     * Создает дробь из двух чисел: числителя и знаменателя
+     * @param $num  int числитель
+     * @param $denom int знаменатель
+     * @return void
+     */
     public function __construct($num = 1, $denom = 1)
     {
         $this->numerator = $num;
@@ -25,6 +33,25 @@ class Fraction
         }
     }
 
+    /**
+     * Суммируем две дроби
+     * @param $fraction object
+     * @return void
+     */
+    public function addFraction(Fraction $fraction)
+    {
+        $this->numerator = $this->numerator * $fraction->denominator + $this->denominator * $fraction->numerator;
+        $this->denominator = $this->denominator * $fraction->denominator;
+    }
+
+    /**
+     * Формируем красивый вывод дроби, например было 111/113
+     * стало: 111
+     *        ---
+     *        113
+     * @param
+     * @return void
+     */
     public function simplify()
     {
         $i = 10;
@@ -38,10 +65,11 @@ class Fraction
         }
     }
 
+    /**
+     *
+     */
     public function toString()
     {
         return $this->numerator."/".$this->denominator;
     }
-
-
 }
