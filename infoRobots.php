@@ -26,10 +26,10 @@ session_start();
 const ROBOTS_SIZE = 32000;
 
 $host = $_GET['host'];
-$file_name = $host . '/robots.txt';
+$file_name = $host.'/robots.txt';
 
 $c = curl_init($file_name);
-curl_setopt($c, CURLOPT_RETURNTRANSFER, TRUE);
+curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 
 function getMax($content)
 {
@@ -46,7 +46,7 @@ function getMax($content)
             }
         }
     }
-    echo 'Max host is: ' . $max . '<br>';
+    echo 'Max host is: '.$max.'<br>';
     return $max;
 }
 
@@ -62,15 +62,17 @@ $arrayInfo = array(
 );
 if (!curl_errno($c)) {
     if ($info['http_code'] != 200) {
-        foreach ($arrayInfo as $one)
+        foreach ($arrayInfo as $one) {
             $one['status'] = 'Error';
+        }
     } else {
         $arrayInfo[0]['status'] = 'OK';
         $arrayInfo[5]['status'] = 'OK';
         if ($info['size_download'] > ROBOTS_SIZE) {
             $arrayInfo[3]['status'] = 'Error';
-        } else
+        } else {
             $arrayInfo[3]['status'] = 'OK';
+        }
 
     }
     $res = stristr($content, 'Sitemap');
@@ -106,7 +108,7 @@ if (!curl_errno($c)) {
 
 }
 if ($info ['http_code'] != 200) {
-    echo "Error: " . $info ['http_code'];
+    echo "Error: ".$info ['http_code'];
 }
 curl_close($c);
 echo '<h5>Результат теста</h5>';
@@ -115,7 +117,7 @@ echo '<tr><th>id</th><th>Название проверки</th><th>Состоя�
 foreach ($arrayInfo as $array) {
     echo '<tr>';
     foreach ($array as $key => $value) {
-        echo '<td>' . $value . '</td>';
+        echo '<td>'.$value.'</td>';
     }
     echo '</tr>';
 }

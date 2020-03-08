@@ -82,23 +82,23 @@ $active_sheet->getStyle('1')->getNumberFormat()->setFormatCode(PHPExcel_Style_Nu
 
 $num_row = 2;
 foreach ($data as $value) {
-    $active_sheet->mergeCells('A' . $num_row . ':C' . $num_row);
-    $active_sheet->getStyle('A' . $num_row . ':C' . $num_row)->applyFromArray($style_between);
+    $active_sheet->mergeCells('A'.$num_row.':C'.$num_row);
+    $active_sheet->getStyle('A'.$num_row.':C'.$num_row)->applyFromArray($style_between);
     $num_row++;
     $active_sheet->getRowDimension($num_row)->setRowHeight(40);
     $active_sheet->setCellValueByColumnAndRow(0, $num_row, $value['id']);
     $active_sheet->setCellValueByColumnAndRow(1, $num_row, $value['check']);
     $active_sheet->setCellValueByColumnAndRow(2, $num_row, $value['status']);
     if ($value['status'] == 'OK') {
-        $objExcel->getActiveSheet()->getStyle('C' . $num_row)->applyFromArray($style_ok);
+        $objExcel->getActiveSheet()->getStyle('C'.$num_row)->applyFromArray($style_ok);
     } else {
-        $objExcel->getActiveSheet()->getStyle('C' . $num_row)->applyFromArray($style_error);
+        $objExcel->getActiveSheet()->getStyle('C'.$num_row)->applyFromArray($style_error);
     }
     // после каждой строки результата сделать пустую строку серого цвета
     $num_row++;
 }
 
-$active_sheet->getStyle('A1:C' . ($num_row - 1))->applyFromArray($style_arr);
+$active_sheet->getStyle('A1:C'.($num_row - 1))->applyFromArray($style_arr);
 
 header('Content-Type: application/vnd.ms-excel');
 header('Content-Disposition: attachment; filename="our_table.xlsx"');
