@@ -1,4 +1,5 @@
 <?php
+
 class BeautyFractionOutput extends Fraction
 {
     protected $intPart;
@@ -7,20 +8,19 @@ class BeautyFractionOutput extends Fraction
     {
         echo $this->numerator.' / '.$this->denominator.'<br>';
     }
+
     public function printFraction($chus, $znam)
     {
         echo $chus.' / '.$znam.'<br>';
         $saveChus = $chus;
         $counter = 0;
-        while ($chus / 10 >= 1)
-        {
+        while ($chus / 10 >= 1) {
             $chus /= 10;
             $counter++;
         }
         echo 'Красивый вывод дроби: <br>';
         echo $saveChus.'<br>';
-        for ($i = 0; $i <= $counter; $i++)
-        {
+        for ($i = 0; $i <= $counter; $i++) {
             echo '-';
         }
         echo '<br>';
@@ -30,10 +30,8 @@ class BeautyFractionOutput extends Fraction
     public function simplification($chus, $znam)
     {
         $this->intPart = 0;
-        if ($chus > $znam)
-        {
-            while ($chus > $znam)
-            {
+        if ($chus > $znam) {
+            while ($chus > $znam) {
                 $chus %= $znam;
                 $this->intPart++;
             }

@@ -2,13 +2,13 @@
 
 class Fraction
 {
-//    protected $numerator;
-//    protected $denominator;
-    public $numerator;
+    protected $numerator;
+    protected $denominator;
+    /*public $numerator;
     public $denominator;
-    public $someone;
+    public $someone;*/
 
-    public function addFraction (Fraction $fraction)
+    public function addFraction(Fraction $fraction)
     {
         $this->numerator = $this->numerator * $fraction->denominator + $this->denominator * $fraction->numerator;
         $this->denominator = $this->denominator * $fraction->denominator;
@@ -17,13 +17,10 @@ class Fraction
     public function __construct($num = 1, $denom = 1)
     {
         $this->numerator = $num;
-        if ($denom == 0)
-        {
+        if ($denom == 0) {
             echo "Incorrect data";
             $this->denominator = 1;
-        }
-        else
-        {
+        } else {
             $this->denominator = $denom;
         }
     }
@@ -31,10 +28,8 @@ class Fraction
     public function simplify()
     {
         $i = 10;
-        while ($i > 1)
-        {
-            if (($this->numerator % $i == 0) && ($this->denominator % $i == 0))
-            {
+        while ($i > 1) {
+            if (($this->numerator % $i == 0) && ($this->denominator % $i == 0)) {
                 $this->numerator /= $i;
                 $this->denominator /= $i;
                 $i = 11;
@@ -45,7 +40,7 @@ class Fraction
 
     public function toString()
     {
-        return $this->numerator . "/" . $this->denominator;
+        return $this->numerator."/".$this->denominator;
     }
 
 
