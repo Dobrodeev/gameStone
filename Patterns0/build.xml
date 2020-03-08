@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<!-- xml-файл построения -->
+
+<project name="megaquiz" default="main">
+   <target name="main" />
+</project>
