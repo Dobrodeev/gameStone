@@ -1,9 +1,12 @@
 <?php
+
 /**
  * Упрщает неправильную дробь и выводит ее в красивом виде
  * @package fractions
+ * @subpackage
  * @author A. Maleev
  * @copyright 2018
+ * @version 1.0
  * */
 class BeautyFractionOutput extends Fraction
 {
@@ -12,7 +15,6 @@ class BeautyFractionOutput extends Fraction
      * @var int
      */
     protected $intPart;
-
     /**
      * Обычный вывод дроби
      * @param
@@ -25,8 +27,8 @@ class BeautyFractionOutput extends Fraction
 
     /**
      * Красивый вывод дроби
-     * @param $chus object
-     * @param $znam object
+     * @param $chus int
+     * @param $znam int
      * @return void
      * */
     public function printFraction($chus, $znam)
@@ -49,8 +51,8 @@ class BeautyFractionOutput extends Fraction
 
     /**
      * Упрощение дроби
-     * @param $chus object
-     * @param $znam object
+     * @param $chus int
+     * @param $znam int
      * @return void
      * */
     public function simplification($chus, $znam)
@@ -64,5 +66,10 @@ class BeautyFractionOutput extends Fraction
         }
         echo 'Дробь после упрщения: <br>';
         echo $this->intPart.' '.$chus.' / '.$znam.'<br>';
+    }
+
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
     }
 }

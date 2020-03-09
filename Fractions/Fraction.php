@@ -1,17 +1,21 @@
 <?php
+
 /**
  * Определяет создание дродей, суммирование, упрощение и преобразование дроби в строку (метод toString)
  * @package fractions
  * @author A. Maleev
  * @copyright 2018
+ * @version 1.0
  * */
 class Fraction
 {
     /**
+     * Числитель дроби
      * @var int
      */
     protected $numerator;
     /**
+     * Знаменатель дроби
      * @var int
      */
     protected $denominator;
@@ -21,6 +25,7 @@ class Fraction
      * @param $num  int числитель
      * @param $denom int знаменатель
      * @return void
+     * @throws InvalidArgumentException if the provided argument is zero
      */
     public function __construct($num = 1, $denom = 1)
     {
@@ -35,7 +40,7 @@ class Fraction
 
     /**
      * Суммируем две дроби
-     * @param $fraction object
+     * @param $fraction Fraction
      * @return void
      */
     public function addFraction(Fraction $fraction)
@@ -49,7 +54,7 @@ class Fraction
      * стало: 111
      *        ---
      *        113
-     * @param
+     *
      * @return void
      */
     public function simplify()
@@ -66,10 +71,19 @@ class Fraction
     }
 
     /**
-     *
+     * @return string
      */
     public function toString()
     {
         return $this->numerator."/".$this->denominator;
+    }
+
+    /**
+     *
+     */
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
+        //return $this->numerator;
     }
 }
