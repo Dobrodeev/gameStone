@@ -6,8 +6,16 @@
  * Time: 22:29
  */
 
+//
+
+/**
+ * Class SimpleAlgoritms
+ */
 class SimpleAlgoritms
 {
+    /**
+     *
+     */
     public function cvadrarickNumbers()
     {
         $array = [];
@@ -15,7 +23,7 @@ class SimpleAlgoritms
         for ($i = 0; $i < 9; $i++) {
             echo '<tr>';
             for ($j = 0; $j < 9; $j++) {
-                echo '<td>' . $array[$i][$j] = (9 * $i + $j + 1) . '</td>';
+                echo '<td>'.$array[$i][$j] = (9 * $i + $j + 1).'</td>';
             }
             echo '</tr>';
         }
@@ -34,7 +42,7 @@ class SimpleAlgoritms
         for ($i = 0; $i < 9; $i++) {
             echo '<tr>';
             for ($j = 0; $j < 9; $j++) {
-                echo '<td>' . $array[$i][$j] . '</td>';
+                echo '<td>'.$array[$i][$j].'</td>';
             }
             echo '</tr>';
         }
@@ -50,6 +58,10 @@ class SimpleAlgoritms
      * 45
      * 5
      */
+//
+    /**
+     *
+     */
     public function pyramidaDown()
     {
         $a = 3;
@@ -64,16 +76,20 @@ class SimpleAlgoritms
 
         for ($j = $a + 1; $j <= $b; $j++) {
             for ($i = $a; $i <= $b; $i++) {
-                if ($i < $j)
+                if ($i < $j) {
                     echo '0';
-                else
+                } else {
                     echo $i;
+                }
             }
 
             echo '<br/>';
         }
     }
 
+    /**
+     * @param $N
+     */
     public function diagonalMatrica($N)
     {
         // $N - размер квадрата
@@ -83,13 +99,17 @@ class SimpleAlgoritms
 //        if (($i == $j || $j == $N - 1 -$i) && !($i == $j && $j == $N - 1 -$i))
                 if ($i == $j ^ $j == $N - 1 - $i) {
                     echo 'X';
-                } else
+                } else {
                     echo '0';
+                }
             }
             echo '<br>';
         }
     }
 
+    /**
+     *
+     */
     public function gameIn15()
     {
         $array = array(
@@ -100,23 +120,39 @@ class SimpleAlgoritms
         );
         foreach ($array as $item) {
             foreach ($item as $value) {
-                echo $value . ' ';
+                echo $value.' ';
             }
             echo '<br>';
         }
     }
 
+    /**
+     * @param $n
+     * @return float|int
+     */
     public function recFactorial($n)
     {
-        if ($n < 0) return 0;
-        if ($n == 0) return 1;
+        if ($n < 0) {
+            return 0;
+        }
+        if ($n == 0) {
+            return 1;
+        }
         return $n * recFactorial($n - 1);
     }
 
+    /**
+     * @param $n
+     * @return float|int
+     */
     public function factorial($n)
     {
-        if ($n < 0) return 0;
-        if ($n == 0) return 1;
+        if ($n < 0) {
+            return 0;
+        }
+        if ($n == 0) {
+            return 1;
+        }
         $f = 1;
 
         for ($i = 1; $i <= $n; $i++) {
@@ -133,8 +169,8 @@ class SimpleAlgoritms
     {
         $n = $_GET['n'];
         $x = $_GET['x'];
-        echo $n . '<br>';
-        echo $x . '<br>';
+        echo $n.'<br>';
+        echo $x.'<br>';
         $i = 1;
         $exponenta = 1;
         while ($i <= $n) {
@@ -142,8 +178,8 @@ class SimpleAlgoritms
             $i++;
         }
 
-        echo 'exp(' . $x . ')=' . $exponenta . '<br>';
-        echo ' при n=' . $n . '<br>';
+        echo 'exp('.$x.')='.$exponenta.'<br>';
+        echo ' при n='.$n.'<br>';
         //echo recFactorial(5).'<br>';
         /** Более оптимальный просчет суммы ряда */
 
@@ -161,6 +197,11 @@ class SimpleAlgoritms
         echo $sum;
     }
 
+    /**
+     * @param $text
+     * @param $index
+     * @return string
+     */
     public function perevorotString($text, $index)
     {
 //        echo $text.'<br>';
@@ -169,9 +210,13 @@ class SimpleAlgoritms
         //    $perevorot = strrev($temp);
         //    $result = $first.$perevorot;
         //    echo $result;
-        return substr($text, 0, $index - 1) . strrev(substr($text, $index - 1));
+        return substr($text, 0, $index - 1).strrev(substr($text, $index - 1));
     }
 
+    /**
+     * @param $arr
+     * @return mixed
+     */
     public function maxElementOfArray($arr)
     {
         $array = [];
@@ -185,6 +230,10 @@ class SimpleAlgoritms
         return $temp;
     }
 
+    /**
+     * @param $arr
+     * @return mixed
+     */
     public function minElement($arr)
     {
         $min = $arr[0];
@@ -196,11 +245,14 @@ class SimpleAlgoritms
         return $min;
     }
 
+    /**
+     * @param $arr
+     */
     public function puzurSort($arr)
     {
         echo 'До сортировки: <br>';
         foreach ($arr as $value) {
-            echo $value . ' ';
+            echo $value.' ';
         }
         for ($i = 0; $i < count($arr) - 1; $i++) {
             for ($j = count($arr) - 1; $j > $i; $j--) {
@@ -214,11 +266,14 @@ class SimpleAlgoritms
         echo '<br>';
         echo 'После сортировки: <br>';
         foreach ($arr as $value) {
-            echo $value . ' ';
+            echo $value.' ';
         }
         echo '<br>';
     }
 
+    /**
+     * @param $n
+     */
     public function simpleMatrica($n)
     {
         $n = 9;
@@ -227,7 +282,7 @@ class SimpleAlgoritms
         for ($i = 0; $i < $n; $i++) {
             echo '<tr>';
             for ($j = 0; $j < $n; $j++) {
-                echo '<td>' . $array[$i][$j] = (9 * $i + $j + 1) . '</td>';
+                echo '<td>'.$array[$i][$j] = (9 * $i + $j + 1).'</td>';
             }
             echo '</tr>';
         }
@@ -238,9 +293,9 @@ class SimpleAlgoritms
             echo '<tr>';
             for ($j = 0; $j < $n; $j++) {
                 if ($j % 2 == 0) {
-                    echo '<td>' . $array[$i][$j] . '</td>';
+                    echo '<td>'.$array[$i][$j].'</td>';
                 } else {
-                    echo '<td>' . $array[$n - 1 - $i][$j] . '</td>';
+                    echo '<td>'.$array[$n - 1 - $i][$j].'</td>';
                 }
             }
             echo '</tr>';
@@ -248,52 +303,92 @@ class SimpleAlgoritms
         echo '</table>';
     }
 
+    /**
+     * На вход подаются 3 числа, метод определяет, будул ли 2 числа четными
+     * @param $num1
+     * @param $num2
+     * @param $num3
+     */
     public function evenNumbers($num1, $num2, $num3)
     {
         if (($num1 % 2 == 0 && $num2 % 2 == 0) or ($num2 % 2 == 0 && $num3 % 2 == 0) or ($num1 % 2 == 0 && $num3 % 2 == 0)) {
-            echo $num1 . ', ' . $num2 . ', ' . $num3 . ' - 2 числа четные <br>';
-        } else
-            echo $num1 . ', ' . $num2 . ', ' . $num3 . ' - нету двох четных чисел <br>';
+            echo $num1.', '.$num2.', '.$num3.' - 2 числа четные <br>';
+        } else {
+            echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
+        }
     }
 
+    /**
+     * @param $num1
+     * @param $num2
+     * @param $num3
+     */
     public function evenNumbers2($num1, $num2, $num3)
     {
         if (($num1 % $num2 == 0) or ($num2 % $num3 == 0) or ($num3 % $num1 == 0) or ($num2 % $num1 == 0) or ($num2 % $num3 == 0) or ($num3 % 2 == 0)) {
-            echo $num1 . ', ' . $num2 . ', ' . $num3 . ' - 2 числа четные <br>';
-        } else
-            echo $num1 . ', ' . $num2 . ', ' . $num3 . ' - нету двох четных чисел <br>';
+            echo $num1.', '.$num2.', '.$num3.' - 2 числа четные <br>';
+        } else {
+            echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
+        }
     }
 
+    /**
+     * @param $num1
+     * @param $num2
+     * @param $num3
+     */
     public function evenNumbers3($num1, $num2, $num3)
     {
         if ((($num1 * $num2) % 2 == 0) and (($num1 * $num3) % 2 == 0) and (($num2 * $num3) % 2 == 0)) {
-            echo $num1 . ', ' . $num2 . ', ' . $num3 . ' - 2 числа четные <br>';
-        } else
-            echo $num1 . ', ' . $num2 . ', ' . $num3 . ' - нету двох четных чисел <br>';
+            echo $num1.', '.$num2.', '.$num3.' - 2 числа четные <br>';
+        } else {
+            echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
+        }
     }
 
-    /**  */
+
+    /**
+     * @param $num1
+     * @param $num2
+     * @param $num3
+     */
     public function evenNumbers4($num1, $num2, $num3)
     {
         $counter = 0;
-        if ($num1 % 2 == 0) $counter++;
-        if ($num2 % 2 == 0) $counter++;
-        if ($num3 % 2 == 0) $counter++;
-        if ($counter >= 2)
-            echo $num1 . ', ' . $num2 . ', ' . $num3 . ' - 2 числа четные <br>';
-        else
-            echo $num1 . ', ' . $num2 . ', ' . $num3 . ' - нету двох четных чисел <br>';
+        if ($num1 % 2 == 0) {
+            $counter++;
+        }
+        if ($num2 % 2 == 0) {
+            $counter++;
+        }
+        if ($num3 % 2 == 0) {
+            $counter++;
+        }
+        if ($counter >= 2) {
+            echo $num1.', '.$num2.', '.$num3.' - 2 числа четные <br>';
+        } else {
+            echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
+        }
     }
 
+    /**
+     * @param $num1
+     * @param $num2
+     * @param $num3
+     */
     function evenNumbers5($num1, $num2, $num3)
     {
 
         if ($num1 % 2 + $num2 % 2 + $num3 % 2 <= 1) {
-            echo $num1 . ', ' . $num2 . ', ' . $num3 . ' - 2 числа четные <br>';
-        } else
-            echo $num1 . ', ' . $num2 . ', ' . $num3 . ' - нету двох четных чисел <br>';
+            echo $num1.', '.$num2.', '.$num3.' - 2 числа четные <br>';
+        } else {
+            echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
+        }
     }
 
+    /**
+     * @param $n
+     */
     public function simpleTicTack($n)
     {
         $n = 3;
@@ -302,7 +397,7 @@ class SimpleAlgoritms
         for ($i = 0; $i < $n; $i++) {
             echo '<tr>';
             for ($j = 0; $j < $n; $j++) {
-                echo '<td>' . $array[$i][$j] = '&nbsp' . '</td>';
+                echo '<td>'.$array[$i][$j] = '&nbsp'.'</td>';
             }
             echo '</tr>';
         }

@@ -26,7 +26,7 @@ spl_autoload_register(function ($class) {
     include $class . '.php';
 });
 $object = new SimpleAlgoritms();
-
+$object->evenNumbers(1,2,0);
 echo '<hr>';
 /*$object->pyramidaDown();
 echo 'Выведем диагонали матрицы: <br>';
@@ -70,7 +70,7 @@ $object->evenNumbers(13, 267, 38);
 $object->evenNumbers4(19,12,90);
 echo 'Tic Tack <br>';
 $object->simpleTicTack(2);*/
-$testArray = [3, 7, 15, 1, 292, 1, 1, 1, 2, 1, 3, 1, 14, 2, 1, 1, 2, 2, 2, 2, 1, 84, 2, 1, 1];
+/*$testArray = [3, 7, 15, 1, 292, 1, 1, 1, 2, 1, 3, 1, 14, 2, 1, 1, 2, 2, 2, 2, 1, 84, 2, 1, 1];
 $fibonacciArray = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711,];
 $catallanaArray = [1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, 208012, 742900, 2674440, 9694845, 35357670, 129644790, 477638700, 1767263190, 6564120420, 24466267020, 91482563640, 343059613650, 1289904147324, 4861946401452,];
 $simpleArrayZero = [11, 101, 10111, 101111, 1011001, 1100101];
@@ -95,13 +95,13 @@ function writelineArray($testArray)
         echo $value . ' ';
     }
     echo '<br>';
-}
+}*/
 
 //writelineArray($testArray);
-$randomArray = [];
+/*$randomArray = [];
 for ($i = 0; $i < 10; $i++) {
     $randomArray[$i] = mt_rand(0, 12);
-}
+}*/
 //writelineArray($randomArray);
 //$object->puzurSort($testArray);
 /*
