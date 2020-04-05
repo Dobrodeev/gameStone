@@ -19,6 +19,8 @@
         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                placeholder="Enter some text" name="text">
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <label for="index1">index (№ буквы, которую нужно поменять местамис последней)</label>
+        <input type="text" name="index" id="index1">
     </div>
     <button type="submit" class="btn btn-primary">Перевернуть строку</button>
 </form>
@@ -59,9 +61,9 @@ function revolutionString($text, $index)
     return substr($text, 0, $index - 1).strrev(substr($text, $index - 1));
 }
 
-$string = 'abcdefgggh';
+/*$string = 'abcdefgggh';
 $index = 5;
-echo revolutionString($string, $index).'<br>';
+echo revolutionString($string, $index).'<br>';*/
 ?>
 </body>
 </html>
