@@ -214,10 +214,10 @@ class SimpleAlgoritms
     }
 
     /**
-     * @param $arr
+     * @param  array  $arr
      * @return mixed
      */
-    public function maxElementOfArray($arr)
+    public function maxElementOfArray(array $arr)
     {
         $array = [];
         $array = $arr;
@@ -231,10 +231,10 @@ class SimpleAlgoritms
     }
 
     /**
-     * @param $arr
+     * @param  array  $arr
      * @return mixed
      */
-    public function minElement($arr)
+    public function minElement(array $arr)
     {
         $min = $arr[0];
         for ($i = 1; $i < count($arr) - 1; $i++) {
