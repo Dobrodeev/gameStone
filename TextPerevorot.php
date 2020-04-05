@@ -18,41 +18,50 @@
         <label for="exampleInputEmail1">Some text</label>
         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                placeholder="Enter some text">
-        <!--        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
-    <?php
-    /**
-     * $start = 12;
-     * $end = 19;
-     * for ($i = $start; $i <= $end; $i++)
-     * {
-     * //    echo $i.'<br>';
-     * for ($j = 0;  $j < $i; $j++)
-     * {
-     * echo $i;
-     * }
-     * echo '<br>';
-     * }
-     */
-    $string = 'abcdefghhafkfkafkauyevpi';
-    $index = 5;
-    function perevorotString($text, $index)
-    {
-        echo $text . '<br>';
+    <button type="submit" class="btn btn-primary">Перевернуть строку</button>
+</form>
+<?php
+/**
+ * $start = 12;
+ * $end = 19;
+ * for ($i = $start; $i <= $end; $i++)
+ * {
+ * //    echo $i.'<br>';
+ * for ($j = 0;  $j < $i; $j++)
+ * {
+ * echo $i;
+ * }
+ * echo '<br>';
+ * }
+ */
+//
+
+
+/**
+ * текст который подается на вход
+ * abcdefgggh
+ * порядковый номер (индекс) символа(буквы), которую будем менять местами с последней буквой, результат:
+ * abcdhgggfe
+ * @param $text
+ * @param $index
+ * @return string
+ */
+function revolutionString($text, $index)
+{
+    echo $text.'<br>';
 //    $first = substr($text, 0, $index - 1);
 //    $temp = substr($text, $index - 1);
 //    $perevorot = strrev($temp);
 //    $result = $first.$perevorot;
 //    echo $result;
-        return substr($text, 0, $index - 1) . strrev(substr($text, $index - 1));
-    }
+    return substr($text, 0, $index - 1).strrev(substr($text, $index - 1));
+}
 
-    echo perevorotString($string, $index) . '<br>';
-    $save = perevorotString('Moscow Kiev Lutsck', 7);
-    echo $save . '<br>';
-    echo '<br>';
-    ?>
-    <button type="submit" class="btn btn-primary">Перевернуть строку</button>
-</form>
+$string = 'abcdefgggh';
+$index = 5;
+echo revolutionString($string, $index).'<br>';
+?>
 </body>
 </html>
