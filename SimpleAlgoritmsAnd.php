@@ -9,10 +9,10 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
-<form action="#" method="post">
+<!--<form action="#" method="post">
     <input type="text" name="data">
     <input type="submit">
-</form>
+</form>-->
 <script src="assets/jquery-3.2.1.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <?php
@@ -26,6 +26,8 @@ spl_autoload_register(function ($class) {
     include $class . '.php';
 });
 $object = new SimpleAlgoritms();
+
+echo '<hr>';
 /*$object->pyramidaDown();
 echo 'Выведем диагонали матрицы: <br>';
 $object->diagonalMatrica(19);
