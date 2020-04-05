@@ -13,11 +13,11 @@
 <body>
 <script src="assets/jquery-3.2.1.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
-<form>
+<form action="TextPerevorot_handler.php" method="post">
     <div class="form-group">
         <label for="exampleInputEmail1">Some text</label>
         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-               placeholder="Enter some text">
+               placeholder="Enter some text" name="text">
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <button type="submit" class="btn btn-primary">Перевернуть строку</button>
