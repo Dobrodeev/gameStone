@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class Wheel
+ * Class Wheel класс колес для автомобиля
  */
 class Wheel
 {
@@ -65,7 +65,7 @@ class Wheel
 }
 
 /**
- * Class Car
+ * Class Car состоит из кузова и колес класса Wheel
  */
 class Car
 {
@@ -79,12 +79,13 @@ class Car
      * @var int|string
      */
     /**
+     * количество колесв автомобиле может быть 4, 6, ...
      * @var int|string
      */
-    public $year,
-        $color,
-        $speed,
-        $wheels = array();
+    public $year;
+    public $color;
+    public $speed;
+    public $wheels = array();
 
     /**
      * Car constructor.
@@ -119,7 +120,7 @@ class Car
 
 $a = new Car();
 $b = new Car('Green', 120);
-
+// накачаем во второе колесо 7 бар
 $b->wheels[2]->setPressure(7);
 echo $a."<br>";
 $a->color = 'Red';
@@ -129,7 +130,7 @@ echo $b."<br>";
 for ($i = 0; $i < 4; ++$i) {
     echo $b->wheels[$i]->getPressure()."<br>";
 }
-
+// постфиксная и префиксная записи: сравнение
 function post(&$x)
 {
     $temp = $x;
