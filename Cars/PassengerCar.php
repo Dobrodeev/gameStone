@@ -5,15 +5,36 @@
  * Date: 11.03.2019
  * Time: 20:30
  */
+//
 
+/**
+ * Class PassengerCar
+ */
 class PassengerCar
 {
-    public $year,
-        $color,
-        $speed,
-        $wheels = array();
+    /**
+     * @var
+     */
+    public $year;
+    /**
+     * @var string
+     */
+    public $color;
+    /**
+     * @var int
+     */
+    public $speed;
+    /**
+     * @var array
+     */
+    public $wheels = array();
 
-    function __construct($color = 'Grey', $speed = 0)
+    /**
+     * PassengerCar constructor.
+     * @param  string  $color
+     * @param  int  $speed
+     */
+    public function __construct($color = 'Grey', $speed = 0)
     {
         $this->color = $color;
         $this->speed = $speed;
@@ -22,12 +43,18 @@ class PassengerCar
         }
     }
 
-    function aacelerate($speed)
+    /**
+     * @param $speed
+     */
+    public function accelerate($speed)
     {
         $this->speed += $speed;
     }
 
-    function __toString()
+    /**
+     * @return string
+     */
+    public function __toString()
     {
         return "This is {$this->color} car with speed = {$this->speed}!";
     }
