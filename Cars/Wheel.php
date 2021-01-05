@@ -6,35 +6,67 @@
  * Time: 20:26
  */
 
+//
+
+/**
+ * Class Wheel
+ */
 class Wheel
 {
-    private $pressure,
-        $d,
-        $owner;
+    /**
+     * @var float
+     */
+    private $pressure;
+    /**
+     * @var int
+     */
+    public $d;
+    /**
+     * @var null
+     */
+    public $owner;
 
-    function __construct($owner = NULL, $pressure = 2.0, $d = 13)
+    /**
+     * Wheel constructor.
+     * @param  null  $owner
+     * @param  float  $pressure
+     * @param  int  $d
+     */
+    public function __construct($owner = null, $pressure = 2.0, $d = 13)
     {
         $this->pressure = $pressure;
         $this->d = $d;
         $this->owner = $owner;
     }
 
-    function getPressure() {return $this->pressure;}
-
-    function setPressure($pressure)
+    /**
+     * @return float
+     */
+    public function getPressure()
     {
-        if ($pressure < 0) $pressure = 0;
-        if ($pressure > 5)
-        {
+        return $this->pressure;
+    }
+
+    /**
+     * @param $pressure
+     */
+    public function setPressure($pressure)
+    {
+        if ($pressure < 0) {
+            $pressure = 0;
+        }
+        if ($pressure > 5) {
             echo "BABAH!!!<br>";
             $pressure = 0;
         }
-        if ($this->owner != NULL)
-        {
-            if ($pressure == 0)
+        if ($this->owner != null) {
+            if ($pressure == 0) {
                 $this->owner->speed = 0;
-            else if($pressure < 0.5)
-                $this->owner->speed /= 2;
+            } else {
+                if ($pressure < 0.5) {
+                    $this->owner->speed /= 2;
+                }
+            }
         }
         $this->pressure = $pressure;
     }
