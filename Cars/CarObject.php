@@ -9,8 +9,8 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
-<script src="assets/jquery-3.2.1.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
+<script src="../assets/jquery-3.2.1.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
 <?php
 /**
  * Created by PhpStorm.
@@ -19,19 +19,19 @@
  * Time: 20:31
  */
 spl_autoload_register(function ($class) {
-    include $class . '.php';
+    include $class.'.php';
 });
 $a = new PassengerCar();
 $b = new PassengerCar('Green', 120);
 
 $b->wheels[2]->setPressure(7);
-echo $a . "<br>";
+echo $a."<br>";
 $a->color = 'Red';
-echo $a . "<br>";
-echo $b . "<br>";
+echo $a."<br>";
+echo $b."<br>";
 
 for ($i = 0; $i < 4; ++$i) {
-    echo $b->wheels[$i]->getPressure() . "<br>";
+    echo $b->wheels[$i]->getPressure()."<br>";
 }
 # ++$i, $i++ examples
 /*function post(&$x)
