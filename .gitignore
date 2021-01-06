@@ -4,3 +4,4 @@
 *.php-tmp
 phpDocumentor.phar
 ~$Excel Export.xlsx
+.vs
