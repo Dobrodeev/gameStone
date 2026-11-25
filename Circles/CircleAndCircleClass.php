@@ -1,48 +1,64 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dobrodeev
- * Date: 14.08.2018
- * Time: 13:49
- */
-//
 
-/**
- * Class CircleAndCircleClass
- * считает количество точек пересечения двух окружностей
- */
-class CircleAndCircleClass
+declare(strict_types=1);
+
+/** Сколько точек пересечения у двух окружностей. */
+enum Intersection
 {
-    private $x;
-    private $y;
-    private $r;
+    case None;
+    case One;
+    case Two;
+    case Infinite;
 
-    public function __construct($x, $y, $r)
+    public function label(): string
     {
-        $this->x = $x;
-        $this->y = $y;
-        $this->r = $r;
+        return match ($this) {
+            self::None => '0 — окружности не пересекаются',
+            self::One => '1 — окружности касаются',
+            self::Two => '2 — окружности пересекаются',
+            self::Infinite => 'бесконечно много — окружности совпадают',
+        };
     }
+}
 
-    public function setCircle($x, $y, $r)
-    {
-        $this->x = $x;
-        $this->y = $y;
-        $this->r = $r;
-    }
+/**
+ * Окружность: центр (x, y) и радиус r.
+ */
+final readonly class CircleAndCircleClass
+{
+    /** Погрешность сравнения дробных чисел (корень даёт неточный результат). */
+    private const float EPSILON = 1e-9;
 
-    public function countIntersections($another)
-    {
-        // abs(), min(), max() if $distance > abs(r1-r2)
-        $distance = sqrt(pow($this->x - $another->x, 2) + pow($this->y - $another->y, 2));
-        if ($distance > $this->r + $another->r || $distance < abs($this->r - $another->r)) {
-            return 0;
-        } elseif ($distance == $this->r + $another->r || ($distance == abs($this->r - $another->r) && $distance != 0)) {
-            return 1;
-        } elseif ($distance < $this->r + $another->r && $distance > abs($this->r - $another->r)) {
-            return 2;
-        } elseif ($this->x == $another->x && $this->y == $another->y && $this->r == $another->r) {
-            return -1;
+    public function __construct(
+        public float $x,
+        public float $y,
+        public float $r,
+    ) {
+        if ($r <= 0) {
+            throw new InvalidArgumentException('Радиус должен быть больше нуля');
         }
+    }
+
+    /**
+     * Пусть d — расстояние между центрами:
+     *  - d = 0 и радиусы равны   → окружности совпадают;
+     *  - d > r1 + r2             → одна вне другой, пересечений нет;
+     *  - d < |r1 − r2|           → одна внутри другой, пересечений нет;
+     *  - d = r1 + r2 или |r1 − r2| → касание, одна точка;
+     *  - иначе                   → две точки.
+     */
+    public function countIntersections(self $other): Intersection
+    {
+        $distance = hypot($this->x - $other->x, $this->y - $other->y);
+        $sum = $this->r + $other->r;
+        $difference = abs($this->r - $other->r);
+        $equals = static fn(float $a, float $b): bool => abs($a - $b) < self::EPSILON;
+
+        return match (true) {
+            $equals($distance, 0) && $equals($difference, 0) => Intersection::Infinite,
+            $distance > $sum + self::EPSILON, $distance < $difference - self::EPSILON => Intersection::None,
+            $equals($distance, $sum), $equals($distance, $difference) => Intersection::One,
+            default => Intersection::Two,
+        };
     }
 }
