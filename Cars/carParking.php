@@ -6,11 +6,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
-<script src="assets/jquery-3.2.1.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
+<script src="../assets/jquery-3.2.1.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
 <form action="#" method="post">
     <input class="form-control form-control-lg" type="text" placeholder="7:00" name="time"><br>
 <!--    <input class="form-control form-control-lg" type="text" placeholder="AA0000AM" name="car"><br>-->
@@ -45,7 +45,7 @@ public время заезда(с последнего раза);
 
 }
 -Отбытие, всего парковок: 0:23*/
-include 'DB.php';
+include __DIR__ . '/../DB.php';
 /**
  * если машина стоит на, то выежает,
  * если нет, то заежает и записать время заезда в минутах
