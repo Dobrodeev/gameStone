@@ -1,60 +1,45 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Zver
- * Date: 11.03.2019
- * Time: 20:30
- */
-//
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/Wheel.php';
 
 /**
- * Class PassengerCar
+ * Легковой автомобиль: кузов (цвет, скорость) и колёса класса Wheel.
  */
-class PassengerCar
+final class PassengerCar implements Stringable
 {
-    /**
-     * @var
-     */
-    public $year;
-    /**
-     * @var string
-     */
-    public $color;
-    /**
-     * @var int
-     */
-    public $speed;
-    /**
-     * @var array
-     */
-    public $wheels = array();
+    /** @var list<Wheel> */
+    public readonly array $wheels;
 
-    /**
-     * PassengerCar constructor.
-     * @param  string  $color
-     * @param  int  $speed
-     */
-    public function __construct($color = 'Grey', $speed = 0)
-    {
-        $this->color = $color;
-        $this->speed = $speed;
-        for ($i = 0; $i < 4; ++$i) {
-            $this->wheels[$i] = new Wheel($this);
-        }
+    public private(set) float $speed;
+
+    public function __construct(
+        public string $color = 'Grey',
+        float $speed = 0,
+        int $wheelCount = 4,
+        public ?int $year = null,
+    ) {
+        $this->speed = max($speed, 0);
+        $this->wheels = array_map(fn() => new Wheel($this), range(1, $wheelCount));
     }
 
-    /**
-     * @param $speed
-     */
-    public function accelerate($speed)
+    public function accelerate(float $delta): void
     {
-        $this->speed += $speed;
+        $this->speed = max($this->speed + $delta, 0);
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function slowDown(float $factor): void
+    {
+        $this->speed /= $factor;
+    }
+
+    public function stop(): void
+    {
+        $this->speed = 0;
+    }
+
+    public function __toString(): string
     {
         return "This is {$this->color} car with speed = {$this->speed}!";
     }

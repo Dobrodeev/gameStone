@@ -1,73 +1,37 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Zver
- * Date: 11.03.2019
- * Time: 20:26
- */
 
-//
+declare(strict_types=1);
 
 /**
- * Class Wheel
+ * Колесо автомобиля. Давление влияет на скорость машины-владельца:
+ * 0 бар — машина останавливается, меньше 0.5 бар — скорость падает вдвое,
+ * больше MAX_PRESSURE — колесо лопается (давление 0).
  */
-class Wheel
+final class Wheel
 {
-    /**
-     * @var float
-     */
-    private $pressure;
-    /**
-     * @var int
-     */
-    public $d;
-    /**
-     * @var null
-     */
-    public $owner;
+    public const float MAX_PRESSURE = 5.0;
+    public const float LOW_PRESSURE = 0.5;
 
-    /**
-     * Wheel constructor.
-     * @param  null  $owner
-     * @param  float  $pressure
-     * @param  int  $d
-     */
-    public function __construct($owner = null, $pressure = 2.0, $d = 13)
-    {
+    public private(set) float $pressure;
+    public private(set) bool $burst = false;
+
+    public function __construct(
+        private readonly ?PassengerCar $owner = null,
+        float $pressure = 2.0,
+        public readonly int $diameter = 13,
+    ) {
         $this->pressure = $pressure;
-        $this->d = $d;
-        $this->owner = $owner;
     }
 
-    /**
-     * @return float
-     */
-    public function getPressure()
+    public function setPressure(float $pressure): void
     {
-        return $this->pressure;
-    }
+        $this->burst = $pressure > self::MAX_PRESSURE;
+        $this->pressure = $this->burst ? 0.0 : max($pressure, 0.0);
 
-    /**
-     * @param $pressure
-     */
-    public function setPressure($pressure)
-    {
-        if ($pressure < 0) {
-            $pressure = 0;
-        }
-        if ($pressure > 5) {
-            echo "BABAH!!!<br>";
-            $pressure = 0;
-        }
-        if ($this->owner != null) {
-            if ($pressure == 0) {
-                $this->owner->speed = 0;
-            } else {
-                if ($pressure < 0.5) {
-                    $this->owner->speed /= 2;
-                }
-            }
-        }
-        $this->pressure = $pressure;
+        match (true) {
+            $this->pressure == 0.0 => $this->owner?->stop(),
+            $this->pressure < self::LOW_PRESSURE => $this->owner?->slowDown(2),
+            default => null,
+        };
     }
 }

@@ -1,162 +1,42 @@
 <?php
 
-/**
- * Class Wheel класс колес для автомобиля
- */
-class Wheel
+declare(strict_types=1);
+
+// Постфиксный и префиксный инкремент: $x++ возвращает старое значение, ++$x — новое.
+// Функции post() и pref() повторяют их поведение вручную через передачу по ссылке.
+
+require_once __DIR__ . '/layout.php';
+
+function post(int &$x): int
 {
-    /**
-     * @var float
-     */
-    /**
-     * @var float|int
-     */
-    /**
-     * @var float|int|null
-     */
-    private $pressure,
-        $d,
-        $owner;
+    $old = $x;
+    $x++;
 
-    /**
-     * Wheel constructor.
-     * @param  null  $owner
-     * @param  float  $pressure
-     * @param  int  $d
-     */
-    function __construct($owner = null, $pressure = 2.0, $d = 13)
-    {
-        $this->pressure = $pressure;
-        $this->d = $d;
-        $this->owner = $owner;
-    }
-
-    /**
-     * @return float|int|null
-     */
-    function getPressure()
-    {
-        return $this->pressure;
-    }
-
-    /**
-     * @param $pressure
-     */
-    function setPressure($pressure)
-    {
-        if ($pressure < 0) {
-            $pressure = 0;
-        }
-        if ($pressure > 5) {
-            echo "BABAH!!!<br>";
-            $pressure = 0;
-        }
-        if ($this->owner != null) {
-            if ($pressure == 0) {
-                $this->owner->speed = 0;
-            } else {
-                if ($pressure < 0.5) {
-                    $this->owner->speed /= 2;
-                }
-            }
-        }
-        $this->pressure = $pressure;
-    }
+    return $old;
 }
 
-/**
- * Class Car состоит из кузова и колес класса Wheel
- */
-class Car
+function pref(int &$x): int
 {
-    /**
-     * @var
-     */
-    /**
-     * @var string
-     */
-    /**
-     * @var int|string
-     */
-    /**
-     * количество колесв автомобиле может быть 4, 6, ...
-     * @var int|string
-     */
-    public $year;
-    public $color;
-    public $speed;
-    public $wheels = array();
-
-    /**
-     * Car constructor.
-     * @param  string  $color
-     * @param  int  $speed
-     */
-    function __construct($color = 'Grey', $speed = 0)
-    {
-        $this->color = $color;
-        $this->speed = $speed;
-        for ($i = 0; $i < 4; ++$i) {
-            $this->wheels[$i] = new Wheel($this);
-        }
-    }
-
-    /**
-     * @param $speed
-     */
-    function aacelerate($speed)
-    {
-        $this->speed += $speed;
-    }
-
-    /**
-     * @return string
-     */
-    function __toString()
-    {
-        return "This is {$this->color} car with speed = {$this->speed}!";
-    }
+    return ++$x;
 }
 
-$a = new Car();
-$b = new Car('Green', 120);
-// накачаем во второе колесо 7 бар
-$b->wheels[2]->setPressure(7);
-echo $a."<br>";
-$a->color = 'Red';
-echo $a."<br>";
-echo $b."<br>";
-
-for ($i = 0; $i < 4; ++$i) {
-    echo $b->wheels[$i]->getPressure()."<br>";
-}
-// постфиксная и префиксная записи: сравнение
-function post(&$x)
-{
-    $temp = $x;
-    $x += 1;
-    return $temp;
-}
-
-function pref(&$x)
-{
-    return $x += 1;;
-}
-
-
-$x = 10;
-echo post($x)."<br>";
-echo $x."<br>";
-
-$x = 10;
-echo $x++."<br>";
-echo $x."<br>";
-
-
-$x = 10;
-echo pref($x)."<br>";
-echo $x."<br>";
-
-$x = 10;
-echo ++$x."<br>";
-echo $x."<br>";
+pageHeader('Постфиксный и префиксный инкремент');
+?>
+<table class="table table-bordered" style="width: auto">
+    <tr><th>Выражение (x = 10)</th><th>Вернуло</th><th>x после</th></tr>
+    <?php
+    $cases = [
+        'post($x)' => static fn(int &$x): int => post($x),
+        '$x++' => static fn(int &$x): int => $x++,
+        'pref($x)' => static fn(int &$x): int => pref($x),
+        '++$x' => static fn(int &$x): int => ++$x,
+    ];
+    foreach ($cases as $expression => $increment):
+        $x = 10;
+        $returned = $increment($x);
+        ?>
+        <tr><td><code><?= h($expression) ?></code></td><td><?= $returned ?></td><td><?= $x ?></td></tr>
+    <?php endforeach; ?>
+</table>
+<?php
+pageFooter();
