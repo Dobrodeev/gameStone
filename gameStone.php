@@ -10,7 +10,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <div>
-    <form name="form1" method="post" action="scriptGame.php">
+    <form name="form1" method="post" action="Game/scriptGame.php">
         <h3>Game JuZeFa for webdesign</h3>
         <hr size="1">
         <p>Выбираем вариант:</p>

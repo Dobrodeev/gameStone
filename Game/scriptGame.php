@@ -3,13 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Game result</title>
-	 <link rel="stylesheet" href="assets/style.css">
-	<link rel="stylesheet" href="assets/reset.css">
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	 <link rel="stylesheet" href="../assets/style.css">
+	<link rel="stylesheet" href="../assets/reset.css">
+	<link href="../assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
-	<script src="assets/jquery-3.2.1.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="../assets/jquery-3.2.1.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
 <!--    <div>-->
 <!--        <form name="form1" method="post" action="#">-->
 <!--            <h3>Game JuZeFa for webdesign</h3>-->
@@ -89,7 +89,7 @@
 
         function nextRound()
         {
-            echo '<a href="gameStone.php">Next Round</a>';
+            echo '<a href="../gameStone.php">Next Round</a>';
         }
 
         writeChange();
