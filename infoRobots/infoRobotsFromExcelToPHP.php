@@ -1,7 +1,7 @@
 <?php
         //echo "Наш новый тестовый файл!<br>";
         // Подключаем библиотечный класс
-        include("Classes/PHPExcel.php");
+        include("../Classes/PHPExcel.php");
        
         $data = array(
 	array(
