@@ -25,9 +25,10 @@ echo '<pre>';
 print_r($_POST['number']);
 echo '</pre>';
 
+require_once __DIR__ . '/../Sorts/RecursivClass.php';
 $factorial = new RecursivClass();
 $x = 8;
 echo $x.'! = '.$factorial->factorialRecursic($x).'<br>';
-$factorial->factorialFor(7);
+echo '7! = ' . $factorial->factorialFor(7) . '<br>';
 */
 ?>

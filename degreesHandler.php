@@ -24,6 +24,7 @@ spl_autoload_register(function ($class)
     include $class.'.php';
 }
 );
+require_once __DIR__ . '/Sorts/RecursivClass.php';
 $degreesCel = new RecursivClass();
 //$degreesCel->degreesExchange();
 $degreesCel->degreesExchangeParametrs(13,19,2);
