@@ -1,104 +1,34 @@
 <?php
-/***/
-session_name('test');
-session_start();
-//$_SESSION['count'] = @$_SESSION['count'] + 1;
-//unset($_SESSION['count']);
-//$_SESSION = array();
-//session_destroy();
 
-?>
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
-</head>
-<body>
-<script src="../assets/jquery-3.2.1.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
-<form action="#" method="post">
-    <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg" name="number"><br>
-    <button type="submit" class="btn btn-primary" name="go">Submit</button>
-</form>
-<?php
-/**
- * Created by PhpStorm.
- * User: Zver
- * Date: 01.02.2019
- * Time: 20:24
- */
-include __DIR__ . '/../DB.php';
-echo $_POST['number'].'<br>';
-$number = $_POST['number'];
-if ($number > 0)
-{
-    $query = "INSERT INTO numbers_statistics (number) VALUE ('$number')";
-    $stmt = $pdo->query($query);
-}
-elseif ($number < 0)
-{
-    echo ' Error. $number must be > 0 <br>';
-}
-else
-{
-    echo 'Выводим статистику: <br>';
-    $queryStatistics = "SELECT * FROM numbers_statistics";
-    $queryMIN = "SELECT MIN(number) FROM numbers_statistics";
-    $queryMAX = "SELECT MAX(number) FROM numbers_statistics";
-    $querySUM = "SELECT SUM(number) FROM numbers_statistics";
-    $querySUMaverage = "SELECT SUM(number)/COUNT(number) FROM numbers_statistics";
-    $stmt = $pdo->query($queryStatistics);
-    while ($row = $stmt->fetch())
-    {
-        echo $row['id'].' -> '.$row['number'].'<br>';
-    }
-    $min = $pdo->query($queryMIN)->fetchColumn();
-    echo 'min = '.$min.'<br>';
-    $max = $pdo->query($queryMAX)->fetchColumn();
-    echo 'max = '.$max.'<br>';
-    $Sum = $pdo->query($querySUM)->fetchColumn();
-    echo 'Сумма всех чисел = '.$Sum.'<br>';
-    $SumAverage = $pdo->query($querySUMaverage)->fetchColumn();
-    echo 'Среднее арифметическое чисел = '.$SumAverage.'<br>';
-}
-//$_SESSION['number']
-/**
-if (isset($_POST['go']))
-{
-    $
-    echo $_POST['number'].'<br>';
-    $number = $_POST['number'];
-    function numberAnalysis($number)
-    {
-        $counter = 0;
-        $Summa = 0;
-        $min = $number;
-        $max = $number;
-        if ($number > 0)
-        {
-            $counter ++;
-            $Summa += $number;
+declare(strict_types=1);
 
-        }
-        elseif ($number < 0)
-        {
-            echo 'Error. $number must be > 0. <br>';
-        }
-        else
-        {
-            echo 'Get statistics: <br>';
-        }
-    }
-//    numberAnalysis($number);
-}
- * */
+// Статистика введённых чисел с хранением в базе данных (таблица numbers_statistics).
+// Числа копятся в базе; ввод 0 показывает статистику по всем сохранённым числам.
 
-?>
-<!--<a href="#">Обновить страницу</a>-->
-</body>
-</html>
+require_once __DIR__ . '/NumberStatistics.php';
+
+$title = 'Статистика чисел (база данных)';
+$note = 'Вводите положительные числа по одному. Введите 0, чтобы увидеть статистику по всем сохранённым числам.';
+
+try {
+    require __DIR__ . '/../DB.php'; // создаёт $pdo
+    $store = new PdoStatisticsStore($pdo);
+} catch (PDOException $e) {
+    renderStatisticsPage($title, $note, [
+        'message' => null,
+        'error' => 'Нет подключения к базе данных: ' . $e->getMessage(),
+        'summary' => null,
+    ]);
+    exit;
+}
+
+$result = isset($_POST['go'])
+    ? handleNumberInput($store, (string)($_POST['number'] ?? ''), clearAfterSummary: false)
+    : null;
+
+$list = '';
+if ($result['summary'] ?? null) {
+    $list = '<p>Сохранённые числа: ' . h(implode(', ', array_column($store->numbers(), 'number'))) . '</p>';
+}
+
+renderStatisticsPage($title, $note, $result, $list);
