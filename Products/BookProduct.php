@@ -1,14 +1,25 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dobrodeev
- * Date: 01.08.2018
- * Time: 20:41
- */
 
-class BookProduct
+declare(strict_types=1);
+
+require_once __DIR__ . '/ShopProduct.php';
+
+/** Книга: дополнительно хранит количество страниц. */
+final class BookProduct extends ShopProduct
 {
-    public $name;
-    public $author;
-    public $pages;
+    public function __construct(
+        string $title,
+        string $firstName,
+        string $lastName,
+        float $price,
+        public readonly int $pages,
+    ) {
+        parent::__construct($title, $firstName, $lastName, $price);
+    }
+
+    #[\Override]
+    public function getSummary(): string
+    {
+        return parent::getSummary() . ", страниц: {$this->pages}";
+    }
 }
