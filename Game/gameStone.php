@@ -1,33 +1,38 @@
-<html>
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../assets/reset.css">
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link rel="stylesheet" href="../assets/style.css">
-    <title>Игра ЮЗФ</title>
-</head>
-<body>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
-<div>
-    <form name="form1" method="post" action="scriptGame.php">
-        <h3>Game JuZeFa for webdesign</h3>
-        <hr size="1">
-        <p>Выбираем вариант:</p>
-        <p>
-            <br>
-            <select name=variant size=1>
-                <option value=1>Ножницы</option>
-                <option value=2>Бумага</option>
-                <option value=3 selected>Колодец</option>
-            </select>
-        </p>
-        <br>
-        <p>
-            <input type="submit" value="Отослать форму">
-            &nbsp;&nbsp;&nbsp<input type="reset" value="Очистить форму">
-        </p>
+<?php
+
+declare(strict_types=1);
+
+// Игра «Ножницы, бумага, колодец»: выбор фигуры.
+
+session_start();
+
+require_once __DIR__ . '/layout.php';
+require_once __DIR__ . '/GameMatch.php';
+
+if (isset($_GET['new'])) {
+    GameMatch::reset();
+}
+$match = GameMatch::load();
+
+pageHeader('Ножницы, бумага, колодец');
+?>
+<h3>Ножницы, бумага, колодец</h3>
+<p>Ножницы режут бумагу, бумага накрывает колодец, ножницы падают в колодец.
+    Матч из <?= GameMatch::ROUNDS ?> раундов.</p>
+<?php if ($match->isOver()): ?>
+    <p>Матч закончен. <a href="?new=1">Начать новый</a></p>
+<?php else: ?>
+    <p>Раунд <?= $match->round + 1 ?> из <?= GameMatch::ROUNDS ?>.
+        Счёт: вы <?= $match->userScore ?> — компьютер <?= $match->botScore ?></p>
+    <form method="post" action="scriptGame.php" class="form-inline">
+        <select name="variant" class="form-control">
+            <?php foreach (Figure::cases() as $figure): ?>
+                <option value="<?= $figure->value ?>" <?= $figure === Figure::Well ? 'selected' : '' ?>>
+                    <?= h($figure->label()) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+        <button type="submit" class="btn btn-primary">Сыграть</button>
     </form>
-</div>
-</body>
-</html>
+<?php endif;
+pageFooter();

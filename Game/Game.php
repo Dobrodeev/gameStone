@@ -1,126 +1,105 @@
 <?php
 
-/**
- * @author Valera
- * @copyright 2017
- */
+declare(strict_types=1);
 
-function GenerateMap($height, $width)
+// Случайное блуждание по карте: * — проходимая клетка, 0 — стена, # — игрок.
+// Игрок делает случайный шаг каждый ход; шаг в стену или за край карты пропускается.
+
+require_once __DIR__ . '/layout.php';
+
+enum Direction
 {
-    $arr=array();
-    for($i=0;$i<$height;$i++)
+    case Up;
+    case Down;
+    case Left;
+    case Right;
+
+    /** @return array{int, int} смещение [dx, dy] */
+    public function offset(): array
     {
-        $arr[$i]=array();
-        for($j=0;$j<$width;$j++)
-        {
-            if(rand(0,5)==0)
-            {
-                $arr[$i][$j]="0";
-                continue;
+        return match ($this) {
+            self::Up => [0, -1],
+            self::Down => [0, 1],
+            self::Left => [-1, 0],
+            self::Right => [1, 0],
+        };
+    }
+
+    public static function random(): self
+    {
+        return self::cases()[array_rand(self::cases())];
+    }
+}
+
+final readonly class Map
+{
+    private const string FLOOR = '*';
+    private const string WALL = '0';
+
+    /** @param list<list<string>> $cells */
+    private function __construct(private array $cells)
+    {
+    }
+
+    /** Карта, где каждая клетка — стена с вероятностью 1/6. */
+    public static function generate(int $width, int $height): self
+    {
+        $cells = [];
+        for ($y = 0; $y < $height; $y++) {
+            for ($x = 0; $x < $width; $x++) {
+                $cells[$y][$x] = random_int(0, 5) === 0 ? self::WALL : self::FLOOR;
             }
-            $arr[$i][$j]="*";
         }
+
+        return new self($cells);
     }
-    return $arr;
-}
-function Screen($arr, $x, $y)
-{
-    for($i=0; $i<count($arr); $i++)
+
+    public function width(): int
     {
-        for($j=0;$j<count($arr[$i]);$j++)
-        {
-            if($i==$y && $j==$x)
-            {
-                print("#");
-                continue;
+        return count($this->cells[0]);
+    }
+
+    public function height(): int
+    {
+        return count($this->cells);
+    }
+
+    public function isWalkable(int $x, int $y): bool
+    {
+        return ($this->cells[$y][$x] ?? self::WALL) === self::FLOOR;
+    }
+
+    public function render(int $playerX, int $playerY): string
+    {
+        $rows = [];
+        foreach ($this->cells as $y => $row) {
+            $line = $row;
+            if ($y === $playerY) {
+                $line[$playerX] = '#';
             }
-            print($arr[$i][$j]);
-        }
-        print("<br>");
-    }
-    print("<br><br><br>");
-}
-function GetUserInput()
-{
-    $rand=rand(0,3);
-    switch($rand)
-    {
-        case 0: return "UP";
-        case 1: return "DOWN";
-        case 2: return "LEFT";
-        case 3: return "RIGHT";
-        default: return "";
-    }
-}
-function PlayerInit($w, $h, &$x, &$y)
-{
-    $x = rand(0, $w-1);
-    $y = rand(0, $h-1);
-}
-function IsWalkable($str)
-{
-    switch($str)
-    {
-        case "0":
-        return false;
-
-        default: return true;
-    }
-}
-function IsCanMove($command, &$x, &$y, $map)
-{
-    //bounds
-    if($y==0 && $command=="UP") return false;
-    if($y==9 && $command=="DOWN")return false;
-    if($x==0 && $command=="LEFT") return false;
-    if($x==9 && $command=="RIGHT") return false;
-
-    //walkable
-    $X=$x;
-    $Y=$y;
-    Move($command, $X, $Y);
-    if(!IsWalkable($map[$Y][$X])) return false;
-
-    //all ok
-    return true;
-}
-function Move($command, &$x, &$y)
-{
-        switch($command)
-        {
-            case "UP":
-            $y--;
-            break;
-            case "DOWN":
-            $y++;
-            break;
-            case "LEFT":
-            $x--;
-            break;
-            case "RIGHT":
-            $x++;
-            break;
+            $rows[] = implode('', $line);
         }
 
-}
-function Main()
-{
-    $W = 10;
-    $H = 10;
-    $map = GenerateMap($W,$H);
-    PlayerInit($W, $H, $X, $Y);
-    $totalTime = 45;
-    Screen($map, $X, $Y);
-    for($t =0; $t<$totalTime; $t++)
-    {
-        $userInput = GetUserInput();
-        if(IsCanMove($userInput, $X, $Y, $map))
-        {
-            Move($userInput, $X, $Y);
-        }
-        Screen($map, $X, $Y);
+        return implode("\n", $rows);
     }
 }
-Main();
 
-?>
+$map = Map::generate(10, 10);
+$x = random_int(0, $map->width() - 1);
+$y = random_int(0, $map->height() - 1);
+$moves = 45;
+
+pageHeader('Случайное блуждание по карте');
+echo '<h3>Случайное блуждание по карте</h3><pre>', $map->render($x, $y), '</pre>';
+
+for ($turn = 1; $turn <= $moves; $turn++) {
+    $direction = Direction::random();
+    [$dx, $dy] = $direction->offset();
+    $moved = $map->isWalkable($x + $dx, $y + $dy);
+    if ($moved) {
+        [$x, $y] = [$x + $dx, $y + $dy];
+    }
+    printf('<p>Ход %d: %s%s</p><pre>%s</pre>', $turn, $direction->name, $moved ? '' : ' — нельзя', $map->render($x, $y));
+}
+
+pageFooter();

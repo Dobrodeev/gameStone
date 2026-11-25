@@ -1,142 +1,57 @@
 <?php
 
-/**
- * @author Valera
- * @copyright 2017
- */
-function RandUnitFrom($units)
-{
-    //$units=array("Player1","Player2","Player3","Player4","Player5");
-    //$unit_wins=array(0,0,0,0,0);
-    $index_rand=rand(0,count($units)-1);
-    $rand_player=$units[$index_rand];
-    return $rand_player;
+declare(strict_types=1);
+
+// Турнир «Ножницы, бумага, колодец»: от 4 до 10 игроков, в каждом раунде играют двое случайных.
+// Турнир идёт, пока кто-нибудь не наберёт WINS_TO_FINISH побед.
+
+require_once __DIR__ . '/layout.php';
+require_once __DIR__ . '/Figure.php';
+
+const WINS_TO_FINISH = 7;
+
+/** @var array<string, int> $wins имя игрока => количество побед */
+$wins = [];
+foreach (range(1, random_int(4, 10)) as $n) {
+    $wins["Player{$n}"] = 0;
 }
-function GetNumber($player, $players)
-{
-    for($i=0; $i<count($players); $i++)
-    {
-        if($players[$i]==$player)
-            return $i;
+
+pageHeader('Турнир');
+echo '<h3>Турнир до ', WINS_TO_FINISH, ' побед, игроков: ', count($wins), '</h3>';
+
+$round = 0;
+while (max($wins) < WINS_TO_FINISH) {
+    $round++;
+    [$player1, $player2] = array_rand($wins, 2);
+    $figure1 = Figure::random();
+    $figure2 = Figure::random();
+
+    $result = match ($figure1->against($figure2)) {
+        1 => $player1,
+        -1 => $player2,
+        0 => null,
+    };
+    if ($result !== null) {
+        $wins[$result]++;
     }
-}
-function SaveWin($res,&$unit_wins, $player1, $player2, $players)
-{
-    if($res=="Unit1 win") $unit_wins[GetNumber($player1, $players)]++;
-    elseif($res=="Unit2 win") $unit_wins[GetNumber($player2, $players)]++;
-}
-function ConsoleReadln()
-{
-        switch($x)
-        {
-            case 0:
-            $variant=0;// Ножницы
-            break;
-            case 1:
-            $variant=1;// Бумага
-            break;
-            case 2:
-            $variant=2;// Колодец
-            break;
-        }
-}
-function ConsoleWriteln($unit1)
-{
-        switch($unit1)
-        {
-            case 0:
-            print("Ножницы <br>");// Ножницы
-            break;
-            case 1:
-            print("Бумага <br>");// Бумага
-            break;
-            case 2:
-            print("Колодец <br>");// Колодец
-            break;
-        }
-}
-function RandRes()
-{
-    $unit1=rand(0,2);
-    $unit2=rand(0,2);
-    //print("unit1=".$unit1."<br>");
-    //print("unit2=".$unit2."<br>");\
-    ConsoleWriteln($unit1);
-    ConsoleWriteln($unit2);
-    return array($unit1,$unit2);
-    //list($unit1,$unit2)=RandUsers();
-}
-//RandUsers();
 
-//ConsoleReadln()
-
-//ConsoleWriteln(1,0);
-function CompareUnits($Unit1,$Unit2)
-{
-    if($Unit1==$Unit2) return "Draw";
-    elseif($Unit1==0 && $Unit2==1) return "Unit1 win";
-    elseif($Unit1==0 && $Unit2==2) return "Unit2 win";
-    elseif($Unit1==1 && $Unit2==0) return "Unit2 win";
-    elseif($Unit1==1 && $Unit2==2) return "Unit1 win";
-    elseif($Unit1==2 && $Unit2==0) return "Unit1 win";
-    elseif($Unit1==2 && $Unit2==1) return "Unit2 win";
-    return "no any fjbjfbjhbjhjhb here";
+    printf(
+        '<p><b>Раунд %d</b>: %s (%s) vs %s (%s) — %s</p>',
+        $round,
+        h($player1),
+        h($figure1->label()),
+        h($player2),
+        h($figure2->label()),
+        $result === null ? 'ничья' : 'победил ' . h($result),
+    );
 }
-function IsEndGame($wins, $max_win)
-{
-    foreach($wins as $n)
-        if($n>=$max_win)
-            return true;
 
-    return false;
+arsort($wins);
+echo '<h4>Итог: победитель — ', h(array_key_first($wins)), ' за ', $round, ' раундов</h4>';
+echo '<table class="table table-bordered" style="width: auto"><tr><th>Игрок</th><th>Победы</th></tr>';
+foreach ($wins as $player => $count) {
+    printf('<tr><td>%s</td><td>%d</td></tr>', h($player), $count);
 }
-function ShowStats($wins, $player1, $player2, $players)
-{
-    for($i=0; $i<count($players); $i++)
-    {
-        print($i." ".$wins[$i]." ");
-        $i1 =GetNumber($player1, $players);
-        $i2 =GetNumber($player2, $players);
-        print( (($i==$i1) || ($i==$i2)) ? " *** " : "     ");
-        print("<br>");
-    }
-}
-function Main()
-{
-    $NumberOfPlayers = rand(4, 10);
+echo '</table>';
 
-    //init
-    $players = array();
-    $wins = array();
-    for($i=0; $i<$NumberOfPlayers; $i++)
-    {
-        $players[$i] = "Player".($i+1);
-        $wins[$i] = 0;
-    }
-    $NeedsWins = 7;
-
-    //game
-    $Rounds = 0;
-    do
-    {
-        $Rounds++;
-        print("<br><br>Round".$Rounds."<br>");
-        $player1 = RandUnitFrom($players);
-        $player2;
-        do
-        {
-           $player2 = RandUnitFrom($players);
-        }
-        while($player2==$player1);
-        print($player1."  vs ".$player2."<br>");
-        $u1=RandRes();
-        $res = CompareUnits($u1[0],$u1[1]);
-        SaveWin($res, $wins, $player1, $player2, $players);
-        print($res."<br>");
-        ShowStats($wins, $player1, $player2, $players);
-    }
-    while(!IsEndGame($wins, $NeedsWins));
-}
-Main();
-
-?>
+pageFooter();

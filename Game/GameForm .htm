@@ -1,34 +1,26 @@
-<html>
+<!doctype html>
+<html lang="ru">
 <head>
-	<meta charset="utf-8">
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ножницы, бумага, колодец</title>
     <link rel="stylesheet" href="../assets/reset.css">
-	<link href="../assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<title>Игра ЮЗФ</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 </head>
 <body>
-   <script src="http://code.jquery.com/jquery-latest.js"></script>
-   <script src="../assets/js/bootstrap.min.js"></script>
-	<div>
-		<form name="form1" method="post" action="scriptGame.php">
-			<h3>Game JuZeFa for webdesign</h3>
-			<hr size="1">
-			<p>Выбираем вариант:</p>
-			<p>
-			<br>
-			<select name=variant size=1>
-				<option value=1>Ножницы</option>
-				<option value=2>Бумага</option>
-				<option value=3 selected>Колодец</option>
-			</select>
-			</p>
-			<br>
-		<p>
-		<input type="submit" value="Отослать форму">
-		&nbsp;&nbsp;&nbsp<input type="reset" value="Очистить форму">
-		</p>
-		</form>
-	</div>
+<div class="container">
+    <!-- Статическая версия формы. Основная страница игры, со счётом матча, — gameStone.php -->
+    <h3>Ножницы, бумага, колодец</h3>
+    <form method="post" action="scriptGame.php" class="form-inline">
+        <select name="variant" class="form-control">
+            <option value="1">Ножницы</option>
+            <option value="2">Бумага</option>
+            <option value="3" selected>Колодец</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Сыграть</button>
+    </form>
+</div>
+<script src="../assets/jquery-3.2.1.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
 </body>
-<!--<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>-->
 </html>
