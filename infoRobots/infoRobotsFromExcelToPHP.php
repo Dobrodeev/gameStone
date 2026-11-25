@@ -1,109 +1,87 @@
 <?php
-        //echo "Наш новый тестовый файл!<br>";
-        // Подключаем библиотечный класс
-        include("../Classes/PHPExcel.php");
-       
-        $data = array(
-	array(
-		'id' => 1,
-		'title' => 'bmw',
-		'model' => '323',
-		'price' => 5670
-		 ),
-	array(
-		'id' => 2,
-		'title' => 'bmw',
-		'model' => '525',
-		'price' => 12670
-		 ),
-	array(
-		'id' => 3,
-		'title' => 'audi',
-		'model' => 'A6',
-		'price' => 8570
-		 ),
-	array(
-		'id' => 4,
-		'title' => 'vaz',
-		'model' => '2106',
-		'price' => 800
-		 )
-	);
-        
-        
-        // Определяем массивы стилей:
-        
-         $style_arr = array(
-            'borders'=>array(
-                'outline'=>array(
-                    'style'=> PHPExcel_Style_Border::BORDER_THICK
-                ),
-                'allborders'=>array(
-                    'style'=> PHPExcel_Style_Border::BORDER_THIN,
-                    'color'=>array('rgb'=>'909090')
-                )
-            ),
-            'alignment'=>array(
-                'horizontal'=> PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                'vertical'=>PHPExcel_Style_Alignment::VERTICAL_CENTER
-            ),
-            'font'=>array(
-                'name'=>'Times New Roman',
-                'size'=>14,
-                'italic'=>true
-            )
-        );
-        $style_ok = array(
-          'fill'=>array(
-              'type'=> PHPExcel_Style_Fill::FILL_SOLID,
-              'color'=>array('rgb'=>'33FF33')
-          )  
-        );
-        
-        
-        $objExcel = new PHPExcel();
-        $objExcel->setActiveSheetIndex(0);
-        //$objExcel->createSheet();
-        
-        $active_sheet = $objExcel->getActiveSheet();
-        $active_sheet->setTitle("Test Table");
-        $active_sheet->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
-        $active_sheet->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_PORTRAIT);
-         
-        $active_sheet->mergeCells('A1:D1');
-        
-        $active_sheet->getColumnDimension('A')->setAutoSize();
-        $active_sheet->getRowDimension('1')->setRowHeight(30);
-        
-        $active_sheet->getStyle('C')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);    
-        
-        
-        $active_sheet->setCellValue('A1', 'Наша таблица:');
-        $active_sheet->setCellValue('A2', 'id');
-        $active_sheet->setCellValue('B2', 'title');
-        $active_sheet->setCellValue('C2', 'model');
-        $active_sheet->setCellValue('D2', 'price');
-        
-        $num_row = 3;
-        foreach ($data as $value) 
-        {
-            $active_sheet->setCellValueByColumnAndRow(0, $num_row , $value['id']);
-            $active_sheet->setCellValueByColumnAndRow(1, $num_row , $value['title']);
-            $active_sheet->setCellValueByColumnAndRow(2, $num_row , $value['model']);
-            $active_sheet->setCellValueByColumnAndRow(3, $num_row , $value['price']);
-            //$active_sheet->getStyle('D'.$num_row)->applyFromArray($style_ok);
-            $num_row++;
-        }
-        
-          
-       
-        $active_sheet->getStyle('A1:D'.($num_row-1))->applyFromArray($style_arr);
-        
-        
-        header("Content-Type: application/vnd.ms-excel");
-        header("Content-Disposition: attachment; filename='our_table.xlsx'");
-        
-        $objWriter = PHPExcel_IOFactory::createWriter($objExcel, 'Excel2007');
-        $objWriter->save('php://output');
-        
-        
+
+declare(strict_types=1);
+
+// Пример выгрузки массива PHP в таблицу Excel с помощью PhpSpreadsheet.
+// Перед запуском в папке infoRobots выполнить `composer install`.
+require __DIR__ . '/vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+final readonly class Car
+{
+    public function __construct(
+        public int $id,
+        public string $title,
+        public string $model,
+        public int $price,
+    ) {
+    }
+
+    /** @return list<int|string> */
+    public function toRow(): array
+    {
+        return [$this->id, $this->title, $this->model, $this->price];
+    }
+}
+
+$cars = [
+    new Car(id: 1, title: 'bmw', model: '323', price: 5670),
+    new Car(id: 2, title: 'bmw', model: '525', price: 12670),
+    new Car(id: 3, title: 'audi', model: 'A6', price: 8570),
+    new Car(id: 4, title: 'vaz', model: '2106', price: 800),
+];
+
+$tableStyle = [
+    'borders' => [
+        'outline' => ['borderStyle' => Border::BORDER_THICK],
+        'allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => '909090']],
+    ],
+    'alignment' => [
+        'horizontal' => Alignment::HORIZONTAL_CENTER,
+        'vertical' => Alignment::VERTICAL_CENTER,
+    ],
+    'font' => [
+        'name' => 'Times New Roman',
+        'size' => 14,
+        'italic' => true,
+    ],
+];
+
+$spreadsheet = new Spreadsheet();
+$sheet = $spreadsheet->getActiveSheet();
+$sheet->setTitle('Test Table');
+$sheet->getPageSetup()
+    ->setPaperSize(PageSetup::PAPERSIZE_A4)
+    ->setOrientation(PageSetup::ORIENTATION_PORTRAIT);
+
+$sheet->mergeCells('A1:D1');
+$sheet->getRowDimension(1)->setRowHeight(30);
+$sheet->setCellValue('A1', 'Наша таблица:');
+$sheet->fromArray(['id', 'title', 'model', 'price'], null, 'A2');
+
+// модель храним как текст, чтобы "2106" не превратилось в число
+$sheet->getStyle('C')->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_TEXT);
+
+$row = 3;
+foreach ($cars as $car) {
+    $sheet->fromArray($car->toRow(), null, 'A' . $row, true);
+    $sheet->setCellValueExplicit('C' . $row, $car->model, DataType::TYPE_STRING);
+    $row++;
+}
+
+foreach (['A', 'B', 'C', 'D'] as $column) {
+    $sheet->getColumnDimension($column)->setAutoSize(true);
+}
+$sheet->getStyle('A1:D' . ($row - 1))->applyFromArray($tableStyle);
+
+header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+header('Content-Disposition: attachment; filename="our_table.xlsx"');
+
+(new Xlsx($spreadsheet))->save('php://output');
