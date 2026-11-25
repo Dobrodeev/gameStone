@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Game result</title>
+	<title>Факториал</title>
 	<!-- <link rel="stylesheet" href="../assets/style.css"> -->
 	<link rel="stylesheet" href="../assets/reset.css">
 	<link href="../assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -32,8 +32,8 @@
   </div>  
     -->
     <div class="form-group">  
-        <label for="exampleInputEmail1">Number Factorial!</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="number" mame="number">
+        <label for="exampleInputEmail1">Введите число для вычисления факториала</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="число" name="number">
     </div>  
   <button type="submit" class="btn btn-default" name="go">Submit</button>
 </form>

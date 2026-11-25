@@ -5,30 +5,19 @@
  * Date: 06.08.2018
  * Time: 16:43
  */
-//include 'RecursivClass.php';
 require_once 'factorialForm.php';
-if(isset($_POST['go']))
-{
-    echo '<pre>';
-    print_r($_POST);
-    echo '</pre>';
-}
-spl_autoload_register(function ($className)
-{
-    include __DIR__ . '/../Example/' . $className . '.php';
-});
-$objCardGame = new ExampleClass();
-$objCardGame->cardsGame();
-;
-/**
-echo '<pre>';
-print_r($_POST['number']);
-echo '</pre>';
-
 require_once __DIR__ . '/../Sorts/RecursivClass.php';
-$factorial = new RecursivClass();
-$x = 8;
-echo $x.'! = '.$factorial->factorialRecursic($x).'<br>';
-echo '7! = ' . $factorial->factorialFor(7) . '<br>';
-*/
-?>
+
+if (isset($_POST['go'])) {
+    $number = trim($_POST['number'] ?? '');
+
+    // факториал больше 170! не помещается в float
+    if (!ctype_digit($number) || (int)$number < 1 || (int)$number > 170) {
+        echo '<p style="color: red">Введите целое число от 1 до 170</p>';
+    } else {
+        $n = (int)$number;
+        $factorial = new RecursivClass();
+        echo '<p>Через цикл: ' . $n . '! = ' . $factorial->factorialFor($n) . '</p>';
+        echo '<p>Через рекурсию: ' . $n . '! = ' . $factorial->factorialRecursic($n) . '</p>';
+    }
+}
