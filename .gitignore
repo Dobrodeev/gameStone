@@ -1,7 +1,19 @@
-.idea
-.kdev4
+# IDE и редакторы
+.idea/
+.vs/
+.vscode/
+.kdev4/
 *.kdev4
+
+# Временные файлы
 *.php-tmp
+~$*
+
+# Инструменты
 phpDocumentor.phar
-~$Excel Export.xlsx
-.vs
+vendor/
+
+# Системные файлы
+Thumbs.db
+desktop.ini
+.DS_Store
