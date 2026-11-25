@@ -3,13 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Game result</title>
-	<!-- <link rel="stylesheet" href="assets/style.css"> -->
-	<link rel="stylesheet" href="assets/reset.css">
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<!-- <link rel="stylesheet" href="../assets/style.css"> -->
+	<link rel="stylesheet" href="../assets/reset.css">
+	<link href="../assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
-	<script src="assets/jquery-3.2.1.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="../assets/jquery-3.2.1.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
 <form action="factorial_handler.php" method="post">
   <!--
   <div class="form-group">  

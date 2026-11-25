@@ -15,7 +15,7 @@ if(isset($_POST['go']))
 }
 spl_autoload_register(function ($className)
 {
-    include $className.'.php';
+    include __DIR__ . '/../' . $className . '.php';
 });
 $objCardGame = new ExampleClass();
 $objCardGame->cardsGame();
