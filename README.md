@@ -120,7 +120,7 @@ g, 6, 3
 
 Результаты проверки нужно выгрузить в файл Excel (`.xlsx`) с таблицей из столбцов «№», «Название проверки», «Статус». Статус `OK` и статус `Error` выделяются разными цветами.
 
-Решение: [`infoRobots/infoRobots.php`](infoRobots/infoRobots.php) — форма и проверка, [`infoRobots/infoRobotsExcel.php`](infoRobots/infoRobotsExcel.php) — выгрузка в Excel (библиотека PHPExcel).
+Решение: [`infoRobots/infoRobots.php`](infoRobots/infoRobots.php) — форма и проверка, [`infoRobots/infoRobotsExcel.php`](infoRobots/infoRobotsExcel.php) — выгрузка в Excel (библиотека [PhpSpreadsheet](https://github.com/PHPOffice/PhpSpreadsheet), перед запуском выполнить `composer install` в папке `infoRobots`).
 
 ## Задача 6. Вычисление факториала
 
