@@ -72,9 +72,11 @@ F = 9 / 5 × C + 32
 ## Задача 3. Переворот строки с заданной позиции
 
 Дана строка `abcdefkgsfkgjskhhjkjkhh`.
-Начиная с заданной позиции (например, 4), перевернуть оставшуюся часть строки задом наперёд.
+Перевернуть строку задом наперёд, начиная с символа с заданным номером (нумерация с 1). Символы до этой позиции остаются на месте.
 
-**Результат:** `abcdhhk...e`
+**Пример:** позиция 4 → `abchhkjkjhhksjgkfsgkfed` (первые три символа `abc` на месте, остальное перевёрнуто).
+
+Решение: [`Sorts/TextPerevorot.php`](Sorts/TextPerevorot.php) — форма, [`Sorts/TextPerevorot_handler.php`](Sorts/TextPerevorot_handler.php) — обработчик, функция `reverseFrom()` в [`Sorts/PerevorotArray.php`](Sorts/PerevorotArray.php).
 
 ## Задача 4. Сортировка двумерного массива
 
