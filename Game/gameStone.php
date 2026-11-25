@@ -1,16 +1,16 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="assetst/reset.css">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="../assets/reset.css">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="../assets/style.css">
     <title>Игра ЮЗФ</title>
 </head>
 <body>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
 <div>
-    <form name="form1" method="post" action="Game/scriptGame.php">
+    <form name="form1" method="post" action="scriptGame.php">
         <h3>Game JuZeFa for webdesign</h3>
         <hr size="1">
         <p>Выбираем вариант:</p>

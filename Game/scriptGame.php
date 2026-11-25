@@ -89,7 +89,7 @@
 
         function nextRound()
         {
-            echo '<a href="../gameStone.php">Next Round</a>';
+            echo '<a href="gameStone.php">Next Round</a>';
         }
 
         writeChange();
