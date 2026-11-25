@@ -1,38 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Zver
- * Date: 18.02.2019
- * Time: 20:53
- */
 
-//
+declare(strict_types=1);
 
 /**
- * Class Node
- * узел списка
+ * Узел односвязного списка: значение и ссылка на следующий узел.
+ *
+ * @template T
  */
-class Node
+final class Node
 {
-    /**
-     * @var null
-     * указатеь на следующий элемент списка
-     */
-    public $next = null;
-    /**
-     * @var
-     * значение узла списка
-     */
-    public $data;
-
-    /**
-     * Node constructor.
-     * @param $next
-     * @param $data
-     */
-    public function __construct($next, $data)
-    {
-        $this->next = $next;
-        $this->data = $data;
+    /** @param T $data */
+    public function __construct(
+        public readonly mixed $data,
+        public ?Node $next = null,
+    ) {
     }
 }
