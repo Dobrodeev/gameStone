@@ -29,7 +29,7 @@ class Our_List
      */
     public function push_front($data)
     {
-        include 'List/Node.php';
+        include __DIR__ . '/Node.php';
         $this->start = new Node($this->start, $data);
         $this->count++;
     }

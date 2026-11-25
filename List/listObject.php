@@ -24,7 +24,7 @@
 {
     include '../'.$class.'.php';
 });*/
-include '../List.php';
+include __DIR__ . '/List.php';
 $listObject = new Our_List();
 $listObject->push_front(1991);
 $listObject->push_front(1989);
