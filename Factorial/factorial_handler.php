@@ -17,7 +17,7 @@ if (isset($_POST['go'])) {
     } else {
         $n = (int)$number;
         $factorial = new RecursivClass();
-        echo '<p>Через цикл: ' . $n . '! = ' . $factorial->factorialFor($n) . '</p>';
-        echo '<p>Через рекурсию: ' . $n . '! = ' . $factorial->factorialRecursic($n) . '</p>';
+        echo '<p>Через цикл: ' . $n . '! = ' . $factorial->factorialLoop($n) . '</p>';
+        echo '<p>Через рекурсию: ' . $n . '! = ' . $factorial->factorialRecursive($n) . '</p>';
     }
 }

@@ -1,139 +1,69 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dobrodeev
- * Date: 13.12.2018
- * Time: 11:10
- */
 
-class TaskArrays
+declare(strict_types=1);
+
+/**
+ * Упражнения с одномерным массивом чисел.
+ * Номера элементов считаются с 1.
+ */
+final readonly class TaskArrays
 {
-    public function exercisesArrays()
+    /** @param list<int|float> $numbers */
+    public function __construct(private array $numbers)
     {
-        /** max element */
-        $simpleArray = [9, -13, 26, -3, 19, 29, 3, 27, -20, 18, -17];
-        echo '<pre>';
-        print_r($simpleArray);
-        echo '</pre>';
-//        echo 'max элемент массива: '.min($simpleArray).'<br>';
-        $maximumElement = $simpleArray[0];
-        for ($i = 1; $i < count($simpleArray); $i++) {
-            if ($simpleArray[$i] > $maximumElement) {
-                $maximumElement = $simpleArray[$i];
-            }
+        if ($numbers === []) {
+            throw new InvalidArgumentException('Массив не должен быть пустым');
         }
-        echo 'max элемент массива: '.$maximumElement.'<br>';
-        echo 'min элемент массива: '.min($simpleArray).'<br>';
-        $Summa = 0;
-        for ($i = 0; $i < count($simpleArray); $i++) {
-            if ($simpleArray[$i] > 0) {
-                $Summa += $simpleArray[$i];
-            }
-        }
-        echo 'Сумма положительных элементов массива: '.$Summa.'<br>';
-        $Summa = 0;
-        for ($i = 0; $i < count($simpleArray); $i++) {
-            if ($simpleArray[$i] < 0) {
-                $Summa += $simpleArray[$i];
-            }
-        }
-        echo 'Сумма отрицательных элементов массива: '.$Summa.'<br>';
-        $Proizvedenie = 1;
-        for ($i = 0; $i < sizeof($simpleArray); $i++) {
-            if ($simpleArray[$i] > 0) {
-                $Proizvedenie *= $simpleArray[$i];
-            }
-        }
-        echo 'Произведение положительных элементов массива: '.$Proizvedenie.'<br>';
-        $Proizvedenie = 1;
-        for ($i = 0; $i < sizeof($simpleArray); $i++) {
-            if ($simpleArray[$i] < 0) {
-                $Proizvedenie *= $simpleArray[$i];
-            }
-        }
-        echo 'Произведение отрицательных элементов массива: '.$Proizvedenie.'<br>';
-        echo 'элементы массива, которые > 5:<br>';
-        for ($i = 0; $i < sizeof($simpleArray); $i++) {
-            if ($simpleArray[$i] > 5) {
-                echo $simpleArray[$i].' ';
-            }
-        }
-        echo '<br>';
-        echo 'Вторая половина массива:<br>';
-        for ($i = (int) (count($simpleArray) / 2); $i < sizeof($simpleArray); $i++) // (int) приведение к целому
-        {
-            echo $simpleArray[$i].' ';
-        }
-        echo '<br>Количество положительных элементов массива:<br>';
-        $num = 0;
-        for ($i = 0; $i < count($simpleArray); $i++) {
-            if ($simpleArray[$i] > 0) {
-                $num++;
-            }
-        }
-        echo 'Всего '.$num.' положительных элементов<br>';
-        $num = 0;
-        for ($i = 0; $i < count($simpleArray); $i++) {
-            if ($simpleArray[$i] < 0) {
-                $num++;
-            }
-        }
-        echo 'Всего '.$num.' отрицательных элементов<br>';
-        $Proizvedenie = 1;
-        for ($i = 0; $i < sizeof($simpleArray); $i++) {
-            if ($simpleArray[$i] > 0) {
-                $Proizvedenie *= $i;
-            }
-        }
-        echo 'Произведение положительных номеров элементов массива: '.$Proizvedenie.'<br>';
-        $Proizvedenie = 1;
-        for ($i = 0; $i < sizeof($simpleArray); $i++) {
-            if ($simpleArray[$i] < 0) {
-                $Proizvedenie *= $i;
-            }
-        }
-        echo 'Произведение отрицательных номеров элементов массива: '.$Proizvedenie.'<br>';
-        $minElement = min($simpleArray);
-        for ($i = 0; $i < count($simpleArray); $i++) {
-            if ($simpleArray[$i] == $minElement) {
-//                echo 'Номер min элемента: '.key($simpleArray).'<br>';
-                echo 'Номер min элемента: '.$i.'<br>';
-            }
-        }
-        /** обходимся без min() */
-        $minimumElement = $simpleArray[0];
-        $minimumIndex = 0;
-        for ($i = 1; $i < count($simpleArray); $i++) {
-            if ($simpleArray[$i] < $minimumElement) {
-                $minimumElement = $simpleArray[$i];
-                $minimumIndex = $i;
-            }
-        }
-        $maxElement = max($simpleArray);
-        for ($i = 0; $i < count($simpleArray); $i++) {
-            if ($simpleArray[$i] == $maxElement) {
-                echo 'Номер max элемента: '.$i.'<br>';
-            }
-        }
-        /**
-         * Средрее арифметическое элементов массива
-         */
-        $avgSumma = 0;
-        for ($i = 0; $i < count($simpleArray); $i++) {
-            $avgSumma += abs($simpleArray[$i]);
-        }
-        echo 'Среднее арифметическое: '.$avgSumma / count($simpleArray).'<br>';
-        echo 'Элементы которые < 10<br>';
-        for ($i = 0; $i < count($simpleArray); $i++) {
-            if ($simpleArray[$i] < 10) {
-                echo $simpleArray[$i].' ';
-            }
-        }
-        echo '<br>Элементы которые 0< x <6<br>';
-        for ($i = 0; $i < count($simpleArray); $i++) {
-            if ($simpleArray[$i] > 0 && $simpleArray[$i] < 6) {
-                echo $simpleArray[$i].' ';
-            }
-        }
+    }
+
+    /**
+     * Все результаты упражнений: название => значение.
+     *
+     * @return array<string, int|float|string>
+     */
+    public function exercises(): array
+    {
+        $positive = $this->filter(static fn($n) => $n > 0);
+        $negative = $this->filter(static fn($n) => $n < 0);
+        $min = min($this->numbers);
+        $max = max($this->numbers);
+
+        return [
+            'Максимальный элемент' => $max,
+            'Минимальный элемент' => $min,
+            'Номер максимального элемента' => $this->positionsOf($max),
+            'Номер минимального элемента' => $this->positionsOf($min),
+            'Сумма положительных элементов' => array_sum($positive),
+            'Сумма отрицательных элементов' => array_sum($negative),
+            'Произведение положительных элементов' => array_product($positive),
+            'Произведение отрицательных элементов' => array_product($negative),
+            'Количество положительных элементов' => count($positive),
+            'Количество отрицательных элементов' => count($negative),
+            'Произведение номеров положительных элементов' => array_product(array_keys($positive)),
+            'Произведение номеров отрицательных элементов' => array_product(array_keys($negative)),
+            'Среднее арифметическое' => round(array_sum($this->numbers) / count($this->numbers), 2),
+            'Элементы больше 5' => $this->join(static fn($n) => $n > 5),
+            'Элементы меньше 10' => $this->join(static fn($n) => $n < 10),
+            'Элементы 0 < x < 6' => $this->join(static fn($n) => $n > 0 && $n < 6),
+            'Вторая половина массива' => implode(' ', array_slice($this->numbers, intdiv(count($this->numbers), 2))),
+        ];
+    }
+
+    /** Элементы, подходящие под условие, с ключами — номерами элементов (с 1). */
+    private function filter(callable $condition): array
+    {
+        $numbered = array_combine(range(1, count($this->numbers)), $this->numbers);
+
+        return array_filter($numbered, $condition);
+    }
+
+    private function join(callable $condition): string
+    {
+        return implode(' ', $this->filter($condition));
+    }
+
+    private function positionsOf(int|float $value): string
+    {
+        return implode(', ', array_keys($this->filter(static fn($n) => $n === $value)));
     }
 }

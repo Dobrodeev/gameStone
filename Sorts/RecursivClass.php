@@ -1,80 +1,59 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dobrodeev
- * Date: 06.08.2018
- * Time: 16:35
- */
 
-//
+declare(strict_types=1);
 
 /**
- * Class RecursivClass
+ * Факториал (циклом и рекурсией) и перевод градусов Цельсия в Фаренгейты.
  */
-class RecursivClass
+final class RecursivClass
 {
-    /**
-     * @param $number
-     * @return float|int
-     */
-    public function factorialRecursic($number)
+    /** n! через рекурсию. */
+    public function factorialRecursive(int $n): int|float
     {
-        if ($number == 1) {
-            return 1;
-        } else {
-            return ($number * $this->factorialRecursic($number - 1));
-        }
+        $this->assertNotNegative($n);
+
+        return $n <= 1 ? 1 : $n * $this->factorialRecursive($n - 1);
     }
 
-    /**
-     * @param $number
-     * @return int
-     */
-    public function factorialFor($number)
+    /** n! через цикл. */
+    public function factorialLoop(int $n): int|float
     {
+        $this->assertNotNegative($n);
+
         $factorial = 1;
-        for ($i = 1; $i <= $number; $i++) {
+        for ($i = 2; $i <= $n; $i++) {
             $factorial *= $i;
         }
-//        echo $number.'! = '.$factorial.'<br>';
+
         return $factorial;
     }
 
-    /**
-     * Degrees Celsius Degrees Fahrenheit
-     * F = 9 / 5 x C + 32
-     */
-    public function degreesExchange()
+    /** F = 9 / 5 × C + 32 */
+    public static function celsiusToFahrenheit(float $celsius): float
     {
-        $Fahrenheit = 0;
-        $j = 0;
-        echo '<b>Exchange Deegrees Celsius to Fahrengeit</b><br>';
-        for ($i = 0; $i <= 30; $i++) {
-            $Fahrenheit = 9 / 5 * $j + 32;
-            echo $j.' Celsius -> '.$Fahrenheit.' F<br>';
-            $j += 10;
-        }
+        return 9 / 5 * $celsius + 32;
     }
 
-
     /**
-     * Degrees Celsius Degrees Fahrenheit with parametrs
-     * @param $start
-     * @param $step
-     * @param $num_rows
+     * Таблица перевода: $rows строк, начиная с $start, с шагом $step.
+     *
+     * @return array<int, array{celsius: float, fahrenheit: float}>
      */
-    public function degreesExchangeParametrs($start, $step, $num_rows)
+    public function degreesTable(float $start, float $step, int $rows): array
     {
-//        $Fahrenheit = 0;
-        echo "<b>Exchange Deegrees Celsius to Fahrengeit with step $step</b><br>";
-        echo '<table border="1">';
-        echo '<tr><th>Цельсий </th><th>Фаренгейт</th></tr>';
-        for ($C = $start; $C < $start + $step * $num_rows; $C += $step) {
-//            $Fahrenheit = 9 / 5 * $start + 32;
-//            echo '<tr><td>'.$start.' Celsius </td><td>'.$Fahrenheit.' F</td></tr>';
-//            $start += $step;
-            echo '<tr><td>'.$C.' Celsius </td><td>'.(9 / 5 * $C + 32).' F</td></tr>';
+        $table = [];
+        for ($i = 0; $i < $rows; $i++) {
+            $celsius = $start + $step * $i;
+            $table[] = ['celsius' => $celsius, 'fahrenheit' => self::celsiusToFahrenheit($celsius)];
         }
-        echo '</table>';
+
+        return $table;
+    }
+
+    private function assertNotNegative(int $n): void
+    {
+        if ($n < 0) {
+            throw new InvalidArgumentException('Факториал определён только для n >= 0');
+        }
     }
 }

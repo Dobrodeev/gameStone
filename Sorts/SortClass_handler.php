@@ -1,68 +1,67 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sort array</title>
-    <link rel="stylesheet" href="../assets/reset.css">
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
-</head>
-<body>
-<script src="../assets/jquery-3.2.1.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
 <?php
-/**
- * Created by PhpStorm.
- * User: dobrodeev
- * Date: 10.08.2018
- * Time: 22:00
- */
-spl_autoload_register(function ($className) {
-    include $className.'.php';
-});
-//include 'sorts.php';
-$objectSort = new SortClass();
-//$objectSort->our_sort();
-$countElements = 900;
-echo '<span style="color: #005cbf">После сортировки '.$countElements.' элементов массива: </span><br>';
-//$objectSort->print_arr();
-$array = $objectSort->randomArray($countElements);
-/*echo '<pre>';
-print_r($array);
-echo '</pre>';*/
-$mtime = microtime(true);
-$objectSort->bubbleSort($array);
-printf("Время операции сортировки bubbletSort() <span style='color: #007bff'>%f милисекунд. </span>",
-    microtime(true) - $mtime);
-echo 'microtime(): '.microtime(true).'<br>';
-//$objectSort->print_arr($array);
-shuffle($array);
-$mtime = microtime(true);
-$objectSort->caseSort($array);
-printf("Время операции сортировки caseSort() <span style='color: #007bff'>%f милисекунд. </span>",
-    microtime(true) - $mtime);
-echo 'microtime(): '.microtime(true).'<br>';
-shuffle($array);
-$mtime = microtime(true);
-$objectSort->insertSort($array);
-printf("Время операции сортировки insertSort() <span style='color: #007bff'>%f милисекунд. </span>",
-    microtime(true) - $mtime);
-echo 'microtime(): '.microtime(true).'<br>';
-shuffle($array);
-$mtime = microtime(true);
-$objectSort->qsort($array, 0, count($array) - 1);
-printf("Время операции сортировки quickSort() <span style='color: #007bff'>%f милисекунд. </span>",
-    microtime(true) - $mtime);
-echo 'microtime(): '.microtime(true).'<br>';
-//$objectSort->print_arr($array);
-//$objectSort->caseSort($array);
-//$objectSort->insertSort($array);
 
-//$objectSort->insertSort()
+declare(strict_types=1);
 
-//$objectSort->print_arr($array);
+// Задача 4: сортировка массива из sort.php + сравнение скорости алгоритмов сортировки.
+
+require_once __DIR__ . '/layout.php';
+require_once __DIR__ . '/SortClass.php';
+
+/** @param list<array{string, int, int}> $rows */
+function printRows(array $rows): void
+{
+    echo '<table class="table table-condensed"><tr><th>[0]</th><th>[1]</th><th>[2]</th><th>[1] + [2]</th></tr>';
+    foreach ($rows as [$letter, $a, $b]) {
+        printf('<tr><td>%s</td><td>%d</td><td>%d</td><td>%d</td></tr>', h($letter), $a, $b, $a + $b);
+    }
+    echo '</table>';
+}
+
+function isSorted(array $items, callable $cmp): bool
+{
+    for ($i = 1, $n = count($items); $i < $n; $i++) {
+        if ($cmp($items[$i - 1], $items[$i]) > 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+$rows = require __DIR__ . '/sort.php';
+$sorted = SortClass::sortTask($rows);
+
+$algorithms = [
+    'Пузырьком' => SortClass::bubbleSort(...),
+    'Выбором' => SortClass::selectionSort(...),
+    'Вставками' => SortClass::insertionSort(...),
+    'Быстрая (Хоара)' => SortClass::quickSort(...),
+];
+
+$benchmarkSize = 900;
+$randomRows = SortClass::randomRows($benchmarkSize);
+
+pageHeader('Сортировка двумерного массива');
 ?>
-</body>
-</html>
+<p>Пример из условия:</p>
+<?php printRows(SortClass::sortTask([['g', 6, 3], ['f', 8, 6], ['a', 5, 3], ['f', 2, 5]])); ?>
+
+<h4>Скорость алгоритмов на <?= $benchmarkSize ?> случайных строках</h4>
+<table class="table table-bordered">
+    <tr><th>Алгоритм</th><th>Время, мс</th><th>Отсортировано верно</th></tr>
+    <?php foreach ($algorithms as $name => $sort):
+        $time = hrtime(true);
+        $result = $sort($randomRows, SortClass::compareTaskRows(...));
+        $ms = (hrtime(true) - $time) / 1e6;
+        ?>
+        <tr>
+            <td><?= h($name) ?></td>
+            <td><?= number_format($ms, 2) ?></td>
+            <td><?= isSorted($result, SortClass::compareTaskRows(...)) ? 'да' : '<b class="text-danger">нет</b>' ?></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+<h4>Массив из sort.php после сортировки (<?= count($sorted) ?> строк)</h4>
+<?php printRows($sorted);
+pageFooter();

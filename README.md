@@ -137,4 +137,4 @@ n! = 1 × 2 × 3 × … × n
 
 **Пример:** `7! = 5040`, `8! = 40320`.
 
-Решение: [`Factorial/factorialForm.php`](Factorial/factorialForm.php) — форма ввода, [`Factorial/factorial_handler.php`](Factorial/factorial_handler.php) — обработчик, сами вычисления — методы `factorialFor()` и `factorialRecursic()` в [`Sorts/RecursivClass.php`](Sorts/RecursivClass.php).
+Решение: [`Factorial/factorialForm.php`](Factorial/factorialForm.php) — форма ввода, [`Factorial/factorial_handler.php`](Factorial/factorial_handler.php) — обработчик, сами вычисления — методы `factorialLoop()` и `factorialRecursive()` в [`Sorts/RecursivClass.php`](Sorts/RecursivClass.php).

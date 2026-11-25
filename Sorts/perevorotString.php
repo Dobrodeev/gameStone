@@ -1,35 +1,27 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <!--    <link rel="stylesheet" href="../assets/reset.css">-->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
-</head>
-<body>
-<script src="../assets/jquery-3.2.1.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
 <?php
-/**
- * Created by PhpStorm.
- * User: Zver
- * Date: 17.01.2019
- * Time: 12:49
- */
-spl_autoload_register(function ($class) {
-    include $class . '.php';
-});
-$object = new PerevorotArray();
-$object->perevorotTexta('В ролях: Chad White, Ember Stone, Erik Everhard, James Deen, Kasey Warner, Tegan Riley, Willow Hayes, Xander Corvus');
-echo 'Example <br>';
-//$exampleArray = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597];
-$string = 'Описание: These girls can\'t wait to show off their hairy bushes! Tegan Riley, Kasey Warner, Willow Hayes, and Ember Stone are here, and they\'re about to get into some sexually hairy situations. Let these beautiful ladies show you why it\'s so sexy to have hair down there!';
-$index = 13;
-$save = $object->perevorotString($string, $index);
-echo $save . '<br>';
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/layout.php';
+require_once __DIR__ . '/PerevorotArray.php';
+
+$text = 'Регистр букв: Hello World, привет мир';
+$variants = PerevorotArray::caseVariants($text);
+
+pageHeader('Упражнения со строками');
 ?>
-</body>
-</html>
+<table class="table table-bordered">
+    <tr><td>Исходный текст</td><td><?= h($variants['original']) ?></td></tr>
+    <tr><td>Заглавными буквами</td><td><?= h($variants['upper']) ?></td></tr>
+    <tr><td>Строчными буквами</td><td><?= h($variants['lower']) ?></td></tr>
+    <tr><td>С большой буквы</td><td><?= h($variants['ucfirst']) ?></td></tr>
+    <tr><td>Слова</td><td><?= h(implode(' | ', $variants['words'])) ?></td></tr>
+    <tr><td>Сумма 150 первых членов гармонического ряда</td><td><?= round(PerevorotArray::harmonicSum(150), 6) ?></td></tr>
+    <tr><td>17 первых чисел Фибоначчи</td><td><?= implode(' ', PerevorotArray::fibonacci(17)) ?></td></tr>
+</table>
+
+<h4>Переворот строки начиная с 13-го символа</h4>
+<?php $sample = 'Обычно уведомления — это короткие информационные сообщения'; ?>
+<p>Было: <?= h($sample) ?><br>Стало: <?= h(PerevorotArray::reverseFrom($sample, 13)) ?></p>
+<?php
+pageFooter();

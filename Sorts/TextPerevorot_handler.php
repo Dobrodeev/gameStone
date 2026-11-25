@@ -1,13 +1,24 @@
 <?php
-/*echo '<pre>';
-print_r($_POST);
-echo '</pre>';*/
-$text = $_POST['text'];
-$index = $_POST['index'];
-function revolutionString($text, $index)
-{
-    return substr($text, 0, $index - 1).strrev(substr($text, $index - 1));
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/layout.php';
+require_once __DIR__ . '/PerevorotArray.php';
+
+$text = (string)($_POST['text'] ?? '');
+$position = filter_var($_POST['position'] ?? null, FILTER_VALIDATE_INT);
+
+pageHeader('Переворот строки с заданной позиции');
+
+try {
+    if (!is_int($position)) {
+        throw new InvalidArgumentException('Номер символа должен быть целым числом');
+    }
+    $result = PerevorotArray::reverseFrom($text, $position);
+    echo '<p>Было: ', h($text), '<br>Стало: ', h($result), '</p>';
+} catch (InvalidArgumentException $e) {
+    echo '<p class="text-danger">', h($e->getMessage()), '</p>';
 }
 
-echo '-Было: '.$text.'<br>';
-echo 'Стало: '.revolutionString($text, $index).'<br>';
+echo '<a href="TextPerevorot.php">Ещё раз</a>';
+pageFooter();

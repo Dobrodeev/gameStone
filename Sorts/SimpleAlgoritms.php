@@ -1,406 +1,187 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Zver
- * Date: 23.01.2019
- * Time: 22:29
- */
 
-//
+declare(strict_types=1);
+
+require_once __DIR__ . '/RecursivClass.php';
+
+enum Month: int
+{
+    case January = 1;
+    case February = 2;
+    case March = 3;
+    case April = 4;
+    case May = 5;
+    case June = 6;
+    case July = 7;
+    case August = 8;
+    case September = 9;
+    case October = 10;
+    case November = 11;
+    case December = 12;
+}
 
 /**
- * Class SimpleAlgoritms
+ * Простые алгоритмические задачи. Методы возвращают данные, вывод — на странице SimpleAlgoritmsAnd.php.
  */
-class SimpleAlgoritms
+final class SimpleAlgoritms
 {
     /**
+     * Задача 1, вариант 1: числа от A до B, каждое повторено столько раз, каково его значение.
+     * (2, 5) → ['22', '333', '4444', '55555']
      *
+     * @return list<string>
      */
-    public function cvadrarickNumbers()
+    public static function repeatedNumbers(int $a, int $b): array
     {
-        $array = [];
-        echo '<table>';
-        for ($i = 0; $i < 9; $i++) {
-            echo '<tr>';
-            for ($j = 0; $j < 9; $j++) {
-                echo '<td>'.$array[$i][$j] = (9 * $i + $j + 1).'</td>';
-            }
-            echo '</tr>';
-        }
-        echo '</table>';
-        for ($i = 0; $i < 9; $i++) {
-            for ($j = 0; $j < 9; $j++) {
-                if ($j > $i) {
-                    $temp = $array[$i][$j];
-                    $array[$i][$j] = $array[$j][$i];
-                    $array[$j][$i] = $temp;
+        self::assertRange($a, $b);
+
+        return array_map(static fn(int $n): string => str_repeat((string)$n, $n), range($a, $b));
+    }
+
+    /**
+     * Задача 1, вариант 2: строка номер k (k = 1..B) содержит числа от max(A, k) до B.
+     * (2, 5) → ['2345', '2345', '345', '45', '5']
+     *
+     * @return list<string>
+     */
+    public static function numberPyramid(int $a, int $b): array
+    {
+        self::assertRange($a, $b);
+
+        return array_map(static fn(int $k): string => implode('', range(max($a, $k), $b)), range(1, $b));
+    }
+
+    /**
+     * Квадратная матрица n×n, заполненная числами 1..n² по строкам.
+     *
+     * @return list<list<int>>
+     */
+    public static function matrix(int $n): array
+    {
+        return array_chunk(range(1, $n * $n), $n);
+    }
+
+    /**
+     * Транспонирование: строки становятся столбцами.
+     *
+     * @param list<list<int>> $matrix
+     * @return list<list<int>>
+     */
+    public static function transpose(array $matrix): array
+    {
+        return array_map(null, ...$matrix);
+    }
+
+    /**
+     * Чётные столбцы остаются как есть, нечётные (считая с 0) переворачиваются сверху вниз — «змейка».
+     *
+     * @param list<list<int>> $matrix
+     * @return list<list<int>>
+     */
+    public static function snakeColumns(array $matrix): array
+    {
+        $n = count($matrix);
+        $result = $matrix;
+        foreach ($matrix as $i => $row) {
+            foreach ($row as $j => $value) {
+                if ($j % 2 === 1) {
+                    $result[$i][$j] = $matrix[$n - 1 - $i][$j];
                 }
             }
         }
-        echo '<hr>';
-        echo '<table>';
-        for ($i = 0; $i < 9; $i++) {
-            echo '<tr>';
-            for ($j = 0; $j < 9; $j++) {
-                echo '<td>'.$array[$i][$j].'</td>';
-            }
-            echo '</tr>';
-        }
-        echo '</table>';
+
+        return $result;
     }
-// $a[$i][$j]=$a[$j][$i]
 
-
-    /** Pyramida
-     * 2345
-     * 2345
-     * 345
-     * 45
-     * 5
-     */
-//
     /**
+     * Квадрат n×n из нулей, на обеих диагоналях — X (центр нечётного квадрата остаётся 0).
      *
+     * @return list<string>
      */
-    public function pyramidaDown()
+    public static function diagonalCross(int $n): array
     {
-        $a = 3;
-        $b = 6;
-
-        for ($j = 0; $j < $a; $j++) {
-            for ($i = $a; $i <= $b; $i++) {
-                echo $i;
+        $rows = [];
+        for ($i = 0; $i < $n; $i++) {
+            $row = '';
+            for ($j = 0; $j < $n; $j++) {
+                $row .= (($i === $j) xor ($j === $n - 1 - $i)) ? 'X' : '0';
             }
-            echo '<br/>';
+            $rows[] = $row;
         }
 
-        for ($j = $a + 1; $j <= $b; $j++) {
-            for ($i = $a; $i <= $b; $i++) {
-                if ($i < $j) {
-                    echo '0';
-                } else {
-                    echo $i;
-                }
-            }
-
-            echo '<br/>';
-        }
+        return $rows;
     }
 
     /**
-     * @param $N
+     * S = 1 + x²/2! + x⁴/4! + ... + x^(2n)/(2n)! (ряд Тейлора для ch x).
+     * Факториал не пересчитывается заново, а накапливается от члена к члену.
      */
-    public function diagonalMatrica($N)
+    public static function evenPowerSeries(float $x, int $n): float
     {
-        // $N - размер квадрата
-        $N = 15;
-        for ($i = 0; $i < $N; $i++) {
-            for ($j = 0; $j < $N; $j++) {
-//        if (($i == $j || $j == $N - 1 -$i) && !($i == $j && $j == $N - 1 -$i))
-                if ($i == $j ^ $j == $N - 1 - $i) {
-                    echo 'X';
-                } else {
-                    echo '0';
-                }
-            }
-            echo '<br>';
-        }
-    }
-
-    /**
-     *
-     */
-    public function gameIn15()
-    {
-        $array = array(
-            array(1, 2, 3, 4),
-            array(5, 6, 7, 8),
-            array(9, 10, 11, 12),
-            array(13, 14, 15, 16)
-        );
-        foreach ($array as $item) {
-            foreach ($item as $value) {
-                echo $value.' ';
-            }
-            echo '<br>';
-        }
-    }
-
-    /**
-     * @param $n
-     * @return float|int
-     */
-    public function recFactorial($n)
-    {
-        if ($n < 0) {
-            return 0;
-        }
-        if ($n == 0) {
-            return 1;
-        }
-        return $n * recFactorial($n - 1);
-    }
-
-    /**
-     * @param $n
-     * @return float|int
-     */
-    public function factorial($n)
-    {
-        if ($n < 0) {
-            return 0;
-        }
-        if ($n == 0) {
-            return 1;
-        }
-        $f = 1;
-
+        $sum = 1.0;
+        $term = 1.0;
         for ($i = 1; $i <= $n; $i++) {
-            $f = $f * $i;
+            $term *= $x * $x / ((2 * $i - 1) * (2 * $i));
+            $sum += $term;
         }
 
-        return $f;
+        return $sum;
     }
 
-    /** S = 1 + x^2/2! + x^4/4! + ...+ x^n/n!
-     * n<N, x<R
-     * n & x задаются через адресную строку методом GET*/
-    public function exponenta()
+    /** Максимум без max(). */
+    public static function maxElement(array $numbers): int|float
     {
-        $n = $_GET['n'];
-        $x = $_GET['x'];
-        echo $n.'<br>';
-        echo $x.'<br>';
-        $i = 1;
-        $exponenta = 1;
-        while ($i <= $n) {
-            $exponenta += pow($x, 2 * $i) / (recFactorial(2 * $i));
-            $i++;
-        }
+        return array_reduce($numbers, static fn($carry, $n) => $carry === null || $n > $carry ? $n : $carry)
+            ?? throw new InvalidArgumentException('Пустой массив');
+    }
 
-        echo 'exp('.$x.')='.$exponenta.'<br>';
-        echo ' при n='.$n.'<br>';
-        //echo recFactorial(5).'<br>';
-        /** Более оптимальный просчет суммы ряда */
+    /** Минимум без min(). */
+    public static function minElement(array $numbers): int|float
+    {
+        return array_reduce($numbers, static fn($carry, $n) => $carry === null || $n < $carry ? $n : $carry)
+            ?? throw new InvalidArgumentException('Пустой массив');
+    }
 
-        $n = 20;
-        $x = 5.3;
-
-        $sum = 1;
-        $fact = 1;
-        for ($i = 2; $i <= 2 * $n; $i += 2) {
-            for ($j = ($i - 1); $j <= $i; $j++) {
-                $fact *= $j;
-            }
-            $sum += pow($x, $i) / ($fact);
-        }
-        echo $sum;
+    /** Есть ли среди трёх чисел хотя бы два чётных. */
+    public static function hasTwoEven(int $a, int $b, int $c): bool
+    {
+        return count(array_filter([$a, $b, $c], static fn(int $n): bool => $n % 2 === 0)) >= 2;
     }
 
     /**
-     * @param $text
-     * @param $index
-     * @return string
+     * Задача про дату. Пользователь вводит строку ДДММГГ, например 240398.
+     * Если ГГ >= 30, это 19ГГ, иначе 20ГГ.
+     * Возвращает null, если дата некорректна (учитываются високосные годы).
      */
-    public function perevorotString($text, $index)
+    public static function parseDate(string $value): ?DateTimeImmutable
     {
-//        echo $text.'<br>';
-        //    $first = substr($text, 0, $index - 1);
-        //    $temp = substr($text, $index - 1);
-        //    $perevorot = strrev($temp);
-        //    $result = $first.$perevorot;
-        //    echo $result;
-        return substr($text, 0, $index - 1).strrev(substr($text, $index - 1));
+        if (!preg_match('/^(\d{2})(\d{2})(\d{2})$/', $value, $m)) {
+            return null;
+        }
+        [, $day, $month, $year] = array_map(intval(...), $m);
+        $year += $year >= 30 ? 1900 : 2000;
+
+        return checkdate($month, $day, $year)
+            ? new DateTimeImmutable(sprintf('%04d-%02d-%02d', $year, $month, $day))
+            : null;
     }
 
-    /**
-     * @param  array  $arr
-     * @return mixed
-     */
-    public function maxElementOfArray(array $arr)
+    /** 14.03.2019 */
+    public static function formatNumeric(DateTimeImmutable $date): string
     {
-        $array = [];
-        $array = $arr;
-        $temp = $array[0];
-        for ($i = 0; $i < count($array) - 1; $i++) {
-            if ($array[$i + 1] > $temp) {
-                $temp = $array[$i + 1];
-            }
-        }
-        return $temp;
+        return $date->format('d.m.Y');
     }
 
-    /**
-     * @param  array  $arr
-     * @return mixed
-     */
-    public function minElement(array $arr)
+    /** 14 March 2019 */
+    public static function formatWithMonthName(DateTimeImmutable $date): string
     {
-        $min = $arr[0];
-        for ($i = 1; $i < count($arr) - 1; $i++) {
-            if ($arr[$i] < $min) {
-                $min = $arr[$i];
-            }
-        }
-        return $min;
+        return $date->format('d') . ' ' . Month::from((int)$date->format('n'))->name . ' ' . $date->format('Y');
     }
 
-    /**
-     * @param $arr
-     */
-    public function puzurSort($arr)
+    private static function assertRange(int $a, int $b): void
     {
-        echo 'До сортировки: <br>';
-        foreach ($arr as $value) {
-            echo $value.' ';
+        if ($a < 1 || $b < $a) {
+            throw new InvalidArgumentException('Нужны положительные числа A <= B');
         }
-        for ($i = 0; $i < count($arr) - 1; $i++) {
-            for ($j = count($arr) - 1; $j > $i; $j--) {
-                if ($arr[$j - 1] > $arr[$j]) {
-                    $temp = $arr[$j - 1];
-                    $arr[$j - 1] = $arr[$j];
-                    $arr[$j] = $temp;
-                }
-            }
-        }
-        echo '<br>';
-        echo 'После сортировки: <br>';
-        foreach ($arr as $value) {
-            echo $value.' ';
-        }
-        echo '<br>';
-    }
-
-    /**
-     * @param $n
-     */
-    public function simpleMatrica($n)
-    {
-        $n = 9;
-        $array = array();
-        echo '<table class="table">';
-        for ($i = 0; $i < $n; $i++) {
-            echo '<tr>';
-            for ($j = 0; $j < $n; $j++) {
-                echo '<td>'.$array[$i][$j] = (9 * $i + $j + 1).'</td>';
-            }
-            echo '</tr>';
-        }
-        echo '</table>';
-
-        echo '<table class="table table-dark">';
-        for ($i = 0; $i < $n; $i++) {
-            echo '<tr>';
-            for ($j = 0; $j < $n; $j++) {
-                if ($j % 2 == 0) {
-                    echo '<td>'.$array[$i][$j].'</td>';
-                } else {
-                    echo '<td>'.$array[$n - 1 - $i][$j].'</td>';
-                }
-            }
-            echo '</tr>';
-        }
-        echo '</table>';
-    }
-
-    /**
-     * На вход подаются 3 числа, метод определяет, будут ли 2 числа четными
-     * @param $num1
-     * @param $num2
-     * @param $num3
-     */
-    public function evenNumbers($num1, $num2, $num3)
-    {
-        if (($num1 % 2 == 0 && $num2 % 2 == 0) or ($num2 % 2 == 0 && $num3 % 2 == 0) or ($num1 % 2 == 0 && $num3 % 2 == 0)) {
-            echo $num1.', '.$num2.', '.$num3.' - 2 числа четные <br>';
-        } else {
-            echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
-        }
-    }
-
-    /**
-     * @param $num1
-     * @param $num2
-     * @param $num3
-     */
-    public function evenNumbers2($num1, $num2, $num3)
-    {
-        if (($num1 % $num2 == 0) or ($num1 % $num3 == 0) or ($num3 % $num1 == 0) or ($num2 % $num1 == 0) or ($num2 % $num3 == 0) or ($num3 % $num2 == 0)) {
-            echo $num1.', '.$num2.', '.$num3.' - 2 числа четные <br>';
-        } else {
-            echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
-        }
-    }
-
-    /**
-     * @param $num1
-     * @param $num2
-     * @param $num3
-     */
-    public function evenNumbers3($num1, $num2, $num3)
-    {
-        if ((($num1 * $num2) % 2 == 0) and (($num1 * $num3) % 2 == 0) and (($num2 * $num3) % 2 == 0)) {
-            echo $num1.', '.$num2.', '.$num3.' - 2 числа четные <br>';
-        } else {
-            echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
-        }
-    }
-
-
-    /**
-     * @param $num1
-     * @param $num2
-     * @param $num3
-     */
-    public function evenNumbers4($num1, $num2, $num3)
-    {
-        $counter = 0;
-        if ($num1 % 2 == 0) {
-            $counter++;
-        }
-        if ($num2 % 2 == 0) {
-            $counter++;
-        }
-        if ($num3 % 2 == 0) {
-            $counter++;
-        }
-        if ($counter >= 2) {
-            echo $num1.', '.$num2.', '.$num3.' - 2 числа четные <br>';
-        } else {
-            echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
-        }
-    }
-
-    /**
-     * @param $num1
-     * @param $num2
-     * @param $num3
-     */
-    function evenNumbers5($num1, $num2, $num3)
-    {
-
-        if ($num1 % 2 + $num2 % 2 + $num3 % 2 <= 1) {
-            echo $num1.', '.$num2.', '.$num3.' - 2 числа четные <br>';
-        } else {
-            echo $num1.', '.$num2.', '.$num3.' - нету двох четных чисел <br>';
-        }
-    }
-
-    /**
-     * @param $n
-     */
-    public function simpleTicTack($n)
-    {
-        $n = 3;
-        $array = array();
-        echo '<table class="table table-bordered table-dark">';
-        for ($i = 0; $i < $n; $i++) {
-            echo '<tr>';
-            for ($j = 0; $j < $n; $j++) {
-                echo '<td>'.$array[$i][$j] = '&nbsp'.'</td>';
-            }
-            echo '</tr>';
-        }
-        echo '</table>';
     }
 }
