@@ -1,75 +1,55 @@
 <?php
 
+declare(strict_types=1);
+
+require_once __DIR__ . '/Fraction.php';
+
 /**
- * Упрщает неправильную дробь и выводит ее в красивом виде
- * @package fractions
- * @subpackage
- * @author A. Maleev
- * @copyright 2018
- * @version 1.0
- * */
-class BeautyFractionOutput extends Fraction
+ * Красивый вывод дроби «в столбик» с выделением целой части:
+ *
+ *        29
+ *    14 ----
+ *        51
+ */
+final class BeautyFractionOutput
 {
-    /**
-     * Используется для упрощения дроби
-     * @var int
-     */
-    protected $intPart;
-    /**
-     * Обычный вывод дроби
-     * @param
-     * @return void
-     * */
-    public function simpleOutput()
+    /** Дробь в столбик: числитель, черта по ширине длинного числа, знаменатель. */
+    public static function stacked(Fraction $fraction): string
     {
-        echo $this->numerator.' / '.$this->denominator.'<br>';
+        if ($fraction->denominator === 1) {
+            return (string)$fraction->numerator;
+        }
+
+        return self::column((string)$fraction->numerator, (string)$fraction->denominator);
     }
 
-    /**
-     * Красивый вывод дроби
-     * @param $chus int
-     * @param $znam int
-     * @return void
-     * */
-    public function printFraction($chus, $znam)
+    /** Смешанная дробь в столбик: целая часть слева, по центру строки с чертой. */
+    public static function mixed(Fraction $fraction): string
     {
-        echo $chus.' / '.$znam.'<br>';
-        $saveChus = $chus;
-        $counter = 0;
-        while ($chus / 10 >= 1) {
-            $chus /= 10;
-            $counter++;
+        [$whole, $numerator, $denominator] = $fraction->toMixed();
+
+        if ($numerator === 0) {
+            return (string)$whole;
         }
-        echo 'Красивый вывод дроби: <br>';
-        echo $saveChus.'<br>';
-        for ($i = 0; $i <= $counter; $i++) {
-            echo '-';
+        if ($whole === 0) {
+            return self::stacked($fraction);
         }
-        echo '<br>';
-        echo $znam.'<br>';
+
+        $prefix = (string)$whole . ' ';
+        $indent = str_repeat(' ', strlen($prefix));
+        [$top, $line, $bottom] = explode("\n", self::column((string)$numerator, (string)$denominator));
+
+        return "{$indent}{$top}\n{$prefix}{$line}\n{$indent}{$bottom}";
     }
 
-    /**
-     * Упрощение дроби
-     * @param $chus int
-     * @param $znam int
-     * @return void
-     * */
-    public function simplification($chus, $znam)
+    private static function column(string $top, string $bottom): string
     {
-        $this->intPart = 0;
-        if ($chus > $znam) {
-            while ($chus > $znam) {
-                $chus %= $znam;
-                $this->intPart++;
-            }
-        }
-        echo 'Дробь после упрщения: <br>';
-        echo $this->intPart.' '.$chus.' / '.$znam.'<br>';
-    }
+        $width = max(strlen($top), strlen($bottom));
 
-    public function __toString()
-    {
-        // TODO: Implement __toString() method.
+        return implode("\n", [
+            str_pad($top, $width, ' ', STR_PAD_BOTH),
+            str_repeat('-', $width),
+            str_pad($bottom, $width, ' ', STR_PAD_BOTH),
+        ]);
     }
 }

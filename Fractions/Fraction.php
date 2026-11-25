@@ -1,89 +1,102 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Определяет создание дродей, суммирование, упрощение и преобразование дроби в строку (метод toString)
- * @package fractions
- * @author A. Maleev
- * @copyright 2018
- * @version 1.0
- * */
-class Fraction
+ * Обыкновенная дробь. Неизменяемая: арифметические операции возвращают новую дробь.
+ * Дробь всегда хранится в несократимом виде, знак — в числителе: 6/-8 → -3/4.
+ */
+final readonly class Fraction implements Stringable
 {
-    /**
-     * Числитель дроби
-     * @var int
-     */
-    protected $numerator;
-    /**
-     * Знаменатель дроби
-     * @var int
-     */
-    protected $denominator;
+    public int $numerator;
+    public int $denominator;
 
-    /**
-     * Создает дробь из двух чисел: числителя и знаменателя
-     * @param $num  int числитель
-     * @param $denom int знаменатель
-     * @return void
-     * @throws InvalidArgumentException if the provided argument is zero
-     */
-    public function __construct($num = 1, $denom = 1)
+    /** @throws InvalidArgumentException если знаменатель равен нулю */
+    public function __construct(int $numerator = 1, int $denominator = 1)
     {
-        $this->numerator = $num;
-        if ($denom == 0) {
-            echo "Incorrect data";
-            $this->denominator = 1;
-        } else {
-            $this->denominator = $denom;
+        if ($denominator === 0) {
+            throw new InvalidArgumentException('Знаменатель не может быть равен нулю');
         }
+
+        $sign = $denominator < 0 ? -1 : 1;
+        $gcd = self::gcd($numerator, $denominator);
+        $this->numerator = intdiv($sign * $numerator, $gcd);
+        $this->denominator = intdiv(abs($denominator), $gcd);
     }
 
-    /**
-     * Суммируем две дроби
-     * @param $fraction Fraction
-     * @return void
-     */
-    public function addFraction(Fraction $fraction)
+    /** Дробь из строки вида «3/4», «-3/4» или «5». */
+    public static function fromString(string $value): self
     {
-        $this->numerator = $this->numerator * $fraction->denominator + $this->denominator * $fraction->numerator;
-        $this->denominator = $this->denominator * $fraction->denominator;
-    }
-
-    /**
-     * Формируем красивый вывод дроби, например было 111/113
-     * стало: 111
-     *        ---
-     *        113
-     *
-     * @return void
-     */
-    public function simplify()
-    {
-        $i = 10;
-        while ($i > 1) {
-            if (($this->numerator % $i == 0) && ($this->denominator % $i == 0)) {
-                $this->numerator /= $i;
-                $this->denominator /= $i;
-                $i = 11;
-            }
-            $i--;
+        if (!preg_match('~^\s*(-?\d+)\s*(?:/\s*(-?\d+)\s*)?$~', $value, $m)) {
+            throw new InvalidArgumentException("Не дробь: «{$value}»");
         }
+
+        return new self((int)$m[1], (int)($m[2] ?? 1));
     }
 
-    /**
-     * @return string
-     */
-    public function toString()
+    public function add(self $other): self
     {
-        return $this->numerator."/".$this->denominator;
+        return new self(
+            $this->numerator * $other->denominator + $other->numerator * $this->denominator,
+            $this->denominator * $other->denominator,
+        );
+    }
+
+    public function subtract(self $other): self
+    {
+        return $this->add($other->negate());
+    }
+
+    public function multiply(self $other): self
+    {
+        return new self($this->numerator * $other->numerator, $this->denominator * $other->denominator);
+    }
+
+    /** @throws DivisionByZeroError при делении на нулевую дробь */
+    public function divide(self $other): self
+    {
+        if ($other->numerator === 0) {
+            throw new DivisionByZeroError('Деление на ноль');
+        }
+
+        return new self($this->numerator * $other->denominator, $this->denominator * $other->numerator);
+    }
+
+    public function negate(): self
+    {
+        return new self(-$this->numerator, $this->denominator);
     }
 
     /**
+     * Выделение целой части: 743/51 → [14, 29, 51] (14 целых 29/51).
      *
+     * @return array{int, int, int} [целая часть, числитель, знаменатель]
      */
-    public function __toString()
+    public function toMixed(): array
     {
-        // TODO: Implement __toString() method.
-        //return $this->numerator;
+        $whole = intdiv($this->numerator, $this->denominator);
+
+        return [$whole, abs($this->numerator % $this->denominator), $this->denominator];
+    }
+
+    public function toFloat(): float
+    {
+        return $this->numerator / $this->denominator;
+    }
+
+    public function __toString(): string
+    {
+        return $this->denominator === 1 ? (string)$this->numerator : "{$this->numerator}/{$this->denominator}";
+    }
+
+    /** Наибольший общий делитель (алгоритм Евклида). */
+    private static function gcd(int $a, int $b): int
+    {
+        [$a, $b] = [abs($a), abs($b)];
+        while ($b !== 0) {
+            [$a, $b] = [$b, $a % $b];
+        }
+
+        return max($a, 1);
     }
 }

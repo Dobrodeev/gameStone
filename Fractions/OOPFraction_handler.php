@@ -1,65 +1,72 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>OOP</title>
-    <!--    <link rel="stylesheet" href="assets/css/bootstrap.min.css">-->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-
-</head>
-<body>
-<!--<script src="assets/jquery-3.2.1.js"></script>-->
-<!--<script src="assets/js/bootstrap.min.js"></script>-->
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
 <?php
 
-spl_autoload_register(function ($class) {
-    include $class.'.php';
-});
-$fr1 = new Fraction(1, 2);
-$fr2 = new Fraction(3, 5);
+declare(strict_types=1);
 
-$fr1->addFraction($fr2);
-$fr1->addFraction($fr2);
-echo 'Сумма дробей: <br>';
-echo $fr1->toString();
-/*echo '<br>После упрощения: <br>';
-$fr1->simplify();
-echo $fr1->toString();
-echo '<hr>';
-$fr3 = new Fraction(16000, 800);
-print_r($fr3);
-//$fraction->simpleOutput($fr3);
-echo $fr3->toString();
-echo '<br>После упрощения: <br>';
-$fr3->simplify();
-echo $fr3->toString();
+// Калькулятор обыкновенных дробей: сумма, разность, произведение, частное.
 
-$fr4 = new BeautyFraction();
-echo '<br>';
-print_r($fr3);
-echo '<br>';
-$fr4->niceOutput($fr3);
-echo '<br>';
-$fraction = new BeautyFractionOutput();
-$fraction->printFraction(1145, 19);
-$fraction->simplification(743, 51);
-$fr5 = new Fraction(434, 34);
-print_r($fr5);
-$fraction->simpleOutput($fr5);*/
+require_once __DIR__ . '/BeautyFractionOutput.php';
+
+$h = static fn(mixed $value): string => htmlspecialchars((string)$value, ENT_QUOTES);
+$first = (string)($_GET['first'] ?? '1/2');
+$second = (string)($_GET['second'] ?? '3/5');
+
+$results = [];
+$error = null;
+try {
+    $a = Fraction::fromString($first);
+    $b = Fraction::fromString($second);
+    $results = [
+        "{$a} + {$b}" => static fn() => $a->add($b),
+        "{$a} − {$b}" => static fn() => $a->subtract($b),
+        "{$a} × {$b}" => static fn() => $a->multiply($b),
+        "{$a} ÷ {$b}" => static fn() => $a->divide($b),
+    ];
+} catch (InvalidArgumentException $e) {
+    $error = $e->getMessage();
+}
 ?>
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дроби</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h3>Обыкновенные дроби</h3>
+    <form method="get" class="form-inline">
+        <input type="text" name="first" class="form-control" value="<?= $h($first) ?>" placeholder="1/2">
+        <input type="text" name="second" class="form-control" value="<?= $h($second) ?>" placeholder="3/5">
+        <button type="submit" class="btn btn-primary">Посчитать</button>
+    </form>
+    <p class="help-block">Дробь в виде <code>3/4</code>, <code>-3/4</code> или целое число.</p>
+
+    <?php if ($error !== null): ?>
+        <p class="text-danger"><?= $h($error) ?></p>
+    <?php else: ?>
+        <table class="table table-bordered" style="width: auto">
+            <tr><th>Выражение</th><th>Результат</th><th>В столбик</th><th>С целой частью</th></tr>
+            <?php foreach ($results as $expression => $calculate):
+                try {
+                    $result = $calculate();
+                } catch (DivisionByZeroError $e) {
+                    printf('<tr><td>%s</td><td colspan="3">%s</td></tr>', $h($expression), $h($e->getMessage()));
+                    continue;
+                }
+                ?>
+                <tr>
+                    <td><?= $h($expression) ?></td>
+                    <td><?= $h($result) ?></td>
+                    <td><pre><?= $h(BeautyFractionOutput::stacked($result)) ?></pre></td>
+                    <td><pre><?= $h(BeautyFractionOutput::mixed($result)) ?></pre></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    <?php endif; ?>
+</div>
+<script src="../assets/jquery-3.2.1.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
 </body>
 </html>
