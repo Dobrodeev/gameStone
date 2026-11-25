@@ -6,11 +6,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tic Tac Game</title>
-    <link href="assets/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" media="screen">
 </head>
 <body>
-<script src="assets/jquery-3.2.1.js"></script>
-<script src="assets/js/bootstrap.js"></script>
+<script src="../assets/jquery-3.2.1.js"></script>
+<script src="../assets/js/bootstrap.js"></script>
 <form method="post" action="#">
     <div class="form-group">
         <label for="exampleInputEmail1">Походить</label>
