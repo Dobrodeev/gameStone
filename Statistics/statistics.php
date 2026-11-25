@@ -16,11 +16,11 @@ session_start();
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
-<script src="assets/jquery-3.2.1.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
+<script src="../assets/jquery-3.2.1.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
 <form action="#" method="post">
     <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg" name="number"><br>
     <button type="submit" class="btn btn-primary" name="go">Submit</button>
@@ -32,7 +32,7 @@ session_start();
  * Date: 01.02.2019
  * Time: 20:24
  */
-include 'DB.php';
+include __DIR__ . '/../DB.php';
 echo $_POST['number'].'<br>';
 $number = $_POST['number'];
 if ($number > 0)
